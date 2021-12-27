@@ -50,6 +50,9 @@ var activityIndicator = UIActivityIndicatorView()
             Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                 if let error = error {
                     print("Registration Auth Error",error.localizedDescription)
+                    Alert.showAlert(strTitle: "Error", strMessage: error.localizedDescription, viewController: self)
+                    Activity.removeIndicator(parentView: self.view, childView: self.activityIndicator)
+                    
                 }
                 if let authResult = authResult {
                     let storageRef = Storage.storage().reference(withPath: "users/\(authResult.user.uid)")
@@ -57,11 +60,13 @@ var activityIndicator = UIActivityIndicatorView()
                     uploadMeta.contentType = "image/jpeg"
                     storageRef.putData(imageData, metadata: uploadMeta) { storageMeta, error in
                         if let error = error {
-                            print("Registration Storage Error",error.localizedDescription)
+                            Alert.showAlert(strTitle: "Error", strMessage: error.localizedDescription, viewController: self)
+                            Activity.removeIndicator(parentView: self.view, childView: self.activityIndicator)
                         }
                         storageRef.downloadURL { url, error in
                             if let error = error {
-                                print("Registration Storage Download Url Error",error.localizedDescription)
+                                Alert.showAlert(strTitle: "Error", strMessage: error.localizedDescription, viewController: self)
+                                Activity.removeIndicator(parentView: self.view, childView: self.activityIndicator)
                             }
                             if let url = url {
                                 print("URL",url.absoluteString)
@@ -76,7 +81,8 @@ var activityIndicator = UIActivityIndicatorView()
                                 ]
                                 db.collection("users").document(authResult.user.uid).setData(userData) { error in
                                     if let error = error {
-                                        print("Registration Database error",error.localizedDescription)
+                                        Alert.showAlert(strTitle: "Error", strMessage: error.localizedDescription, viewController: self)
+                                        Activity.removeIndicator(parentView: self.view, childView: self.activityIndicator)
                                     }else {
                                         if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabBarController") as? UITabBarController {
                                             vc.modalPresentationStyle = .fullScreen
@@ -90,6 +96,11 @@ var activityIndicator = UIActivityIndicatorView()
                     }
                 }
             }
+        }else{
+            
+               
+                Alert.showAlert(strTitle: "Error", strMessage: "Password confirmation doesn't match Password", viewController: self)
+                       
         }
         }
     }
