@@ -10,7 +10,6 @@
 		EE9F6C9E277943EC004FC3D8 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F6C9D277943EC004FC3D8 /* Alert.swift */; };
 		EEC31D642778477E00E48473 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC31D632778477E00E48473 /* AppDelegate.swift */; };
 		EEC31D662778477E00E48473 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC31D652778477E00E48473 /* SceneDelegate.swift */; };
-		EEC31D682778477E00E48473 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC31D672778477E00E48473 /* ViewController.swift */; };
 		EEC31D6B2778477E00E48473 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEC31D692778477E00E48473 /* Main.storyboard */; };
 		EEC31D6D2778478600E48473 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEC31D6C2778478600E48473 /* Assets.xcassets */; };
 		EEC31D702778478600E48473 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEC31D6E2778478600E48473 /* LaunchScreen.storyboard */; };
@@ -36,7 +35,6 @@
 		EEC31D602778477D00E48473 /* FoundAndLostItems.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoundAndLostItems.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEC31D632778477E00E48473 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EEC31D652778477E00E48473 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		EEC31D672778477E00E48473 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		EEC31D6A2778477E00E48473 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EEC31D6C2778478600E48473 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EEC31D6F2778478600E48473 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -108,7 +106,6 @@
 				EEC31D9A2779332700E48473 /* DetailsViewController.swift */,
 				EEC31D9827789DB200E48473 /* PostViewController.swift */,
 				EEC31D8A277880D900E48473 /* LoginViewController.swift */,
-				EEC31D672778477E00E48473 /* ViewController.swift */,
 				EEC31D88277880B400E48473 /* RegisterViewController.swift */,
 				EEC31D8E277885B500E48473 /* HomeViewController.swift */,
 			);
@@ -237,7 +234,6 @@
 				EEC31D8D277882EB00E48473 /* Activity.swift in Sources */,
 				EEC31D8F277885B500E48473 /* HomeViewController.swift in Sources */,
 				EEC31D89277880B400E48473 /* RegisterViewController.swift in Sources */,
-				EEC31D682778477E00E48473 /* ViewController.swift in Sources */,
 				EEC31D91277885DC00E48473 /* Post.swift in Sources */,
 				EE9F6C9E277943EC004FC3D8 /* Alert.swift in Sources */,
 				EEC31D962778959600E48473 /* PostCell.swift in Sources */,

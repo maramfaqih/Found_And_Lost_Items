@@ -21,7 +21,6 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func handleLogin(_ sender: Any) {
-        print("test0")
 
         if let email = emailTextField.text,
            let password = passwordTextField.text {
