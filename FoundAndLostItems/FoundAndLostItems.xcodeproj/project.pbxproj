@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EE9F6C9E277943EC004FC3D8 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F6C9D277943EC004FC3D8 /* Alert.swift */; };
+		EE9F6CA02779CB1E004FC3D8 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = EE9F6C9F2779CB1D004FC3D8 /* .gitignore */; };
 		EEC31D642778477E00E48473 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC31D632778477E00E48473 /* AppDelegate.swift */; };
 		EEC31D662778477E00E48473 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC31D652778477E00E48473 /* SceneDelegate.swift */; };
 		EEC31D6B2778477E00E48473 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEC31D692778477E00E48473 /* Main.storyboard */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		EE9F6C9D277943EC004FC3D8 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		EE9F6C9F2779CB1D004FC3D8 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .gitignore; path = ../.gitignore; sourceTree = "<group>"; };
 		EEC31D602778477D00E48473 /* FoundAndLostItems.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoundAndLostItems.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEC31D632778477E00E48473 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EEC31D652778477E00E48473 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 		EEC31D572778477D00E48473 = {
 			isa = PBXGroup;
 			children = (
+				EE9F6C9F2779CB1D004FC3D8 /* .gitignore */,
 				EEC31D622778477D00E48473 /* FoundAndLostItems */,
 				EEC31D612778477D00E48473 /* Products */,
 			);
@@ -216,6 +219,7 @@
 				EEC31D6D2778478600E48473 /* Assets.xcassets in Resources */,
 				EEC31D972778959600E48473 /* PostCell.xib in Resources */,
 				EEC31D6B2778477E00E48473 /* Main.storyboard in Resources */,
+				EE9F6CA02779CB1E004FC3D8 /* .gitignore in Resources */,
 				EEC31D7E2778797500E48473 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
