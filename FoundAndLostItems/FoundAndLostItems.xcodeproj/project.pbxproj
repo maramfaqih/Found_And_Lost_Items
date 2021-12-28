@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		EE9F6C9E277943EC004FC3D8 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F6C9D277943EC004FC3D8 /* Alert.swift */; };
 		EE9F6CA02779CB1E004FC3D8 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = EE9F6C9F2779CB1D004FC3D8 /* .gitignore */; };
+		EE9F6CA2277A8DCC004FC3D8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F6CA1277A8DCB004FC3D8 /* ProfileViewController.swift */; };
 		EEC31D642778477E00E48473 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC31D632778477E00E48473 /* AppDelegate.swift */; };
 		EEC31D662778477E00E48473 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC31D652778477E00E48473 /* SceneDelegate.swift */; };
 		EEC31D6B2778477E00E48473 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEC31D692778477E00E48473 /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 /* Begin PBXFileReference section */
 		EE9F6C9D277943EC004FC3D8 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		EE9F6C9F2779CB1D004FC3D8 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .gitignore; path = ../.gitignore; sourceTree = "<group>"; };
+		EE9F6CA1277A8DCB004FC3D8 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		EEC31D602778477D00E48473 /* FoundAndLostItems.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoundAndLostItems.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEC31D632778477E00E48473 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EEC31D652778477E00E48473 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				EEC31D8A277880D900E48473 /* LoginViewController.swift */,
 				EEC31D88277880B400E48473 /* RegisterViewController.swift */,
 				EEC31D8E277885B500E48473 /* HomeViewController.swift */,
+				EE9F6CA1277A8DCB004FC3D8 /* ProfileViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 				EEC31D9327788F7300E48473 /* ImageView.swift in Sources */,
 				EEC31D8B277880D900E48473 /* LoginViewController.swift in Sources */,
 				EEC31D872778807000E48473 /* User.swift in Sources */,
+				EE9F6CA2277A8DCC004FC3D8 /* ProfileViewController.swift in Sources */,
 				EEC31D8D277882EB00E48473 /* Activity.swift in Sources */,
 				EEC31D8F277885B500E48473 /* HomeViewController.swift in Sources */,
 				EEC31D89277880B400E48473 /* RegisterViewController.swift in Sources */,

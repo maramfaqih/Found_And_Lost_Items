@@ -13,7 +13,7 @@
             <objects>
                 <viewController id="TWW-SE-PCI" customClass="LoginViewController" customModule="FoundAndLostItems" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4Vq-AK-naq">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="buf-Ge-YO2">
@@ -98,7 +98,7 @@
             <objects>
                 <viewController id="0gn-ji-DWE" customClass="RegisterViewController" customModule="FoundAndLostItems" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="T3J-EI-Gdu">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sWM-0H-bv0">
@@ -229,9 +229,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="NXR-Jb-mXE">
-                                <rect key="frame" x="0.0" y="78" width="320" height="441"/>
+                                <rect key="frame" x="0.0" y="135" width="320" height="384"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="uxF-E2-fRY">
+                                <rect key="frame" x="69" y="85" width="183" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="All"/>
+                                    <segment title="Lost"/>
+                                    <segment title="Found"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="s3T-fy-g8t"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -239,8 +248,8 @@
                             <constraint firstItem="s3T-fy-g8t" firstAttribute="bottom" secondItem="NXR-Jb-mXE" secondAttribute="bottom" id="V6Q-XE-TBa"/>
                             <constraint firstItem="NXR-Jb-mXE" firstAttribute="centerX" secondItem="s3T-fy-g8t" secondAttribute="centerX" id="cc3-ip-q83"/>
                             <constraint firstItem="s3T-fy-g8t" firstAttribute="trailing" secondItem="NXR-Jb-mXE" secondAttribute="trailing" id="jcG-Xh-RcW"/>
+                            <constraint firstItem="NXR-Jb-mXE" firstAttribute="top" secondItem="s3T-fy-g8t" secondAttribute="top" constant="135" id="oRH-10-oTJ"/>
                             <constraint firstItem="NXR-Jb-mXE" firstAttribute="leading" secondItem="s3T-fy-g8t" secondAttribute="leading" id="oqK-ty-C3k"/>
-                            <constraint firstItem="NXR-Jb-mXE" firstAttribute="top" secondItem="s3T-fy-g8t" secondAttribute="top" constant="78" id="ua6-EY-cBf"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" image="house.fill" catalog="system" id="GnO-sk-5aB"/>
@@ -275,7 +284,7 @@
             <objects>
                 <viewController id="82K-bd-S1z" customClass="PostViewController" customModule="FoundAndLostItems" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3RO-Gn-cpB">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GBW-ha-c37">
@@ -392,16 +401,29 @@
         <!--Profile-->
         <scene sceneID="tfH-ZD-P9f">
             <objects>
-                <viewController id="IDw-72-9Zm" sceneMemberID="viewController">
+                <viewController id="IDw-72-9Zm" customClass="ProfileViewController" customModule="FoundAndLostItems" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MO8-Ow-q3t">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uKv-t3-wBL">
+                                <rect key="frame" x="126" y="319" width="70" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Logout"/>
+                                <connections>
+                                    <action selector="handleLogout:" destination="IDw-72-9Zm" eventType="touchUpInside" id="8Gh-R2-UGE"/>
+                                    <action selector="handleLogout:" destination="qfx-Xd-E9X" eventType="touchUpInside" id="Vdw-9G-cC0"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="97b-F6-NL5"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" image="person.fill" catalog="system" id="ir5-NF-Wvr"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="raW-Ue-qrw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="qfx-Xd-E9X" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4296" y="39"/>
         </scene>
@@ -532,8 +554,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="VEM-9C-U9l"/>
-        <segue reference="iWE-KW-m4I"/>
+        <segue reference="CAJ-0W-jFs"/>
+        <segue reference="Oa9-hK-0Nr"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="house.fill" catalog="system" width="128" height="106"/>
