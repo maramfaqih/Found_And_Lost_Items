@@ -12,6 +12,8 @@ class HomeViewController: UIViewController {
     var posts = [Post]()
     var selectedPost:Post?
     var selectedPostImage:UIImage?
+    let ref = Firestore.firestore()
+  
     @IBOutlet weak var postsTableView: UITableView!{
         didSet{
             postsTableView.delegate = self
@@ -23,18 +25,54 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let all =  ref.collection("posts").order(by: "createdAt",descending: true)
+        getPosts(state: all)
         // Do any additional setup after loading the view.
-        getPosts()
+        
     }
     
-    func getPosts() {
-        let ref = Firestore.firestore()
-        ref.collection("posts").order(by: "createdAt",descending: true).addSnapshotListener { snapshot, error in
+    
+    @IBAction func displayFilterSegmentedControl(_ sender: UISegmentedControl) {
+//        postsTableView.dataSource = nil
+//        postsTableView.dataSource = self
+        //   postsTableView.resignFirstResponder()
+    // self.postsTableView.beginUpdates()
+        //  postsTableView.reloadData()
+            //   self.postsTableView.reloadData()
+        posts = [Post]()
+        if let filter = sender.titleForSegment(at:sender.selectedSegmentIndex) {
+            if filter == "All" {
+              //  self.postsTableView.beginUpdates()
+               let all =  ref.collection("posts").order(by: "createdAt",descending: true)
+
+                getPosts(state: all)
+            }else if filter == "Found"{
+               // self.postsTableView.beginUpdates()
+                let found =  ref.collection("posts").whereField("found", isEqualTo: "yes")
+                getPosts(state: found)
+                
+            }else if filter == "Lost" {
+                //self.postsTableView.beginUpdates()
+                let lost =  ref.collection("posts").whereField("found", isEqualTo: "no")
+                getPosts(state: lost)
+              
+                
+            }
+           // self.postsTableView.reloadData()
+
+        }
+        
+    }
+    func getPosts(state : Query ) {
+        self.postsTableView.reloadData()
+        state.addSnapshotListener { snapshot, error in
+            let ref = Firestore.firestore()
+
             if let error = error {
                 print("DB ERROR Posts",error.localizedDescription)
             }
             if let snapshot = snapshot {
+                
                 snapshot.documentChanges.forEach { diff in
                     let post = diff.document.data()
                     switch diff.type {
@@ -105,7 +143,8 @@ extension HomeViewController: UITableViewDelegate {
         if let currentUser = Auth.auth().currentUser,
            currentUser.uid == posts[indexPath.row].user.id{
           performSegue(withIdentifier: "toPostVC", sender: self)
-        }else {
+        }
+        else {
             performSegue(withIdentifier: "toDetailsVC", sender: self)
             
         }
