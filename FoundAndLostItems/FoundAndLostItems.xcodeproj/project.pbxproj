@@ -31,6 +31,7 @@
 		EEC31D9927789DB200E48473 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC31D9827789DB200E48473 /* PostViewController.swift */; };
 		EEC31D9B2779332700E48473 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC31D9A2779332700E48473 /* DetailsViewController.swift */; };
 		EED97039277AEE190011036D /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED97038277AEE190011036D /* SearchViewController.swift */; };
+		EED9703D277AF8440011036D /* MyPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED9703C277AF8440011036D /* MyPostViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +62,7 @@
 		EEC31D9827789DB200E48473 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		EEC31D9A2779332700E48473 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		EED97038277AEE190011036D /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		EED9703C277AF8440011036D /* MyPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 				EEC31D8A277880D900E48473 /* LoginViewController.swift */,
 				EEC31D88277880B400E48473 /* RegisterViewController.swift */,
 				EEC31D8E277885B500E48473 /* HomeViewController.swift */,
+				EED9703C277AF8440011036D /* MyPostViewController.swift */,
 				EE9F6CA1277A8DCB004FC3D8 /* ProfileViewController.swift */,
 			);
 			path = Controller;
@@ -237,6 +240,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EED9703D277AF8440011036D /* MyPostViewController.swift in Sources */,
 				EED97039277AEE190011036D /* SearchViewController.swift in Sources */,
 				EEC31D9927789DB200E48473 /* PostViewController.swift in Sources */,
 				EEC31D9327788F7300E48473 /* ImageView.swift in Sources */,
