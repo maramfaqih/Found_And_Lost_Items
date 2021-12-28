@@ -381,7 +381,7 @@
         <!--Search-->
         <scene sceneID="7kM-On-tv4">
             <objects>
-                <viewController id="zhF-YY-cvt" sceneMemberID="viewController">
+                <viewController id="zhF-YY-cvt" customClass="SearchViewController" customModule="FoundAndLostItems" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ill-wY-P8B">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -391,10 +391,25 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="czG-pl-X8x">
-                                <rect key="frame" x="0.0" y="91" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="36" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zuh-va-29J">
+                                <rect key="frame" x="16" y="93" width="235" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="axb-Lx-xuh">
+                                <rect key="frame" x="259" y="93" width="45" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" image="magnifyingglass" catalog="system" title="Button"/>
+                                <connections>
+                                    <action selector="searchButtonAction:" destination="zhF-YY-cvt" eventType="touchUpInside" id="dFx-c1-NCO"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Qgd-by-pBB"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -406,10 +421,14 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Search" image="magnifyingglass" catalog="system" id="aI9-hO-YUd"/>
+                    <connections>
+                        <outlet property="searchTableView" destination="C62-01-SDy" id="fPw-BI-Dto"/>
+                        <outlet property="searchTextField" destination="zuh-va-29J" id="5Kz-hO-o6w"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1EI-p4-MS8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5008" y="-558"/>
+            <point key="canvasLocation" x="5006.25" y="-558.80281690140851"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="rFX-st-rTj">

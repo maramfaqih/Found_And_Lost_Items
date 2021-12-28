@@ -30,6 +30,7 @@
 		EEC31D972778959600E48473 /* PostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEC31D952778959600E48473 /* PostCell.xib */; };
 		EEC31D9927789DB200E48473 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC31D9827789DB200E48473 /* PostViewController.swift */; };
 		EEC31D9B2779332700E48473 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC31D9A2779332700E48473 /* DetailsViewController.swift */; };
+		EED97039277AEE190011036D /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED97038277AEE190011036D /* SearchViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,7 @@
 		EEC31D952778959600E48473 /* PostCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostCell.xib; sourceTree = "<group>"; };
 		EEC31D9827789DB200E48473 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		EEC31D9A2779332700E48473 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		EED97038277AEE190011036D /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				EEC31D9A2779332700E48473 /* DetailsViewController.swift */,
+				EED97038277AEE190011036D /* SearchViewController.swift */,
 				EEC31D9827789DB200E48473 /* PostViewController.swift */,
 				EEC31D8A277880D900E48473 /* LoginViewController.swift */,
 				EEC31D88277880B400E48473 /* RegisterViewController.swift */,
@@ -234,6 +237,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EED97039277AEE190011036D /* SearchViewController.swift in Sources */,
 				EEC31D9927789DB200E48473 /* PostViewController.swift in Sources */,
 				EEC31D9327788F7300E48473 /* ImageView.swift in Sources */,
 				EEC31D8B277880D900E48473 /* LoginViewController.swift in Sources */,
