@@ -9,6 +9,9 @@ import UIKit
 import Firebase
 
 class PostViewController: UIViewController {
+    var foundItem = "Found"
+    var foundItems = ["Found","Lost"]
+
     var selectedPost:Post?
     var selectedPostImage:UIImage?
     let activityIndicator = UIActivityIndicatorView()
@@ -22,7 +25,8 @@ class PostViewController: UIViewController {
     
     @IBOutlet weak var postTitleTextField: UITextField!
  
-    @IBOutlet weak var postItemTextField: UITextField!
+  
+    @IBOutlet weak var postFoundPickerView: UIPickerView!
     @IBOutlet weak var postDescriptionTextField: UITextView!
     
     @IBOutlet weak var postCityTextField: UITextField!
@@ -31,6 +35,8 @@ class PostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        postFoundPickerView.delegate = self
+        postFoundPickerView.dataSource = self
         if let selectedPost = selectedPost,
         let selectedImage = selectedPostImage{
             postTitleTextField.text = selectedPost.title
@@ -78,10 +84,10 @@ class PostViewController: UIViewController {
            let imageData = image.jpegData(compressionQuality: 0.75),
            let title = postTitleTextField.text,
            let description = postDescriptionTextField.text,
-           let found = postItemTextField.text,
            let country = postICountryTextField.text,
            let city = postCityTextField.text,
            let currentUser = Auth.auth().currentUser {
+            let found = foundItem
             Activity.showIndicator(parentView: self.view, childView: activityIndicator)
 //            ref.addDocument(data:)
             var postId = ""
@@ -185,4 +191,31 @@ extension PostViewController: UIImagePickerControllerDelegate, UINavigationContr
         picker.dismiss(animated: true, completion: nil)
     }
     
+}
+extension PostViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    //number of colume
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+       
+        return 1
+    }
+    
+    //number of elments = array.count
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+       
+            return foundItems.count
+    }
+    //write elment array on  pv
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+       
+            return foundItems[row]
+}
+            
+        
+    //print on label & do any thing when select row
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+       foundItem = foundItems[row]
+    
+    }
+
+
 }

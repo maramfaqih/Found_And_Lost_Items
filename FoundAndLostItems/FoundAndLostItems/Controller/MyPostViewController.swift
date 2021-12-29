@@ -96,6 +96,16 @@ class MyPostViewController: UIViewController {
             }
 
 }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            if identifier == "toPostEditVC" {
+                let vc = segue.destination as! PostViewController
+                vc.selectedPost = selectedPost
+                vc.selectedPostImage = selectedPostImage
+            }
+        }
+        
+    }
 
 }
 extension MyPostViewController: UITableViewDataSource {
@@ -119,11 +129,8 @@ extension MyPostViewController: UITableViewDelegate {
         let cell = tableView.cellForRow(at: indexPath) as! PostCell
         selectedPostImage = cell.postImageView.image
         selectedPost = posts[indexPath.row]
-        if let currentUser = Auth.auth().currentUser,
-           currentUser.uid == posts[indexPath.row].user.id{
-          performSegue(withIdentifier: "toPostEditVC", sender: self)
-            
-        }
+        
+            performSegue(withIdentifier: "toPostEditVC", sender: self)
         
     }
 }

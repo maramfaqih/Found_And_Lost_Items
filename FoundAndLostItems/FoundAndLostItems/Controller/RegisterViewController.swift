@@ -24,6 +24,8 @@ var activityIndicator = UIActivityIndicatorView()
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+      
+        
     }
     
     @IBAction func handleRegister(_ sender: Any) {

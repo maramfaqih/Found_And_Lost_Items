@@ -48,12 +48,12 @@ class HomeViewController: UIViewController {
                 getPosts(state: all)
             }else if filter == "Found"{
                // self.postsTableView.beginUpdates()
-                let found =  ref.collection("posts").whereField("found", isEqualTo: "yes")
+                let found =  ref.collection("posts").whereField("found", isEqualTo: "Found")
                 getPosts(state: found)
                 
             }else if filter == "Lost" {
                 //self.postsTableView.beginUpdates()
-                let lost =  ref.collection("posts").whereField("found", isEqualTo: "no")
+                let lost =  ref.collection("posts").whereField("found", isEqualTo: "Lost")
                 getPosts(state: lost)
               
                 
@@ -117,9 +117,23 @@ class HomeViewController: UIViewController {
                     }
                 }
             }
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            if identifier == "toPostVC" {
+                let vc = segue.destination as! PostViewController
+                vc.selectedPost = selectedPost
+                vc.selectedPostImage = selectedPostImage
+            }else {
+                let vc = segue.destination as! DetailsViewController
+                vc.selectedPost = selectedPost
+                vc.selectedPostImage = selectedPostImage
+            }
+        }
+        
+    }
+}
 
-}
-}
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return posts.count
