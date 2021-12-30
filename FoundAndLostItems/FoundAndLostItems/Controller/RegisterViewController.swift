@@ -51,6 +51,7 @@ var activityIndicator = UIActivityIndicatorView()
                                     "email":email,
                                     "phoneNumber":phoneNumber,
                                 ]
+                    
                                 db.collection("users").document(authResult.user.uid).setData(userData) { error in
                                     if let error = error {
                                         Alert.showAlert(strTitle: "Error", strMessage: error.localizedDescription, viewController: self)
