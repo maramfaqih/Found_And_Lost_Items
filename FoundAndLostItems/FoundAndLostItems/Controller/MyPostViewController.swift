@@ -119,7 +119,39 @@ extension MyPostViewController: UITableViewDataSource {
         return cell.configure(with: posts[indexPath.row])
     }
     
-    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        selectedPost = posts[indexPath.row]
+        let deleteAction = UIContextualAction(style: .destructive, title: "") { action, view, completionHandler in
+            
+                let ref = Firestore.firestore().collection("posts")
+            if let selectedPost = self.selectedPost {
+                   
+                    ref.document(selectedPost.id).delete { error in
+                        if let error = error {
+                            print("Error in db delete",error)
+                        }else {
+                            // Create a reference to the file to delete
+                            let storageRef = Storage.storage().reference(withPath: "posts/\(selectedPost.user.id)/\(selectedPost.id)")
+                            // Delete the file
+                            storageRef.delete { error in
+                                if let error = error {
+                                    print("Error in storage delete",error)
+                                }
+                            }
+                            
+                        }
+                    }
+                }
+            
+            self.posts.remove(at: indexPath.row)
+            tableView.beginUpdates()
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.endUpdates()
+            completionHandler(true)
+        }
+        deleteAction.image = UIImage(systemName: "trash.fill")
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
 }
 extension MyPostViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -133,4 +165,5 @@ extension MyPostViewController: UITableViewDelegate {
             performSegue(withIdentifier: "toPostEditVC", sender: self)
         
     }
+    
 }
