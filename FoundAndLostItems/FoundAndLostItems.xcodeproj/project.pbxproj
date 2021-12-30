@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EE38A434277D6213009342CE /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE38A433277D6213009342CE /* CustomTabBarController.swift */; };
 		EE9F6C9E277943EC004FC3D8 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F6C9D277943EC004FC3D8 /* Alert.swift */; };
 		EE9F6CA02779CB1E004FC3D8 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = EE9F6C9F2779CB1D004FC3D8 /* .gitignore */; };
 		EE9F6CA2277A8DCC004FC3D8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F6CA1277A8DCB004FC3D8 /* ProfileViewController.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EE38A433277D6213009342CE /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		EE9F6C9D277943EC004FC3D8 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		EE9F6C9F2779CB1D004FC3D8 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .gitignore; path = ../.gitignore; sourceTree = "<group>"; };
 		EE9F6CA1277A8DCB004FC3D8 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				EEC31D8E277885B500E48473 /* HomeViewController.swift */,
 				EED9703C277AF8440011036D /* MyPostViewController.swift */,
 				EE9F6CA1277A8DCB004FC3D8 /* ProfileViewController.swift */,
+				EE38A433277D6213009342CE /* CustomTabBarController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 				EEC31D89277880B400E48473 /* RegisterViewController.swift in Sources */,
 				EEC31D91277885DC00E48473 /* Post.swift in Sources */,
 				EE9F6C9E277943EC004FC3D8 /* Alert.swift in Sources */,
+				EE38A434277D6213009342CE /* CustomTabBarController.swift in Sources */,
 				EEC31D962778959600E48473 /* PostCell.swift in Sources */,
 				EEC31D642778477E00E48473 /* AppDelegate.swift in Sources */,
 				EEC31D9B2779332700E48473 /* DetailsViewController.swift in Sources */,

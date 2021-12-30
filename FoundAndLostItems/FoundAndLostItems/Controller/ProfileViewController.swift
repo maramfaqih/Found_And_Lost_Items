@@ -48,7 +48,7 @@ class ProfileViewController: UIViewController {
                     let userData = userSnapshot.data(){
                      let user = User(dict:userData)
                      self.nameTextField.text = user.name
-                     self.emailTextField.text = user.email
+                     self.emailTextField.text = Auth.auth().currentUser?.email
                      self.phoneNumberTextField.text = user.phoneNumber
                      print("s\(user.name)")
                      print("m***")
@@ -61,107 +61,111 @@ class ProfileViewController: UIViewController {
     
     @IBAction func handleUpdate(_ sender: UIButton) {
         
-//
-            if let name = nameTextField.text,
-              let email = emailTextField.text,
-               //let password = passwordTextField.text,
-               let phoneNumber = phoneNumberTextField.text,
-        
-        let currentUser = Auth.auth().currentUser {
-         Activity.showIndicator(parentView: self.view, childView: activityIndicator)
+        //
+                    if let name = nameTextField.text,
+                      let email = emailTextField.text,
+                     // let password = passwordTextField.text,
+                       let phoneNumber = phoneNumberTextField.text,
+                
+                let currentUser = Auth.auth().currentUser {
+                 Activity.showIndicator(parentView: self.view, childView: activityIndicator)
 
-                let  userId = currentUser.uid     
-                     let db = Firestore.firestore()
-                     let ref = db.collection("users")
-                let user = Auth.auth().currentUser
-                let credential: AuthCredential = EmailAuthProvider.credential(withEmail: "email", password: "password")
-
-                // Prompt the user to re-provide their sign-in credentials
-
-                user?.reauthenticate(with: credential) { error,arg  in
-                    if error != nil {
-                      Alert.showAlert(strTitle: "error autho", strMessage: "error", viewController: self)
+                        let  userId = currentUser.uid
+                             let db = Firestore.firestore()
+                             let ref = db.collection("users")
+                        let user = Auth.auth().currentUser
+                        let credential: AuthCredential = EmailAuthProvider.credential(withEmail: "email", password: "password")
+                       
+                        // Prompt the user to re-provide their sign-in credentials
+                        if emailTextField.text != Auth.auth().currentUser?.email {
+                        user?.reauthenticate(with: credential) { error,arg  in
+                            if error != nil {
+                              Alert.showAlert(strTitle: "error autho", strMessage: "error", viewController: self)
+                                
+                            } else {
                         
-                    } else {
-                
-                      if let email = self.emailTextField.text {
-                Auth.auth().currentUser?.updateEmail(to: email) { error in
-                          if let error = error {
-                              print("email.....")
-                            // An error happened.
-                              Alert.showAlert(strTitle: "error email", strMessage: error.localizedDescription, viewController: self)
-                             
-                          }else{
-                              Alert.showAlert(strTitle: "email", strMessage: "y", viewController: self)
+                              if let email = self.emailTextField.text {
+                        Auth.auth().currentUser?.updateEmail(to: email) { error in
+                                  if let error = error {
+                                      print("email.....")
+                                    // An error happened.
+                                      Alert.showAlert(strTitle: "error email", strMessage: error.localizedDescription, viewController: self)
+                                     
+                                  }else{
+                                      Alert.showAlert(strTitle: "email", strMessage: "y", viewController: self)
 
-                          }
-                    
-                        // ...
-                }}
-                  }}
-                    
-                    let userData : [String:Any]  = [
-                        "id":userId,
-                        "name":name,
-                        "email":email,
-                        "phoneNumber":phoneNumber]
-                
-//                let user = Auth.auth().currentUser
-//                var credential: AuthCredential
+                                  }
+                            
+                                // ...
+                        }}
+                          }}
+                    }
+                            let userData : [String:Any]  = [
+                                "id":userId,
+                                "name":name,
+                                "email": email,
+                                "phoneNumber":phoneNumber]
+                        
+        //                let user = Auth.auth().currentUser
+        //                var credential: AuthCredential
+        //
+        //                // Prompt the user to re-provide their sign-in credentials
+        //
+        //                user?.reauthenticate(with: credential) { error,arg  in
+        //                  if let error = error {
+        //                    // An error happened.
+        //                  } else {
+                            // User re-authenticated.
+//                        if passwordTextField.text!.count >= 6 {
+//                        if let password = passwordTextField.text {
+//                        Auth.auth().currentUser?.updatePassword(to: password) { error in
+//                                  if let error = error {
+//                                      print("password.....")
+//                                    // An error happened.
+//                                      Alert.showAlert(strTitle: "error password", strMessage: error.localizedDescription, viewController: self)
+//                                      Activity.removeIndicator(parentView: self.view, childView: self.activityIndicator)
+//                                  }else{
+//                                      Alert.showAlert(strTitle: "password", strMessage: "y", viewController: self)
 //
-//                // Prompt the user to re-provide their sign-in credentials
+//                                  }
 //
-//                user?.reauthenticate(with: credential) { error,arg  in
-//                  if let error = error {
-//                    // An error happened.
-//                  } else {
-                    // User re-authenticated.
-                if let password = passwordTextField.text {
-                Auth.auth().currentUser?.updatePassword(to: password) { error in
-                          if let error = error {
-                              print("password.....")
-                            // An error happened.
-                              Alert.showAlert(strTitle: "error password", strMessage: error.localizedDescription, viewController: self)
-                              Activity.removeIndicator(parentView: self.view, childView: self.activityIndicator)
-                          }else{
-                              Alert.showAlert(strTitle: "password", strMessage: "y", viewController: self)
+//                                // ...
+//                        }}
+//                        }
+                        
+                        if let password = passwordTextField.text {
+                            if password != "" {
+                        Auth.auth().currentUser?.updatePassword(to: password) { error in
+                                  if let error = error {
+                                      print("password.....")
+                                    // An error happened.
+                                      Alert.showAlert(strTitle: "error password", strMessage: error.localizedDescription, viewController: self)
+                                      Activity.removeIndicator(parentView: self.view, childView: self.activityIndicator)
+                                  }else{
+                                      Alert.showAlert(strTitle: "password", strMessage: "y", viewController: self)
 
-                          }
-                    
-                        // ...
-                }}
-                if let password = passwordTextField.text {
-                Auth.auth().currentUser?.updatePassword(to: password) { error in
-                          if let error = error {
-                              print("password.....")
-                            // An error happened.
-                              Alert.showAlert(strTitle: "error password", strMessage: error.localizedDescription, viewController: self)
-                              Activity.removeIndicator(parentView: self.view, childView: self.activityIndicator)
-                          }else{
-                              Alert.showAlert(strTitle: "password", strMessage: "y", viewController: self)
+                                  }
+                            
+                                // ...
+                        }}
+                        }
+                       
+        //                = emailTextField.text
 
-                          }
-                    
-                        // ...
-                }}
-
-               
-//                = emailTextField.text
-
-                     ref.document(userId).setData(userData) { error in
-                         if let error = error {
-                             Alert.showAlert(strTitle: "Error", strMessage: error.localizedDescription, viewController: self)
-                             Activity.removeIndicator(parentView: self.view, childView: self.activityIndicator)
-                             
-                         }
-                         Activity.removeIndicator(parentView: self.view, childView: self.activityIndicator)
-                         
-        
-    //}
-       //  }
-        }
-    }
-    }
+                             ref.document(userId).setData(userData) { error in
+                                 if let error = error {
+                                     Alert.showAlert(strTitle: "Error", strMessage: error.localizedDescription, viewController: self)
+                                     Activity.removeIndicator(parentView: self.view, childView: self.activityIndicator)
+                                     
+                                 }
+                                 Activity.removeIndicator(parentView: self.view, childView: self.activityIndicator)
+                                 
+                
+            //}
+               //  }
+                }
+            }
+            }
     @IBAction func handleLogout(_ sender: Any) {
         do {
             try Auth.auth().signOut()

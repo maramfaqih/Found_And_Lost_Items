@@ -117,7 +117,7 @@ extension SearchViewController: UITableViewDelegate {
         selectedPostImage = cell.postImageView.image
         selectedPost = posts[indexPath.row]
       
-            performSegue(withIdentifier: "toDetailsVC", sender: self)
+            performSegue(withIdentifier: "fromSearchPostEditVC", sender: self)
             
         }
     }
