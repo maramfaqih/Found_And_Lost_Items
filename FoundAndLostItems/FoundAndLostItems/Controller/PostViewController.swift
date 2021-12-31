@@ -7,8 +7,15 @@
 
 import UIKit
 import Firebase
+import CoreLocation
+import MapKit
 
 class PostViewController: UIViewController {
+    @IBOutlet weak var itemLocationMapView: MKMapView!
+    var latitude : CLLocationDegrees = 0.0
+    var longitude :  CLLocationDegrees = 0.0
+    var locationManager  = CLLocationManager()
+    let annotation = MKPointAnnotation()
     var foundItem = "Found"
     var foundItems = ["Found","Lost"]
 
@@ -43,41 +50,42 @@ class PostViewController: UIViewController {
             postDescriptionTextField.text = selectedPost.description
             postImageView.image = selectedImage
             actionButton.setTitle("Update Post", for: .normal)
-            let deleteBarButton = UIBarButtonItem(image: UIImage(systemName: "trash.fill"), style: .plain, target: self, action: #selector(handleDelete))
-            self.navigationItem.rightBarButtonItem = deleteBarButton
+            
         }else {
             actionButton.setTitle("Add Post", for: .normal)
             self.navigationItem.rightBarButtonItem = nil
             
         }
-    }
-    
+        //----------------location------------------//
+        
+           locationManager.delegate = self
+           //locationManager1  = CLLocationManager()
+           locationManager.desiredAccuracy = kCLLocationAccuracyBest
+           locationManager.distanceFilter = kCLLocationAccuracyHundredMeters
 
- 
-    @objc func handleDelete (_ sender: UIBarButtonItem) {
-        let ref = Firestore.firestore().collection("posts")
-        if let selectedPost = selectedPost {
-            Activity.showIndicator(parentView: self.view, childView: activityIndicator)
-            ref.document(selectedPost.id).delete { error in
-                if let error = error {
-                    print("Error in db delete",error)
-                }else {
-                    // Create a reference to the file to delete
-                    let storageRef = Storage.storage().reference(withPath: "posts/\(selectedPost.user.id)/\(selectedPost.id)")
-                    // Delete the file
-                    storageRef.delete { error in
-                        if let error = error {
-                            print("Error in storage delete",error)
-                        } else {
-                            self.activityIndicator.stopAnimating()
-                            self.navigationController?.popViewController(animated: true)
-                        }
-                    }
-                    
-                }
-            }
-        }
+           locationManager.stopUpdatingLocation()
+           locationManager.requestAlwaysAuthorization()
+          // locationManager1.requestLocation()
+
+           // check if location enabled
+           if CLLocationManager.locationServicesEnabled() {
+               print("Yes")
+               locationManager.startUpdatingLocation()
+           }else{
+               print("No")
+           }
+           //--------------------------------------------//
+//        let initialLocation = CLLocation(latitude: latitude, longitude: longitude)
+//setStartingLocation(location: initialLocation, distance: 100)
+////        annotation.coordinate = CLLocationCoordinate2D(latitude:self.latitude, longitude: self.longitude)
+////        itemLocationMapView.addAnnotation(annotation)
+////        let myAnnotation: MKPointAnnotation = MKPointAnnotation()
+//        let pin = MKPointAnnotation()
+//        pin.coordinate = CLLocationCoordinate2DMake(latitude, longitude)
+//        pin.title = "Current location"
+//        itemLocationMapView.addAnnotation(pin)
     }
+   
     
     @IBAction func handleActionTouch(_ sender: Any) {
         if let image = postImageView.image,
@@ -89,7 +97,6 @@ class PostViewController: UIViewController {
            let currentUser = Auth.auth().currentUser {
             let found = foundItem
             Activity.showIndicator(parentView: self.view, childView: activityIndicator)
-//            ref.addDocument(data:)
             var postId = ""
             if let selectedPost = selectedPost {
                 postId = selectedPost.id
@@ -218,4 +225,54 @@ extension PostViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
 
 
+}
+extension PostViewController : CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
+
+        let userLocation = locations[0] as CLLocation
+              latitude = userLocation.coordinate.latitude
+              longitude = userLocation.coordinate.longitude
+         print("userLocation: \(userLocation)")
+
+        let geoCoder = CLGeocoder()
+        geoCoder.reverseGeocodeLocation(userLocation){ (placeMarks, error) in
+            if error != nil {
+                print("Error")
+            }
+
+            let placeMark = placeMarks! as [CLPlacemark]
+            if placeMark.count>0 {
+                let placeMark = placeMarks![0]
+                self.locationManager.stopUpdatingLocation()
+
+                let country =
+                placeMark.country
+                
+                let city =
+                placeMark.locality
+               // print(country)
+                self.postICountryTextField.text = country ?? "Unknown"
+                self.postCityTextField.text = city ?? "Unknown"
+                print(country ?? ",,,,,,")
+                
+
+            }
+
+        }
+        let initialLocation = CLLocation(latitude: latitude, longitude: longitude)
+        setStartingLocation(location: initialLocation, distance: 1000)
+
+        let pin = MKPointAnnotation()
+        pin.coordinate = CLLocationCoordinate2DMake(latitude, longitude)
+        pin.title = "Current location"
+        itemLocationMapView.addAnnotation(pin)
+    }
+    func setStartingLocation(location: CLLocation, distance: CLLocationDistance){
+        let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: distance, longitudinalMeters: distance)
+        itemLocationMapView.setRegion(region, animated: true)
+       // itemLocationMapView.setCameraBoundary(MKMapView.CameraBoundary(coordinateRegion: region), animated: true)
+
+    }
+    
 }

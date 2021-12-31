@@ -28,18 +28,18 @@ class PostCell: UITableViewCell {
     }
 
     func configure(with post:Post) -> UITableViewCell {
-        if postFoundLabel.text == "Found"{
-            postFoundView.backgroundColor = .systemGreen
-        }else{
-            postFoundView.backgroundColor = .systemRed
-        }
+      
         postFoundLabel.text = post.found
         postTitleLabel.text = post.title
         postDescriptionLabel.text = post.description
         postImageView.loadImageUsingCache(with: post.imageUrl)
         postLocationLabel.text = "\(post.country),\(post.city)"
         postTimeLabel.text = String(describing: post.createdAt!.dateValue().timeAgoDisplay())
-          
+        if postFoundLabel.text == "Found" {
+            postFoundView.backgroundColor = .systemGreen
+        }else{
+            postFoundView.backgroundColor = .systemRed
+        }
         return self
     }
     
