@@ -7,6 +7,8 @@
 
 import UIKit
 import Firebase
+import CoreLocation
+import MapKit
 class PostCell: UITableViewCell {
 
     @IBOutlet weak var postImageView: UIImageView!
@@ -34,7 +36,9 @@ class PostCell: UITableViewCell {
         postDescriptionLabel.text = post.description
         postImageView.loadImageUsingCache(with: post.imageUrl)
         postLocationLabel.text = "\(post.country),\(post.city)"
-        postTimeLabel.text = String(describing: post.createdAt!.dateValue().timeAgoDisplay())
+        if let createdAt = post.createdAt {
+        postTimeLabel.text = String(describing: createdAt.dateValue().timeAgoDisplay())
+        }
         if postFoundLabel.text == "Found" {
             postFoundView.backgroundColor = .systemGreen
         }else{
@@ -73,3 +77,4 @@ extension Date {
  return "\(secondsAgo / week) weeks ago"
 }
 }
+

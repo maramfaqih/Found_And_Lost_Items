@@ -15,6 +15,8 @@ struct Post {
     var imageUrl = ""
     var country = ""
     var city = ""
+    var latitude = 0.0
+    var longitude = 0.0
     var found = ""
     var user:User
     var createdAt:Timestamp?
@@ -25,6 +27,8 @@ struct Post {
            let description = dict["description"] as? String,
            let country = dict["country"] as? String,
            let city = dict["city"] as? String,
+           let latitude = dict["latitude"] as? Double,
+           let longitude = dict["longitude"] as? Double,
            let found = dict["found"] as? String,
            let imageUrl = dict["imageUrl"] as? String,
             let createdAt = dict["createdAt"] as? Timestamp{
@@ -34,6 +38,8 @@ struct Post {
             self.createdAt = createdAt
             self.country = country
             self.city = city
+            self.latitude = latitude
+            self.longitude = longitude
             self.found = found
         }
         self.id = id

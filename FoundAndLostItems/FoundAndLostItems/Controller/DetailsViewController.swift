@@ -9,8 +9,8 @@ import UIKit
 import CoreLocation
 import MapKit
 class DetailsViewController: UIViewController {
-    var latitude : CLLocationDegrees = 16.88905
-    var longitude :  CLLocationDegrees = 42.56461
+    var latitude : CLLocationDegrees = 0.0
+    var longitude :  CLLocationDegrees = 0.0
     var selectedPost:Post?
     var selectedPostImage:UIImage?
     @IBOutlet weak var itemLocationMapView: MKMapView!
@@ -31,7 +31,7 @@ class DetailsViewController: UIViewController {
             country.text = selectedPost.city
             
             postImageView.image = selectedImage
-            let initialLocation = CLLocation(latitude: latitude, longitude: longitude)
+            let initialLocation = CLLocation(latitude: selectedPost.latitude, longitude: selectedPost.longitude)
             setStartingLocation(location: initialLocation, distance: 1000)
 
             let pin = MKPointAnnotation()
@@ -51,3 +51,4 @@ func setStartingLocation(location: CLLocation, distance: CLLocationDistance){
 
 
 }
+

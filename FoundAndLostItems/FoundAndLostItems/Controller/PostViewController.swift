@@ -18,7 +18,7 @@ class PostViewController: UIViewController {
     let annotation = MKPointAnnotation()
     var foundItem = "Found"
     var foundItems = ["Found","Lost"]
-
+var flag = 0
     var selectedPost:Post?
     var selectedPostImage:UIImage?
     let activityIndicator = UIActivityIndicatorView()
@@ -48,8 +48,11 @@ class PostViewController: UIViewController {
         let selectedImage = selectedPostImage{
             postTitleTextField.text = selectedPost.title
             postDescriptionTextField.text = selectedPost.description
+            latitude = selectedPost.latitude
+            longitude = selectedPost.longitude
             postImageView.image = selectedImage
             actionButton.setTitle("Update Post", for: .normal)
+            flag = 1
             
         }else {
             actionButton.setTitle("Add Post", for: .normal)
@@ -86,6 +89,36 @@ class PostViewController: UIViewController {
 //        itemLocationMapView.addAnnotation(pin)
     }
    
+    @IBAction func customLocationAction(_ sender: UILongPressGestureRecognizer) {
+       // if sender.state != UITapGestureRecognizer.State.ended{
+        let allAnnotation = itemLocationMapView.annotations
+        itemLocationMapView.removeAnnotations(allAnnotation)
+            let touchLocation = sender.location(in: itemLocationMapView)
+            let locationCoordinate = itemLocationMapView.convert(touchLocation, toCoordinateFrom: itemLocationMapView)
+           // locationCoordinate.latitude
+            latitude = locationCoordinate.latitude
+            longitude = locationCoordinate.longitude
+            print("-------",locationCoordinate.latitude)
+
+//            let initialLocation = CLLocation(latitude: latitude, longitude: longitude)
+//            setStartingLocation(location: initialLocation, distance: 1000)
+//
+       
+            let pin = MKPointAnnotation()
+            pin.coordinate = CLLocationCoordinate2DMake(latitude, longitude)
+            //pin.title = "location"
+            itemLocationMapView.addAnnotation(pin)
+        locationManager.startUpdatingLocation()
+
+        
+       // }
+      //  if sender.state != UITapGestureRecognizer.State.began{
+        //    return
+       // }
+//            let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: distance, longitudinalMeters: distance)
+//            itemLocationMapView.setRegion(region, animated: true)
+        
+    }
     
     @IBAction func handleActionTouch(_ sender: Any) {
         if let image = postImageView.image,
@@ -125,7 +158,9 @@ class PostViewController: UIViewController {
                                 "description":description,
                                 "imageUrl":url.absoluteString,
                                 "createdAt":selectedPost.createdAt ?? FieldValue.serverTimestamp(),
-                                "updatedAt": FieldValue.serverTimestamp()
+                                "updatedAt": FieldValue.serverTimestamp(),
+                                "latitude": self.latitude,
+                                "longitude": self.longitude
                                 
                             ]
                         }else {
@@ -138,7 +173,9 @@ class PostViewController: UIViewController {
                                 "city":city,
                                 "imageUrl":url.absoluteString,
                                 "createdAt":FieldValue.serverTimestamp(),
-                                "updatedAt": FieldValue.serverTimestamp()
+                                "updatedAt": FieldValue.serverTimestamp(),
+                                "latitude": self.latitude,
+                                "longitude": self.longitude
                             ]
                         }
                         ref.document(postId).setData(postData) { error in
@@ -229,21 +266,26 @@ extension PostViewController: UIPickerViewDelegate, UIPickerViewDataSource {
 extension PostViewController : CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
-
+        if flag == 0 {
         let userLocation = locations[0] as CLLocation
               latitude = userLocation.coordinate.latitude
               longitude = userLocation.coordinate.longitude
+        
          print("userLocation: \(userLocation)")
-
+            flag = 1
+        }
+        
+        let userLocation = CLLocation(latitude: latitude, longitude: longitude)
+        
         let geoCoder = CLGeocoder()
         geoCoder.reverseGeocodeLocation(userLocation){ (placeMarks, error) in
             if error != nil {
                 print("Error")
             }
-
-            let placeMark = placeMarks! as [CLPlacemark]
+            if let placeMarks = placeMarks{
+            let placeMark = placeMarks as [CLPlacemark]
             if placeMark.count>0 {
-                let placeMark = placeMarks![0]
+                let placeMark = placeMarks[0]
                 self.locationManager.stopUpdatingLocation()
 
                 let country =
@@ -257,8 +299,10 @@ extension PostViewController : CLLocationManagerDelegate {
                 print(country ?? ",,,,,,")
                 
 
-            }
+            }}
 
+        
+           
         }
         let initialLocation = CLLocation(latitude: latitude, longitude: longitude)
         setStartingLocation(location: initialLocation, distance: 1000)
@@ -271,7 +315,13 @@ extension PostViewController : CLLocationManagerDelegate {
     func setStartingLocation(location: CLLocation, distance: CLLocationDistance){
         let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: distance, longitudinalMeters: distance)
         itemLocationMapView.setRegion(region, animated: true)
+        
        // itemLocationMapView.setCameraBoundary(MKMapView.CameraBoundary(coordinateRegion: region), animated: true)
+       // locationManager.startUpdatingLocation()
+        //locationManager1.requestLocation()
+       // locationManager.stopUpdatingLocation()
+        //locationManager.requestAlwaysAuthorization()
+        //locationManager.requestAlwaysAuthorization()
 
     }
     
