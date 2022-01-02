@@ -122,7 +122,7 @@ var flag = 0
     
     @IBAction func handleActionTouch(_ sender: Any) {
         if let image = postImageView.image,
-           let imageData = image.jpegData(compressionQuality: 0.75),
+           let imageData = image.jpegData(compressionQuality: 0.25),
            let title = postTitleTextField.text,
            let description = postDescriptionTextField.text,
            let country = postICountryTextField.text,
@@ -305,7 +305,7 @@ extension PostViewController : CLLocationManagerDelegate {
            
         }
         let initialLocation = CLLocation(latitude: latitude, longitude: longitude)
-        setStartingLocation(location: initialLocation, distance: 1000)
+        setStartingLocation(location: initialLocation, distance: 100)
 
         let pin = MKPointAnnotation()
         pin.coordinate = CLLocationCoordinate2DMake(latitude, longitude)

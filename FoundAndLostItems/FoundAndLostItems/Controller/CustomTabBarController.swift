@@ -14,7 +14,7 @@ class CustomTabBarController: UITabBarController {
         tabBar.items?[1].title = "My Post"
         tabBar.items?[4].title = "profile"
 //        UITabBar.appearance().unselectedItemTintColor = UIColor(displayP3Red: 1, green: 1, blue: 1 , alpha: 1)
-        UITabBar.appearance().unselectedItemTintColor = .black
+        UITabBar.appearance().unselectedItemTintColor = .systemGray4
         // Do any additional setup after loading the view.
     }
     

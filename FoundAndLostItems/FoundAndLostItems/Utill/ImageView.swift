@@ -1,17 +1,6 @@
-//
-//  ImageView.swift
-//  FoundAndLostItems
-//
-//  Created by Maram F on 22/05/1443 AH.
-//
-
 import UIKit
 let imageCache = NSCache<NSString,UIImage>()
 extension UIImageView {
-    func circlerImage(){
-        self.layer.cornerRadius = self.frame.height/2
-        self.layer.masksToBounds = true
-    }
     func loadImageUsingCache(with urlString:String) {
         if let cachedImage = imageCache.object(forKey: urlString as NSString) {
             self.image = cachedImage

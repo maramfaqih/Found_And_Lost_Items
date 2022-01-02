@@ -64,7 +64,7 @@ class MyPostViewController: UIViewController {
                                    let userData = userSnapshot.data(){
                                     let user = User(dict:userData)
                                     let post = Post(dict:post,id:diff.document.documentID,user:user)
-                                    self.posts.insert(post, at: 0)
+                                    self.posts.append(post)
                                     DispatchQueue.main.async {
                                         self.myPostTableView.reloadData()
                                     }

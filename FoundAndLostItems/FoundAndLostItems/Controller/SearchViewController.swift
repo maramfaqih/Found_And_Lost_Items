@@ -48,12 +48,12 @@ class SearchViewController: UIViewController {
                 print("DB ERROR Posts",error.localizedDescription)
             }
             if let snapshot = snapshot {
-                
                 snapshot.documentChanges.forEach { diff in
-                    let post = diff.document.data()
+                    let postData = diff.document.data()
                     switch diff.type {
                     case .added :
-                        if let userId = post["userId"] as? String {
+                        
+                        if let userId = postData["userId"] as? String {
                             ref.collection("users").document(userId).getDocument { userSnapshot, error in
                                 if let error = error {
                                     print("ERROR user Data",error.localizedDescription)
@@ -62,39 +62,55 @@ class SearchViewController: UIViewController {
                                 if let userSnapshot = userSnapshot,
                                    let userData = userSnapshot.data(){
                                     let user = User(dict:userData)
-                                    let post = Post(dict:post,id:diff.document.documentID,user:user)
-                                    self.posts.insert(post, at: 0)
-                                    DispatchQueue.main.async {
-                                        self.searchTableView.reloadData()
+                                    let post = Post(dict:postData,id:diff.document.documentID,user:user)
+                                    self.searchTableView.beginUpdates()
+                                    if snapshot.documentChanges.count != 1 {
+                                        self.posts.append(post)
+                                      
+                                        self.searchTableView.insertRows(at: [IndexPath(row:self.posts.count - 1,section: 0)],with: .automatic)
+                                    }else {
+                                        self.posts.insert(post,at:0)
+                                      
+                                        self.searchTableView.insertRows(at: [IndexPath(row: 0,section: 0)],with: .automatic)
                                     }
+                                  
+                                    self.searchTableView.endUpdates()
+                                    
                                     
                                 }
                             }
                         }
-                        case .modified:
+                    case .modified:
                         let postId = diff.document.documentID
                         if let currentPost = self.posts.first(where: {$0.id == postId}),
                            let updateIndex = self.posts.firstIndex(where: {$0.id == postId}){
-                            let newPost = Post(dict:post, id: postId, user: currentPost.user)
+                            let newPost = Post(dict:postData, id: postId, user: currentPost.user)
                             self.posts[updateIndex] = newPost
-                            DispatchQueue.main.async {
-                                self.searchTableView.reloadData()
-                            }
+                         
+                                self.searchTableView.beginUpdates()
+                                self.searchTableView.deleteRows(at: [IndexPath(row: updateIndex,section: 0)], with: .left)
+                                self.searchTableView.insertRows(at: [IndexPath(row: updateIndex,section: 0)],with: .left)
+                                self.searchTableView.endUpdates()
+                            
                         }
                     case .removed:
                         let postId = diff.document.documentID
                         if let deleteIndex = self.posts.firstIndex(where: {$0.id == postId}){
                             self.posts.remove(at: deleteIndex)
-                            DispatchQueue.main.async {
-                                self.searchTableView.reloadData()
-                            }
-                        }
+                          
+                                self.searchTableView.beginUpdates()
+                                self.searchTableView.deleteRows(at: [IndexPath(row: deleteIndex,section: 0)], with: .automatic)
+                                self.searchTableView.endUpdates()
+                            
                         }
                     }
                 }
             }
+            }
+     
 
 }
+    
 }
 extension SearchViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
