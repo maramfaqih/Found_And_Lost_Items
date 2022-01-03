@@ -187,8 +187,19 @@ extension HomeViewController: UITableViewDataSource {
       
         return cell.configure(with: posts[indexPath.row])
     }
-    
-    
+//    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+//
+//        UIView.animate(withDuration: 0.7) {
+//            if let cell = (tableView.dequeueReusableCell(withIdentifier: "PostCell") as? PostCell) {
+//                   cell.contentView.transform = .init(scaleX: 0.95, y: 0.95)
+//                   cell.contentView.backgroundColor = UIColor(white: 1,  alpha: 1)
+//                   cell.contentView.backgroundColor = UIColor(white: 1,  alpha: 0.5)
+//
+//           }
+//
+//    }
+//
+//}
 }
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

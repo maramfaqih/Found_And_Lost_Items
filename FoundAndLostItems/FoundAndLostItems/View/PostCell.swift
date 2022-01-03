@@ -9,11 +9,14 @@ import UIKit
 import Firebase
 import CoreLocation
 import MapKit
+import SwiftUI
 class PostCell: UITableViewCell {
 
     @IBOutlet weak var postImageView: UIImageView!
+
     
-  
+   
+    @IBOutlet weak var backgroundViewCell: UIView!
     @IBOutlet weak var postTitleLabel: UILabel!
     
     @IBOutlet weak var postDescriptionLabel: UILabel!
@@ -30,7 +33,10 @@ class PostCell: UITableViewCell {
     }
 
     func configure(with post:Post) -> UITableViewCell {
-      
+        backgroundViewCell.backgroundColor = .systemGray6
+        backgroundViewCell.layer.cornerRadius = 20
+        backgroundViewCell.layer.masksToBounds = true
+        
         postFoundLabel.text = post.found
         postTitleLabel.text = post.title
         postDescriptionLabel.text = post.description

@@ -12,6 +12,52 @@ import Firebase
 class LoginViewController: UIViewController {
     var activityIndicator = UIActivityIndicatorView()
 
+    @IBOutlet weak var emailLabel: UILabel!{
+        didSet{
+            emailLabel.text = "email".localized
+        }
+    }
+    @IBOutlet weak var passwordLabel: UILabel!{
+        didSet{
+            passwordLabel.text = "password".localized
+        }
+    }
+    
+    @IBOutlet weak var loginButtonOutlet: UIButton!
+    {
+        didSet{
+            loginButtonOutlet.setTitle(NSLocalizedString("login", tableName: "Localizable", comment: ""), for: .normal)
+        }
+    }
+    
+    @IBOutlet weak var registerButtonOutlet: UIButton!{
+        didSet{
+            registerButtonOutlet.setTitle("register".localized, for: .normal)
+        }
+    }
+    
+    @IBOutlet weak var orLabel: UILabel!
+    {
+        didSet{
+            orLabel.text = "or".localized
+        }
+
+    }
+    
+    @IBOutlet weak var loginLabel: UILabel!
+    {
+        didSet{
+            loginLabel.text = "loginword".localized
+        }
+
+    }
+    
+    @IBOutlet weak var langugeButtonOutlet: UIButton!
+    {
+        didSet{
+            langugeButtonOutlet.setTitle(NSLocalizedString("languge", tableName: "Localizable", comment: ""), for: .normal)
+        }
+    }
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     override func viewDidLoad() {
@@ -44,7 +90,24 @@ class LoginViewController: UIViewController {
         }
     }
     
-  
+    @IBAction func changeLanguageButton(_ sender: UIButton) {
+//
+//        UserDefaults.standard.set(lang, forKey: "currentLanguage")
+//        Bundle.setLanguage(lang)
+//        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+//        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+//           let sceneDelegate = windowScene.delegate as? SceneDelegate {
+//            sceneDelegate.window?.rootViewController = storyboard.instantiateInitialViewController()
+//    }
+    
 
 }
+}
+extension String {
+    var localized: String {
 
+        return NSLocalizedString(self, tableName: "Localizable", bundle: .main, value: self, comment: self)
+        
+       
+    }
+}

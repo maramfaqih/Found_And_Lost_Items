@@ -1,0 +1,42 @@
+/* 
+  Localizable.strings
+  FoundAndLostItems
+
+  Created by Maram F on 29/05/1443 AH.
+  
+*/
+
+
+///تسجيل الدخول///
+"loginword" = "Login";
+"hi" = "Hi there! Nice to see you again";
+"email" = "Email";
+"password" = "Password";
+"login" = "Login";
+"newuser" = "Register a new user";
+"register" = "Register";
+"or" = "-Or-";
+"languge" = "عربي";
+
+/// تسجيل مسخدم جديد///
+"registerword" = "Register";
+"name" = "Name";
+"email" = "Email";
+"password" = "Password";
+"repassword" = "Re-password";
+"register" = "Register";
+"login" = "Login";
+"phoneNo" = "phone Number";
+
+///اضافة كتاب///
+"bookname" = "Book Name";
+"description" = "Description";
+"contact" = "contact me";
+"add" = "Add";
+"edit" = "Edit";
+
+
+///صفحة التفاصيل///
+"bookname" = "Book Name";
+"description" = "Description";
+"contact" = "contact me";
