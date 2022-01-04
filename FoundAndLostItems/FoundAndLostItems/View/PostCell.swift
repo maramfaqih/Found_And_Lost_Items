@@ -43,7 +43,7 @@ class PostCell: UITableViewCell {
         shadowViewCell.layer.shadowRadius = 4
         shadowViewCell.layer.masksToBounds = false
        
-        postFoundLabel.text = post.found
+        postFoundLabel.text = post.found.localized
         postTitleLabel.text = post.title
         postDescriptionLabel.text = post.description
         postImageView.loadImageUsingCache(with: post.imageUrl)
@@ -51,7 +51,7 @@ class PostCell: UITableViewCell {
         if let createdAt = post.createdAt {
         postTimeLabel.text = String(describing: createdAt.dateValue().timeAgoDisplay())
         }
-        if postFoundLabel.text == "Found" {
+        if postFoundLabel.text == "found" || postFoundLabel.text == "موجود" {
             postFoundView.backgroundColor = .systemGreen
         }else{
             postFoundView.backgroundColor = .systemRed
@@ -77,16 +77,16 @@ extension Date {
  let week = 7 * day
 
  if secondsAgo < minute {
-     return "\(secondsAgo) sec ago"
+     return "from".localized+"\(secondsAgo)"+"secAgo".localized
  } else if secondsAgo < hour {
-     return "\(secondsAgo / minute) min ago"
+     return "from".localized+"\(secondsAgo / minute)"+"minAgo".localized
  } else if secondsAgo < day {
-     return "\(secondsAgo / hour) hrs ago"
+     return "from".localized+"\(secondsAgo / hour)"+"hrsAgo"
  } else if secondsAgo < week {
-     return "\(secondsAgo / day) days ago"
+     return "from".localized+"\(secondsAgo / day)"+"daysAgo".localized
  }
 
- return "\(secondsAgo / week) weeks ago"
+       return "from".localized+"\(secondsAgo / week)"+"weeksAgo".localized
 }
 }
 

@@ -7,7 +7,6 @@
 */
 
 
-///تسجيل الدخول///
 "loginword" = "Login";
 "email" = "Email";
 "password" = "Password";
@@ -15,7 +14,7 @@
 "newuser" = "Register a new user";
 "register" = "Register";
 "or" = "-Or-";
-"languge" = "عربي";
+"language" = "عربي";
 "profile" = "Profile";
 "home" = "Home";
 "myPost" = "MyPost";
@@ -33,13 +32,21 @@
 "all" = "All";
 "title" = "Title";
 "category" = "Category";
-"selectLocationOnMap" = "Select Location on Map";
+"selectLocationOnMap" = "Select Location on Map :";
 "country" = "Country";
-"city" = "city";
+"city" = "City";
 "cencel" = "Cencal";
-
-"add" = "Add";
+"titleApp1" = "Lost&Found";
+"titleApp2" = "Item";
+"addPost" = "Add Post";
+"updatePost" = "update Post";
 "edit" = "Edit";
+"saveChanges" = "Save Changes";
+"description" = "Description :";
 
-
-
+"secAgo" = " sec ago";
+"minAgo" = " min ago";
+"hrsAgo" = " hrs ago";
+"daysAgo" = " days ago";
+"weeksAgo" = " weeks ago";
+"from" = " ";

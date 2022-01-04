@@ -24,7 +24,7 @@ var activityIndicator = UIActivityIndicatorView()
     @IBOutlet weak var langugeButtonOutlet: UIButton!
     {
         didSet{
-            langugeButtonOutlet.setTitle(NSLocalizedString("languge", tableName: "Localizable", comment: ""), for: .normal)
+            langugeButtonOutlet.setTitle(NSLocalizedString("language", tableName: "Localizable", comment: ""), for: .normal)
         }
     }
     @IBOutlet weak var registerLabel: UILabel!

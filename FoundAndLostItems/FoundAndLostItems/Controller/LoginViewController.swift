@@ -56,7 +56,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var langugeButtonOutlet: UIButton!
     {
         didSet{
-            langugeButtonOutlet.setTitle(NSLocalizedString("languge", tableName: "Localizable", comment: ""), for: .normal)
+            langugeButtonOutlet.setTitle(NSLocalizedString("language", tableName: "Localizable", comment: ""), for: .normal)
                  
         }
     }

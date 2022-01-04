@@ -11,13 +11,54 @@ import CoreLocation
 import MapKit
 
 class PostViewController: UIViewController {
+    @IBOutlet weak var titleApp1Label: UILabel!{
+        didSet{
+            titleApp1Label.text = "titleApp1".localized
+        }
+    }
+    
+    @IBOutlet weak var titleApp2Label: UILabel!{
+        didSet{
+            titleApp2Label.text = "titleApp2".localized
+        }
+    }
+    @IBOutlet weak var countryLabelOutlet: UILabel!{
+        didSet{
+            countryLabelOutlet.text = "country".localized
+        }
+    }
+    @IBOutlet weak var cityLabelOutlet: UILabel!{
+        didSet{
+            cityLabelOutlet.text = "city".localized
+        }
+    }
+    @IBOutlet weak var selectLocationLabelOutlet: UILabel!{
+        didSet{
+            selectLocationLabelOutlet.text = "selectLocationOnMap".localized
+        }
+    }
+    @IBOutlet weak var descriptionLableOutlet: UILabel!{
+        didSet{
+            descriptionLableOutlet.text = "description".localized
+        }
+    }
+    @IBOutlet weak var categoryLableOutlet: UILabel!{
+        didSet{
+            categoryLableOutlet.text = "category".localized
+        }
+    }
+    @IBOutlet weak var titleLableOutlet: UILabel!{
+        didSet{
+            titleLableOutlet.text = "title".localized
+        }
+    }
     @IBOutlet weak var itemLocationMapView: MKMapView!
     var latitude : CLLocationDegrees = 0.0
     var longitude :  CLLocationDegrees = 0.0
     var locationManager  = CLLocationManager()
     let annotation = MKPointAnnotation()
-    var foundItem = "Found"
-    var foundItems = ["Found","Lost"]
+    var foundItem = "found"
+    var foundItems = ["found".localized,"lost".localized]
 var flag = 0
     var selectedPost:Post?
     var selectedPostImage:UIImage?
@@ -29,7 +70,12 @@ var flag = 0
         postImageView.addGestureRecognizer(tapGesture)
     }
 }
-    @IBOutlet weak var cencelButtonOutlet: UIButton!
+    @IBOutlet weak var cencelButtonOutlet: UIButton!{
+        didSet{
+           
+            cencelButtonOutlet.setTitle(NSLocalizedString("cencel", tableName: "Localizable", comment: ""), for: .normal)
+                }
+    }
     
     @IBOutlet weak var postTitleTextField: UITextField!
     
@@ -61,11 +107,11 @@ var flag = 0
             latitude = selectedPost.latitude
             longitude = selectedPost.longitude
             postImageView.image = selectedImage
-            actionButton.setTitle("Update Post", for: .normal)
+            actionButton.setTitle("updatePost".localized, for: .normal)
             flag = 1
             
         }else {
-            actionButton.setTitle("Add Post", for: .normal)
+            actionButton.setTitle("addPost".localized, for: .normal)
             self.navigationItem.rightBarButtonItem = nil
             cencelButtonOutlet.isHidden = true
         }
@@ -88,15 +134,7 @@ var flag = 0
                print("No")
            }
            //--------------------------------------------//
-//        let initialLocation = CLLocation(latitude: latitude, longitude: longitude)
-//setStartingLocation(location: initialLocation, distance: 100)
-////        annotation.coordinate = CLLocationCoordinate2D(latitude:self.latitude, longitude: self.longitude)
-////        itemLocationMapView.addAnnotation(annotation)
-////        let myAnnotation: MKPointAnnotation = MKPointAnnotation()
-//        let pin = MKPointAnnotation()
-//        pin.coordinate = CLLocationCoordinate2DMake(latitude, longitude)
-//        pin.title = "Current location"
-//        itemLocationMapView.addAnnotation(pin)
+
     }
    
     @IBAction func cencelButtonAction(_ sender: UIButton) {
@@ -116,35 +154,33 @@ var flag = 0
             longitude = locationCoordinate.longitude
             print("-------",locationCoordinate.latitude)
 
-//            let initialLocation = CLLocation(latitude: latitude, longitude: longitude)
-//            setStartingLocation(location: initialLocation, distance: 1000)
-//
+
        
             let pin = MKPointAnnotation()
             pin.coordinate = CLLocationCoordinate2DMake(latitude, longitude)
             //pin.title = "location"
             itemLocationMapView.addAnnotation(pin)
-        locationManager.startUpdatingLocation()
+            locationManager.startUpdatingLocation()
 
-        
-       // }
-      //  if sender.state != UITapGestureRecognizer.State.began{
-        //    return
-       // }
-//            let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: distance, longitudinalMeters: distance)
-//            itemLocationMapView.setRegion(region, animated: true)
-        
+   
     }
     
     @IBAction func handleActionTouch(_ sender: Any) {
+        var category : String?
+        if foundItem == "موجود" || foundItem == "found" {
+             category = "found"}
+            else {
+                category = "lost"
+            }
         if let image = postImageView.image,
            let imageData = image.jpegData(compressionQuality: 0.25),
            let title = postTitleTextField.text,
+           let found = category,
            let description = postDescriptionTextField.text,
            let country = postICountryTextField.text,
            let city = postCityTextField.text,
            let currentUser = Auth.auth().currentUser {
-            let found = foundItem
+         
             Activity.showIndicator(parentView: self.view, childView: activityIndicator)
             var postId = ""
             if let selectedPost = selectedPost {
@@ -332,12 +368,7 @@ extension PostViewController : CLLocationManagerDelegate {
         let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: distance, longitudinalMeters: distance)
         itemLocationMapView.setRegion(region, animated: true)
         
-       // itemLocationMapView.setCameraBoundary(MKMapView.CameraBoundary(coordinateRegion: region), animated: true)
-       // locationManager.startUpdatingLocation()
-        //locationManager1.requestLocation()
-       // locationManager.stopUpdatingLocation()
-        //locationManager.requestAlwaysAuthorization()
-        //locationManager.requestAlwaysAuthorization()
+     
 
     }
     

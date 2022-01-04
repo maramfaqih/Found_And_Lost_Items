@@ -9,6 +9,27 @@ import UIKit
 import CoreLocation
 import MapKit
 class DetailsViewController: UIViewController {
+    @IBOutlet weak var titleApp1Label: UILabel!{
+        didSet{
+            titleApp1Label.text = "titleApp1".localized
+        }
+    }
+    @IBOutlet weak var selectLocationLabelOutlet: UILabel!{
+        didSet{
+            selectLocationLabelOutlet.text = "selectLocationOnMap".localized
+        }
+    }
+    @IBOutlet weak var descriptionLableOutlet: UILabel!{
+        didSet{
+            descriptionLableOutlet.text = "description".localized
+        }
+    }
+    @IBOutlet weak var titleApp2Label: UILabel!{
+        didSet{
+            titleApp2Label.text = "titleApp2".localized
+        }
+    }
+  
     var latitude : CLLocationDegrees = 0.0
     var longitude :  CLLocationDegrees = 0.0
     var selectedPost:Post?

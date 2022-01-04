@@ -22,8 +22,30 @@ var read = false
             postsTableView.register(UINib(nibName: "PostCell", bundle: nil), forCellReuseIdentifier: "PostCell")
         }
     }
-  
+    @IBOutlet weak var titleApp1Label: UILabel!{
+        didSet{
+            titleApp1Label.text = "titleApp1".localized
+        }
+    }
     
+    @IBOutlet weak var titleApp2Label: UILabel!{
+        didSet{
+            titleApp2Label.text = "titleApp2".localized
+        }
+    }
+    @IBOutlet weak var LanguageButtonOutlet: UIButton!{
+        didSet{
+            LanguageButtonOutlet.setTitle(NSLocalizedString("language", tableName: "Localizable", comment: ""), for: .normal)
+        }
+    }
+    
+    @IBOutlet weak var filterSegmentedControlOutlet: UISegmentedControl!{
+        didSet{
+            filterSegmentedControlOutlet.setTitle("all".localized, forSegmentAt: 0)
+            filterSegmentedControlOutlet.setTitle("found".localized, forSegmentAt: 1)
+            filterSegmentedControlOutlet.setTitle("lost".localized, forSegmentAt: 2)
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         let all =  ref.collection("posts").order(by: "createdAt" ,descending: true)
@@ -36,24 +58,25 @@ var read = false
     @IBAction func displayFilterSegmentedControl(_ sender: UISegmentedControl) {
   
         posts = [Post]()
-        if let filter = sender.titleForSegment(at:sender.selectedSegmentIndex) {
-            if filter == "All" {
+        
+         let filter = sender.selectedSegmentIndex
+            if filter == 0 {
                 let all =  ref.collection("posts").order(by: "createdAt" ,descending: true)
 
                 getPosts(state: all)
-            }else if filter == "Found"{
-                let found =  ref.collection("posts").whereField("found", isEqualTo: "Found").order(by: "createdAt",descending: true)
+            }else if filter == 1 {
+                let found =  ref.collection("posts").whereField("found", isEqualTo: "found").order(by: "createdAt",descending: true)
                 getPosts(state: found)
                 
-            }else if filter == "Lost" {
+            }else if filter == 2 {
                 //self.postsTableView.beginUpdates()
-                let lost =  ref.collection("posts").whereField("found", isEqualTo: "Lost").order(by: "createdAt",descending: true)
+                let lost =  ref.collection("posts").whereField("found", isEqualTo: "lost").order(by: "createdAt",descending: true)
                 getPosts(state: lost)
               
                 
             }
 
-        }
+        
         
     }
     func getPosts(state : Query ) {
@@ -166,6 +189,31 @@ var read = false
             }
         }
         
+    }
+    
+    @IBAction func changeLanguageButton(_ sender: UIButton) {
+       
+        var lang = UserDefaults.standard.string(forKey: "currentLanguage")
+         if lang == "ar" {
+             Bundle.setLanguage(lang ?? "ar")
+             UIView.appearance().semanticContentAttribute = .forceRightToLeft
+            lang = "en"
+             
+        }else{
+
+            Bundle.setLanguage(lang ?? "en")
+            UIView.appearance().semanticContentAttribute = .forceLeftToRight
+            lang = "ar"
+        }
+      
+        UserDefaults.standard.set(lang, forKey: "currentLanguage")
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let sceneDelegate = windowScene.delegate as? SceneDelegate {
+            sceneDelegate.window?.rootViewController = storyboard.instantiateInitialViewController()
+
+        }
+
     }
 }
 

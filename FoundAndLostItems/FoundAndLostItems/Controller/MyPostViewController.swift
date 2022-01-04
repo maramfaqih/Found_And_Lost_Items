@@ -13,7 +13,22 @@ class MyPostViewController: UIViewController {
     var selectedPost:Post?
     var selectedPostImage:UIImage?
     let ref = Firestore.firestore()
+    @IBOutlet weak var titleApp1Label: UILabel!{
+        didSet{
+            titleApp1Label.text = "titleApp1".localized
+        }
+    }
     
+    @IBOutlet weak var titleApp2Label: UILabel!{
+        didSet{
+            titleApp2Label.text = "titleApp2".localized
+        }
+    }
+    @IBOutlet weak var LanguageButtonOutlet: UIButton!{
+        didSet{
+            LanguageButtonOutlet.setTitle(NSLocalizedString("language", tableName: "Localizable", comment: ""), for: .normal)
+        }
+    }
     @IBOutlet weak var myPostTableView: UITableView!{
         didSet{
             myPostTableView.delegate = self

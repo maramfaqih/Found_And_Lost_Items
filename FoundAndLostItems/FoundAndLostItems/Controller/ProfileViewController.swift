@@ -9,7 +9,71 @@ import UIKit
 import Firebase
 
 class ProfileViewController: UIViewController {
-   
+    @IBOutlet weak var langugeButtonOutlet: UIButton!
+    {
+        didSet{
+            langugeButtonOutlet.setTitle(NSLocalizedString("languge", tableName: "Localizable", comment: ""), for: .normal)
+        }
+    }
+
+    
+    @IBOutlet weak var phoneNolabel: UILabel!
+    {
+        didSet{
+            phoneNolabel.text = "phoneNo".localized
+}
+    }
+    @IBOutlet weak var passwordLabel: UILabel!  {
+        didSet{
+            passwordLabel.text = "password".localized
+}
+    }
+    
+    @IBOutlet weak var rePasswordLabel: UILabel!  {
+        didSet{
+            rePasswordLabel.text = "repassword".localized
+}
+    }
+    @IBOutlet weak var nameLblel: UILabel!
+    {
+        didSet{
+            nameLblel.text = "name".localized
+}
+    }
+    @IBOutlet weak var emailLabel: UILabel!
+    {
+        didSet{
+            emailLabel.text = "email".localized
+}
+    }
+    @IBOutlet weak var saveChangesButtonOutlet: UIButton!
+    {
+        didSet{
+            saveChangesButtonOutlet.setTitle("saveChanges".localized, for: .normal)
+        }
+    }
+    @IBOutlet weak var loginButtonOutlet: UIButton!
+    {
+        didSet{
+            loginButtonOutlet.setTitle(NSLocalizedString("login", tableName: "Localizable", comment: ""), for: .normal)
+        }
+    }
+    @IBOutlet weak var titleApp1Label: UILabel!{
+        didSet{
+            titleApp1Label.text = "titleApp1".localized
+        }
+    }
+    
+    @IBOutlet weak var titleApp2Label: UILabel!{
+        didSet{
+            titleApp2Label.text = "titleApp2".localized
+        }
+    }
+    @IBOutlet weak var LanguageButtonOutlet: UIButton!{
+        didSet{
+            LanguageButtonOutlet.setTitle(NSLocalizedString("language", tableName: "Localizable", comment: ""), for: .normal)
+        }
+    }
     @IBOutlet weak var nameTextField: UITextField!
     
     @IBOutlet weak var emailTextField: UITextField!

@@ -13,7 +13,7 @@
 "newuser" = "تسجيل مستخدم جديد";
 "register" = "تسجيل";
 "or" = "-أو-";
-"languge" = "English";
+"language" = "English";
 "profile" = "الملف الشخصي";
 "home" = "الرئيسية";
 "myPost" = "منشوراتي";
@@ -27,9 +27,6 @@
 "phoneNo" =  "رقم الهاتف";
 
 
-"add" = "إضافة";
-"edit" = "تعديل";
-
 "location" = "الموقع";
 
 "found" = "موجود";
@@ -37,7 +34,20 @@
 "all" = "الكل";
 "title" = "العنوان";
 "category" = "التصنيف";
-"selectLocationOnMap" = "حدد الموقع على الخريطة";
+"selectLocationOnMap" = "حدد الموقع على الخريطة :";
 "country" = "الدولة";
 "city" = "المدينة";
 "cencel" = "إلغاء";
+"titleApp1" = "مفقود وموجود";
+"titleApp2" = "   ";
+"saveChanges" = "حفظ التغييرات";
+"addPost" = "إضافة منشور";
+"updatePost" = "تعديل المنشور";
+"description" = "الوصف :";
+
+"secAgo" = " ثانية";
+"minAgo" = " دقيقة";
+"hrsAgo" = " ساعه";
+"daysAgo" = " يوم";
+"weeksAgo" = " أسبوع";
+"from" = "منذ ";

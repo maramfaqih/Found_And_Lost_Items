@@ -13,7 +13,22 @@ class SearchViewController: UIViewController {
     var selectedPostImage:UIImage?
     var selectedPost:Post?
     //let searchController = UISearchController(searchResultsController: nil)
+    @IBOutlet weak var titleApp1Label: UILabel!{
+        didSet{
+            titleApp1Label.text = "titleApp1".localized
+        }
+    }
     
+    @IBOutlet weak var titleApp2Label: UILabel!{
+        didSet{
+            titleApp2Label.text = "titleApp2".localized
+        }
+    }
+    @IBOutlet weak var LanguageButtonOutlet: UIButton!{
+        didSet{
+            LanguageButtonOutlet.setTitle(NSLocalizedString("language", tableName: "Localizable", comment: ""), for: .normal)
+        }
+    }
     @IBOutlet weak var searchController: UISearchBar!{
         didSet{
             searchController.delegate = self
