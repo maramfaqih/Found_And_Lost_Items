@@ -29,6 +29,7 @@ var flag = 0
         postImageView.addGestureRecognizer(tapGesture)
     }
 }
+    @IBOutlet weak var cencelButtonOutlet: UIButton!
     
     @IBOutlet weak var postTitleTextField: UITextField!
  
@@ -57,7 +58,7 @@ var flag = 0
         }else {
             actionButton.setTitle("Add Post", for: .normal)
             self.navigationItem.rightBarButtonItem = nil
-            
+            cencelButtonOutlet.isHidden = true
         }
         //----------------location------------------//
         
@@ -89,6 +90,12 @@ var flag = 0
 //        itemLocationMapView.addAnnotation(pin)
     }
    
+    @IBAction func cencelButtonAction(_ sender: UIButton) {
+         
+        self.dismiss(animated: true, completion: nil)
+        
+    }
+    
     @IBAction func customLocationAction(_ sender: UILongPressGestureRecognizer) {
        // if sender.state != UITapGestureRecognizer.State.ended{
         let allAnnotation = itemLocationMapView.annotations

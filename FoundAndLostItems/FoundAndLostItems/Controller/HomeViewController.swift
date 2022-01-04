@@ -34,21 +34,14 @@ var read = false
     
     
     @IBAction func displayFilterSegmentedControl(_ sender: UISegmentedControl) {
-//        postsTableView.dataSource = nil
-//        postsTableView.dataSource = self
-        //   postsTableView.resignFirstResponder()
-    // self.postsTableView.beginUpdates()
-        //  postsTableView.reloadData()
-            //   self.postsTableView.reloadData()
+  
         posts = [Post]()
         if let filter = sender.titleForSegment(at:sender.selectedSegmentIndex) {
             if filter == "All" {
-              //  self.postsTableView.beginUpdates()
                 let all =  ref.collection("posts").order(by: "createdAt" ,descending: true)
 
                 getPosts(state: all)
             }else if filter == "Found"{
-               // self.postsTableView.beginUpdates()
                 let found =  ref.collection("posts").whereField("found", isEqualTo: "Found").order(by: "createdAt",descending: true)
                 getPosts(state: found)
                 
@@ -59,7 +52,6 @@ var read = false
               
                 
             }
-           // self.postsTableView.reloadData()
 
         }
         
@@ -184,23 +176,14 @@ extension HomeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell") as! PostCell
-      
+
         return cell.configure(with: posts[indexPath.row])
     }
-//    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-//
-//        UIView.animate(withDuration: 0.7) {
-//            if let cell = (tableView.dequeueReusableCell(withIdentifier: "PostCell") as? PostCell) {
-//                   cell.contentView.transform = .init(scaleX: 0.95, y: 0.95)
-//                   cell.contentView.backgroundColor = UIColor(white: 1,  alpha: 1)
-//                   cell.contentView.backgroundColor = UIColor(white: 1,  alpha: 0.5)
-//
-//           }
-//
-//    }
-//
-//}
-}
+    
+    
+
+        }
+    
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 200
@@ -218,5 +201,33 @@ extension HomeViewController: UITableViewDelegate {
             
         }
     }
+    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+
+        UIView.animate(withDuration: 0.7) {
+            if let cell = (tableView.dequeueReusableCell(withIdentifier: "PostCell") as? PostCell) {
+                cell.contentView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+                cell.contentView.layoutIfNeeded()
+              //  cell.backgroundViewCell.transform = .init(scaleX: 0.70, y: 0.70)
+                   //cell.contentView.backgroundColor = UIColor(white: 1,  alpha: 1)
+                   //cell.contentView.backgroundColor = UIColor(white: 1,  alpha: 0.5)
+               
+                 //   cell.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+                  //  cell.layoutIfNeeded()
+               
+           }
+
+    }
+
 }
+    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        UIView.animate(withDuration: 0.3) {
+            if let cell = (tableView.dequeueReusableCell(withIdentifier: "PostCell") as? PostCell) {
+                cell.contentView.transform = CGAffineTransform.identity
+                cell.contentView.layoutIfNeeded()
+            }
+            
+        }
+    }
+}
+
 

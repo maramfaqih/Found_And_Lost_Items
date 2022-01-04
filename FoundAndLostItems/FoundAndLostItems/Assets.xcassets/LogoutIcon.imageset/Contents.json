@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "loginImg.png",
+      "filename" : "LogoutIconW.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -12,7 +12,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "loginImgW.png",
+      "filename" : "LogoutIcon.png",
       "idiom" : "universal",
       "scale" : "1x"
     },

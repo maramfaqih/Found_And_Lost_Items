@@ -15,7 +15,8 @@ class PostCell: UITableViewCell {
     @IBOutlet weak var postImageView: UIImageView!
 
     
-   
+    @IBOutlet weak var shadowViewCell: UIView!
+    
     @IBOutlet weak var backgroundViewCell: UIView!
     @IBOutlet weak var postTitleLabel: UILabel!
     
@@ -34,9 +35,14 @@ class PostCell: UITableViewCell {
 
     func configure(with post:Post) -> UITableViewCell {
         backgroundViewCell.backgroundColor = .systemGray6
-        backgroundViewCell.layer.cornerRadius = 20
+        backgroundViewCell.layer.cornerRadius = 15
         backgroundViewCell.layer.masksToBounds = true
-        
+        shadowViewCell.layer.cornerRadius = 15
+        shadowViewCell.layer.masksToBounds = true
+        shadowViewCell.layer.shadowOpacity = 0.2
+        shadowViewCell.layer.shadowRadius = 4
+        shadowViewCell.layer.masksToBounds = false
+       
         postFoundLabel.text = post.found
         postTitleLabel.text = post.title
         postDescriptionLabel.text = post.description

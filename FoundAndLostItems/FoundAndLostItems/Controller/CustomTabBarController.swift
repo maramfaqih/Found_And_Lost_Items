@@ -11,9 +11,13 @@ class CustomTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tabBar.items?[1].title = "My Post"
-        tabBar.items?[4].title = "profile"
-//        UITabBar.appearance().unselectedItemTintColor = UIColor(displayP3Red: 1, green: 1, blue: 1 , alpha: 1)
+        tabBar.items?[0].title = "home".localized
+        tabBar.items?[1].title = "myPost".localized
+        tabBar.items?[4].title = "profile".localized
+        
+        
+        
+
       UITabBar.appearance().unselectedItemTintColor = UIColor(displayP3Red: 0.95, green: 0.95, blue: 0.95 , alpha: 1)
        // UITabBar.appearance().unselectedItemTintColor =
         // Do any additional setup after loading the view.

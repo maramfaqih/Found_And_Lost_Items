@@ -11,6 +11,7 @@ import Firebase
 
 class LoginViewController: UIViewController {
     var activityIndicator = UIActivityIndicatorView()
+   
 
     @IBOutlet weak var emailLabel: UILabel!{
         didSet{
@@ -56,6 +57,7 @@ class LoginViewController: UIViewController {
     {
         didSet{
             langugeButtonOutlet.setTitle(NSLocalizedString("languge", tableName: "Localizable", comment: ""), for: .normal)
+                 
         }
     }
     @IBOutlet weak var emailTextField: UITextField!
@@ -91,16 +93,29 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func changeLanguageButton(_ sender: UIButton) {
-//
-//        UserDefaults.standard.set(lang, forKey: "currentLanguage")
-//        Bundle.setLanguage(lang)
-//        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-//        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-//           let sceneDelegate = windowScene.delegate as? SceneDelegate {
-//            sceneDelegate.window?.rootViewController = storyboard.instantiateInitialViewController()
-//    }
+
+        var lang = UserDefaults.standard.string(forKey: "currentLanguage")
+         if lang == "ar" {
+             Bundle.setLanguage(lang ?? "ar")
+             UIView.appearance().semanticContentAttribute = .forceRightToLeft
+            lang = "en"
+             
+        }else{
+
+            Bundle.setLanguage(lang ?? "en")
+            UIView.appearance().semanticContentAttribute = .forceLeftToRight
+            lang = "ar"
+        }
+      
+        UserDefaults.standard.set(lang, forKey: "currentLanguage")
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let sceneDelegate = windowScene.delegate as? SceneDelegate {
+            sceneDelegate.window?.rootViewController = storyboard.instantiateInitialViewController()
+
     
 
+}
 }
 }
 extension String {

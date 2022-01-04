@@ -9,7 +9,6 @@
 
 ///تسجيل الدخول///
 "loginword" = "Login";
-"hi" = "Hi there! Nice to see you again";
 "email" = "Email";
 "password" = "Password";
 "login" = "Login";
@@ -17,8 +16,9 @@
 "register" = "Register";
 "or" = "-Or-";
 "languge" = "عربي";
-
-/// تسجيل مسخدم جديد///
+"profile" = "Profile";
+"home" = "Home";
+"myPost" = "MyPost";
 "registerword" = "Register";
 "name" = "Name";
 "email" = "Email";
@@ -27,16 +27,11 @@
 "register" = "Register";
 "login" = "Login";
 "phoneNo" = "phone Number";
-
-///اضافة كتاب///
-"bookname" = "Book Name";
+"location" = "Location";
 "description" = "Description";
-"contact" = "contact me";
+
 "add" = "Add";
 "edit" = "Edit";
 
 
-///صفحة التفاصيل///
-"bookname" = "Book Name";
-"description" = "Description";
-"contact" = "contact me";
+
