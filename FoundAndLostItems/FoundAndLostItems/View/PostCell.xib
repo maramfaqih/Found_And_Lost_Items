@@ -134,7 +134,7 @@
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="3hz-VQ-sGV"/>
-                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                        <color key="backgroundColor" name="ColorCell"/>
                         <color key="tintColor" systemColor="systemGray6Color"/>
                         <constraints>
                             <constraint firstItem="Nnp-KT-KcL" firstAttribute="leading" secondItem="3hz-VQ-sGV" secondAttribute="leading" id="4qm-Ym-OFw"/>
@@ -175,6 +175,9 @@
         <image name="timer" catalog="system" width="128" height="121"/>
         <namedColor name="BGColorApp">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="ColorCell">
+            <color red="0.94900000095367432" green="0.94900000095367432" blue="0.96899998188018799" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

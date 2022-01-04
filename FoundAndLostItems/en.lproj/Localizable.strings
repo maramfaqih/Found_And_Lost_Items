@@ -22,13 +22,21 @@
 "registerword" = "Register";
 "name" = "Name";
 "email" = "Email";
-"password" = "Password";
 "repassword" = "Re-password";
 "register" = "Register";
 "login" = "Login";
 "phoneNo" = "phone Number";
 "location" = "Location";
 "description" = "Description";
+"found" = "Found";
+"lost" = "Lost";
+"all" = "All";
+"title" = "Title";
+"category" = "Category";
+"selectLocationOnMap" = "Select Location on Map";
+"country" = "Country";
+"city" = "city";
+"cencel" = "Cencal";
 
 "add" = "Add";
 "edit" = "Edit";

@@ -32,10 +32,19 @@ var flag = 0
     @IBOutlet weak var cencelButtonOutlet: UIButton!
     
     @IBOutlet weak var postTitleTextField: UITextField!
+    
  
   
     @IBOutlet weak var postFoundPickerView: UIPickerView!
     @IBOutlet weak var postDescriptionTextField: UITextView!
+    {
+        didSet{
+            postDescriptionTextField.layer.cornerRadius = 5.0
+            postDescriptionTextField.layer.borderWidth = 0.34
+           
+
+        }
+    }
     
     @IBOutlet weak var postCityTextField: UITextField!
     @IBOutlet weak var postICountryTextField: UITextField!

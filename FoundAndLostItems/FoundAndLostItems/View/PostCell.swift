@@ -34,12 +34,12 @@ class PostCell: UITableViewCell {
     }
 
     func configure(with post:Post) -> UITableViewCell {
-        backgroundViewCell.backgroundColor = .systemGray6
+       // backgroundViewCell.backgroundColor = .systemGray6
         backgroundViewCell.layer.cornerRadius = 15
         backgroundViewCell.layer.masksToBounds = true
         shadowViewCell.layer.cornerRadius = 15
         shadowViewCell.layer.masksToBounds = true
-        shadowViewCell.layer.shadowOpacity = 0.2
+        shadowViewCell.layer.shadowOpacity = 0.15
         shadowViewCell.layer.shadowRadius = 4
         shadowViewCell.layer.masksToBounds = false
        

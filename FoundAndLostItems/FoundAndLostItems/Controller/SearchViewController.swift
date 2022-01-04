@@ -9,9 +9,16 @@ import UIKit
 import Firebase
 class SearchViewController: UIViewController {
     var posts = [Post]()
-    var selectedPost:Post?
+    var postsSearch = [Post]()
     var selectedPostImage:UIImage?
+    var selectedPost:Post?
+    //let searchController = UISearchController(searchResultsController: nil)
     
+    @IBOutlet weak var searchController: UISearchBar!{
+        didSet{
+            searchController.delegate = self
+        }
+    }
     @IBOutlet weak var searchTableView: UITableView!{
         didSet{
             searchTableView.delegate = self
@@ -25,23 +32,16 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+ 
+       getPosts()
+       postsSearch = posts
     }
     
-    @IBAction func searchButtonAction(_ sender: UIButton) {
+ 
+    func getPosts() {
         let ref = Firestore.firestore()
-        posts = [Post]()
-        let searchKeyTitle =  ref.collection("posts").whereField("title", isEqualTo: searchTextField.text!)
-        getPosts(state: searchKeyTitle)
-        let searchKeyDescriotion =  ref.collection("posts").whereField("description", isEqualTo: searchTextField.text!)
-        getPosts(state: searchKeyDescriotion)
-        
-        
-    }
-    func getPosts(state : Query ) {
         self.searchTableView.reloadData()
-        state.addSnapshotListener { snapshot, error in
+        ref.collection("posts").addSnapshotListener { snapshot, error in
             let ref = Firestore.firestore()
 
             if let error = error {
@@ -110,16 +110,33 @@ class SearchViewController: UIViewController {
      
 
 }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            if identifier == "toPostVC" {
+                let vc = segue.destination as! PostViewController
+                vc.selectedPost = selectedPost
+                vc.selectedPostImage = selectedPostImage
+            }else {
+                let vc = segue.destination as! DetailsViewController
+                vc.selectedPost = selectedPost
+                vc.selectedPostImage = selectedPostImage
+            }
+        }
+        
+    }
+
     
 }
 extension SearchViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return posts.count
+        return !postsSearch.isEmpty ? postsSearch.count : posts.count
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell") as! PostCell
-        return cell.configure(with: posts[indexPath.row])
+        let post = !postsSearch.isEmpty ? postsSearch[indexPath.row] : posts[indexPath.row]
+        return cell.configure(with: post )
     }
     
     
@@ -130,11 +147,25 @@ extension SearchViewController: UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! PostCell
+        
         selectedPostImage = cell.postImageView.image
-        selectedPost = posts[indexPath.row]
-      
-            performSegue(withIdentifier: "fromSearchPostEditVC", sender: self)
+        let post = !postsSearch.isEmpty ? postsSearch[indexPath.row] : posts[indexPath.row]
+        selectedPost = post
+        performSegue(withIdentifier: "fromSearchPostEditVC", sender: self)
             
         }
     }
 
+extension SearchViewController:UISearchBarDelegate{
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        searchBar.endEditing(true)
+        postsSearch = posts
+    }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        postsSearch = searchText.isEmpty ? posts : posts.filter({ (item ) in
+            return (item.title.lowercased().contains(searchBar.text!.lowercased())||item.description.lowercased().contains(searchBar.text!.lowercased())||item.country.lowercased().contains(searchBar.text!.lowercased())||item.city.lowercased().contains(searchBar.text!.lowercased()))
+    })
+        searchTableView.reloadData()
+}
+}

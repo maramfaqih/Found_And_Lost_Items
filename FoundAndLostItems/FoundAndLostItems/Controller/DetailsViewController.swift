@@ -16,9 +16,16 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var itemLocationMapView: MKMapView!
     @IBOutlet weak var postImageView: UIImageView!
     @IBOutlet weak var postTitleLabel: UILabel!
-    @IBOutlet weak var postDescriptionTextView: UITextView!
+    @IBOutlet weak var postDescriptionTextView: UITextView!{
+        didSet{
+            postDescriptionTextView.layer.cornerRadius = 5.0
+            postDescriptionTextView.layer.borderWidth = 0.34
+           
+
+        }
+    }
     @IBOutlet weak var country : UILabel!
-    @IBOutlet weak var  city : UILabel!
+    @IBOutlet weak var  time : UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
           
@@ -37,7 +44,7 @@ class DetailsViewController: UIViewController {
 
                 let dateString = dayTimePeriodFormatter.string(from: date as Date)
 
-                city.text = dateString
+                time.text = dateString
             }
             postImageView.image = selectedImage
             let initialLocation = CLLocation(latitude: selectedPost.latitude, longitude: selectedPost.longitude)
