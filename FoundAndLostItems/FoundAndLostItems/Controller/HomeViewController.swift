@@ -80,8 +80,10 @@ var read = false
         
     }
     func getPosts(state : Query ) {
+//let today = Date()
+    //   let todayTimeStamp = Timestamp(date: today)
         self.postsTableView.reloadData()
-      //  if read {
+     // if read {
         state.addSnapshotListener { snapshot, error in
             let ref = Firestore.firestore()
 
@@ -153,29 +155,29 @@ var read = false
                   
         }
             
-      //  }
+        }
         
-//        else{
+//     else{
 //        ref.collection("posts").order(by: "createdAt" , descending: true)
 //            .getDocuments() { (querySnapshot, err) in
 //                if let err = err {
 //                    print("Error getting documents: \(err)")
 //                } else {
 //                    for document in querySnapshot!.documents {
-//                     //   print("\(document.documentID) => \(document.data())")
-//                        if let userSnapshot = querySnapshot,
-//                           let userData = userSnapshot.data(){
-//                            let user = User(dict:userData)
-//                            let post = Post(dict:postData,id:diff.document.documentID,user:user)
-//                        posts.append(post)
-//                    }
+//                        print("\(document.documentID) => \(document.data())")
+////                        if let userSnapshot = querySnapshot,
+////                           let userData = document.data() {
+////                            let user = User(dict:userData)
+////                            let post = Post(dict: document.data(),id: document.documentID,user:user)
+////                        posts.append(post)
+////                    }
 //                }
 //        }
-//            read = true
+//                self.read = true
 //        }
-        }
-     
-    
+//        }
+//
+//    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             if identifier == "toPostVC" {
@@ -207,16 +209,17 @@ var read = false
         }
       
         UserDefaults.standard.set(lang, forKey: "currentLanguage")
-        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let sceneDelegate = windowScene.delegate as? SceneDelegate {
-            sceneDelegate.window?.rootViewController = storyboard.instantiateInitialViewController()
 
-        }
+        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabBarController") as? UITabBarController {
+            vc.modalPresentationStyle = .fullScreen  
+            self.present(vc, animated: false, completion: nil)
+        
+        
+   
 
     }
 }
-
+}
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return posts.count
@@ -228,9 +231,7 @@ extension HomeViewController: UITableViewDataSource {
         return cell.configure(with: posts[indexPath.row])
     }
     
-    
-
-        }
+}
     
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -253,14 +254,10 @@ extension HomeViewController: UITableViewDelegate {
 
         UIView.animate(withDuration: 0.7) {
             if let cell = (tableView.dequeueReusableCell(withIdentifier: "PostCell") as? PostCell) {
-                cell.contentView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-                cell.contentView.layoutIfNeeded()
-              //  cell.backgroundViewCell.transform = .init(scaleX: 0.70, y: 0.70)
-                   //cell.contentView.backgroundColor = UIColor(white: 1,  alpha: 1)
-                   //cell.contentView.backgroundColor = UIColor(white: 1,  alpha: 0.5)
+               // cell.contentView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+              //  cell.contentView.layoutIfNeeded()
+                cell.effectViewCell.backgroundColor = UIColor(white: 1,  alpha: 1)
                
-                 //   cell.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-                  //  cell.layoutIfNeeded()
                
            }
 
@@ -268,10 +265,11 @@ extension HomeViewController: UITableViewDelegate {
 
 }
     func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: 0.7) {
             if let cell = (tableView.dequeueReusableCell(withIdentifier: "PostCell") as? PostCell) {
                 cell.contentView.transform = CGAffineTransform.identity
-                cell.contentView.layoutIfNeeded()
+                cell.effectViewCell.backgroundColor = UIColor(white: 1,  alpha: 0)
+                //cell.contentView.layoutIfNeeded()
             }
             
         }

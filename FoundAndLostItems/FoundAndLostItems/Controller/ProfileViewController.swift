@@ -9,12 +9,6 @@ import UIKit
 import Firebase
 
 class ProfileViewController: UIViewController {
-    @IBOutlet weak var langugeButtonOutlet: UIButton!
-    {
-        didSet{
-            langugeButtonOutlet.setTitle(NSLocalizedString("languge", tableName: "Localizable", comment: ""), for: .normal)
-        }
-    }
 
     
     @IBOutlet weak var phoneNolabel: UILabel!
@@ -52,12 +46,7 @@ class ProfileViewController: UIViewController {
             saveChangesButtonOutlet.setTitle("saveChanges".localized, for: .normal)
         }
     }
-    @IBOutlet weak var loginButtonOutlet: UIButton!
-    {
-        didSet{
-            loginButtonOutlet.setTitle(NSLocalizedString("login", tableName: "Localizable", comment: ""), for: .normal)
-        }
-    }
+ 
     @IBOutlet weak var titleApp1Label: UILabel!{
         didSet{
             titleApp1Label.text = "titleApp1".localized
@@ -71,7 +60,7 @@ class ProfileViewController: UIViewController {
     }
     @IBOutlet weak var LanguageButtonOutlet: UIButton!{
         didSet{
-            LanguageButtonOutlet.setTitle(NSLocalizedString("language", tableName: "Localizable", comment: ""), for: .normal)
+            LanguageButtonOutlet.setTitle(NSLocalizedString("language".localized, tableName: "Localizable", comment: ""), for: .normal)
         }
     }
     @IBOutlet weak var nameTextField: UITextField!
@@ -242,5 +231,32 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    @IBAction func changeLanguageButton(_ sender: UIButton) {
+       
+        var lang = UserDefaults.standard.string(forKey: "currentLanguage")
+         if lang == "ar" {
+             Bundle.setLanguage(lang ?? "ar")
+             UIView.appearance().semanticContentAttribute = .forceRightToLeft
+            lang = "en"
+             
+        }else{
 
+            Bundle.setLanguage(lang ?? "en")
+            UIView.appearance().semanticContentAttribute = .forceLeftToRight
+            lang = "ar"
+        }
+      
+        UserDefaults.standard.set(lang, forKey: "currentLanguage")
+
+        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabBarController") as? UITabBarController {
+          
+
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: false, completion: nil)
+        
+        
+   
+
+    }
+}
 }

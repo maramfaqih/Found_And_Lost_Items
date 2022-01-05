@@ -41,7 +41,7 @@
 "titleApp1" = "مفقود وموجود";
 "titleApp2" = "   ";
 "saveChanges" = "حفظ التغييرات";
-"addPost" = "إضافة منشور";
+"addPost" = "نشر";
 "updatePost" = "تعديل المنشور";
 "description" = "الوصف :";
 
@@ -51,3 +51,4 @@
 "daysAgo" = " يوم";
 "weeksAgo" = " أسبوع";
 "from" = "منذ ";
+"search" = "بحث";

@@ -14,6 +14,7 @@ class PostCell: UITableViewCell {
 
     @IBOutlet weak var postImageView: UIImageView!
 
+    @IBOutlet weak var effectViewCell: UIView!
     
     @IBOutlet weak var shadowViewCell: UIView!
     
@@ -37,6 +38,8 @@ class PostCell: UITableViewCell {
        // backgroundViewCell.backgroundColor = .systemGray6
         backgroundViewCell.layer.cornerRadius = 15
         backgroundViewCell.layer.masksToBounds = true
+        effectViewCell.layer.cornerRadius = 15
+        effectViewCell.layer.masksToBounds = true
         shadowViewCell.layer.cornerRadius = 15
         shadowViewCell.layer.masksToBounds = true
         shadowViewCell.layer.shadowOpacity = 0.15
@@ -51,7 +54,7 @@ class PostCell: UITableViewCell {
         if let createdAt = post.createdAt {
         postTimeLabel.text = String(describing: createdAt.dateValue().timeAgoDisplay())
         }
-        if postFoundLabel.text == "found" || postFoundLabel.text == "موجود" {
+        if postFoundLabel.text == "Found" || postFoundLabel.text == "موجود" {
             postFoundView.backgroundColor = .systemGreen
         }else{
             postFoundView.backgroundColor = .systemRed
@@ -81,7 +84,7 @@ extension Date {
  } else if secondsAgo < hour {
      return "from".localized+"\(secondsAgo / minute)"+"minAgo".localized
  } else if secondsAgo < day {
-     return "from".localized+"\(secondsAgo / hour)"+"hrsAgo"
+     return "from".localized+"\(secondsAgo / hour)"+"hrsAgo".localized
  } else if secondsAgo < week {
      return "from".localized+"\(secondsAgo / day)"+"daysAgo".localized
  }

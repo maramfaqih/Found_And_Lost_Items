@@ -120,10 +120,10 @@
 			children = (
 				EEC31D9A2779332700E48473 /* DetailsViewController.swift */,
 				EED97038277AEE190011036D /* SearchViewController.swift */,
+				EEC31D8E277885B500E48473 /* HomeViewController.swift */,
 				EEC31D9827789DB200E48473 /* PostViewController.swift */,
 				EEC31D8A277880D900E48473 /* LoginViewController.swift */,
 				EEC31D88277880B400E48473 /* RegisterViewController.swift */,
-				EEC31D8E277885B500E48473 /* HomeViewController.swift */,
 				EED9703C277AF8440011036D /* MyPostViewController.swift */,
 				EE9F6CA1277A8DCB004FC3D8 /* ProfileViewController.swift */,
 				EE38A433277D6213009342CE /* CustomTabBarController.swift */,

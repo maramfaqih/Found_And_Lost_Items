@@ -158,7 +158,7 @@ var flag = 0
        
             let pin = MKPointAnnotation()
             pin.coordinate = CLLocationCoordinate2DMake(latitude, longitude)
-            //pin.title = "location"
+            pin.title = "location".localized
             itemLocationMapView.addAnnotation(pin)
             locationManager.startUpdatingLocation()
 

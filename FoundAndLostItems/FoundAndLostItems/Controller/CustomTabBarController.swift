@@ -13,6 +13,7 @@ class CustomTabBarController: UITabBarController {
         super.viewDidLoad()
         tabBar.items?[0].title = "home".localized
         tabBar.items?[1].title = "myPost".localized
+        tabBar.items?[3].title = "search".localized
         tabBar.items?[4].title = "profile".localized
         
         

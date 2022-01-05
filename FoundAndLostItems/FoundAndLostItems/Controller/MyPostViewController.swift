@@ -49,6 +49,7 @@ class MyPostViewController: UIViewController {
 //        if let currentUser = Auth.auth().currentUser,
 //           currentUser.uid == posts[0].user.id{
 //                let found =  ref.collection("posts").whereField("found", isEqualTo: "yes")
+       
 
         let all =  ref.collection("posts").whereField("userId", isEqualTo: Auth.auth().currentUser!.uid ).order(by: "createdAt",descending: true)
         getPosts(state: all)
@@ -180,5 +181,39 @@ extension MyPostViewController: UITableViewDelegate {
             performSegue(withIdentifier: "toPostEditVC", sender: self)
         
     }
-    
+    @IBAction func changeLanguageButton(_ sender: UIButton) {
+       
+        var lang = UserDefaults.standard.string(forKey: "currentLanguage")
+         if lang == "ar" {
+             Bundle.setLanguage(lang ?? "ar")
+             UIView.appearance().semanticContentAttribute = .forceRightToLeft
+            lang = "en"
+             
+        }else{
+
+            Bundle.setLanguage(lang ?? "en")
+            UIView.appearance().semanticContentAttribute = .forceLeftToRight
+            lang = "ar"
+        }
+      
+        UserDefaults.standard.set(lang, forKey: "currentLanguage")
+
+        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabBarController") as? UITabBarController {
+          
+
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: false, completion: nil)
+        
+        
+   
+
+    }
+}
+}
+extension UIApplication {
+
+    var statusBarView: UIView? {
+        return value(forKey: "statusBar") as? UIView
+    }
+
 }

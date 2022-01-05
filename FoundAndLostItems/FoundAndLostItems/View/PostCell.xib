@@ -134,7 +134,7 @@
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="3hz-VQ-sGV"/>
-                        <color key="backgroundColor" name="ColorCell"/>
+                        <color key="backgroundColor" systemColor="quaternarySystemFillColor"/>
                         <color key="tintColor" systemColor="systemGray6Color"/>
                         <constraints>
                             <constraint firstItem="Nnp-KT-KcL" firstAttribute="leading" secondItem="3hz-VQ-sGV" secondAttribute="leading" id="4qm-Ym-OFw"/>
@@ -149,6 +149,10 @@
                             <constraint firstItem="FMi-hb-cRf" firstAttribute="leading" secondItem="3hz-VQ-sGV" secondAttribute="leading" id="zWr-yS-JfU"/>
                         </constraints>
                     </view>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fme-CB-a7E">
+                        <rect key="frame" x="15" y="15" width="290" height="170"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" name="BGColorApp"/>
                 <color key="tintColor" name="BGColorApp"/>
@@ -157,6 +161,7 @@
             <color key="backgroundColor" name="BGColorApp"/>
             <connections>
                 <outlet property="backgroundViewCell" destination="mF1-30-eHr" id="cJj-Zw-rRx"/>
+                <outlet property="effectViewCell" destination="Fme-CB-a7E" id="Pxy-ND-GFr"/>
                 <outlet property="postDescriptionLabel" destination="shM-qc-TgO" id="cR1-BB-Yzi"/>
                 <outlet property="postFoundLabel" destination="mDU-J0-k6w" id="At7-b6-nvb"/>
                 <outlet property="postFoundView" destination="ThA-tL-nEM" id="w9e-Td-F9a"/>
@@ -176,9 +181,9 @@
         <namedColor name="BGColorApp">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
-        <namedColor name="ColorCell">
-            <color red="0.94900000095367432" green="0.94900000095367432" blue="0.96899998188018799" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
+        <systemColor name="quaternarySystemFillColor">
+            <color red="0.45490196078431372" green="0.45490196078431372" blue="0.50196078431372548" alpha="0.080000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

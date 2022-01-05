@@ -43,7 +43,6 @@ class SearchViewController: UIViewController {
         
     }
     
-    @IBOutlet weak var searchTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -139,7 +138,34 @@ class SearchViewController: UIViewController {
         }
         
     }
+    @IBAction func changeLanguageButton(_ sender: UIButton) {
+       
+        var lang = UserDefaults.standard.string(forKey: "currentLanguage")
+         if lang == "ar" {
+             Bundle.setLanguage(lang ?? "ar")
+             UIView.appearance().semanticContentAttribute = .forceRightToLeft
+            lang = "en"
+             
+        }else{
 
+            Bundle.setLanguage(lang ?? "en")
+            UIView.appearance().semanticContentAttribute = .forceLeftToRight
+            lang = "ar"
+        }
+      
+        UserDefaults.standard.set(lang, forKey: "currentLanguage")
+
+        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabBarController") as? UITabBarController {
+          
+
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: false, completion: nil)
+        
+        
+   
+
+    }
+}
     
 }
 extension SearchViewController: UITableViewDataSource {
