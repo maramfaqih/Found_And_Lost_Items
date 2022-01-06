@@ -22,6 +22,11 @@ class PostViewController: UIViewController {
             titleApp2Label.text = "titleApp2".localized
         }
     }
+    @IBOutlet weak var navBarTitle: UINavigationItem!{
+        didSet{
+            navBarTitle.title = "titleApp".localized
+        }
+    }
     @IBOutlet weak var countryLabelOutlet: UILabel!{
         didSet{
             countryLabelOutlet.text = "country".localized
@@ -70,12 +75,14 @@ var flag = 0
         postImageView.addGestureRecognizer(tapGesture)
     }
 }
-    @IBOutlet weak var cencelButtonOutlet: UIButton!{
+    @IBOutlet weak var cencelButtonOutlet:
+   UIBarButtonItem!{
         didSet{
+            self.cencelButtonOutlet.title = "cencel".localized
            
-            cencelButtonOutlet.setTitle(NSLocalizedString("cencel", tableName: "Localizable", comment: ""), for: .normal)
-                }
-    }
+        }}
+
+   
     
     @IBOutlet weak var postTitleTextField: UITextField!
     
@@ -97,6 +104,9 @@ var flag = 0
     @IBOutlet weak var actionButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
         // Do any additional setup after loading the view.
         postFoundPickerView.delegate = self
         postFoundPickerView.dataSource = self
@@ -112,8 +122,10 @@ var flag = 0
             
         }else {
             actionButton.setTitle("addPost".localized, for: .normal)
-            self.navigationItem.rightBarButtonItem = nil
-            cencelButtonOutlet.isHidden = true
+            self.navBarTitle.leftBarButtonItem = nil
+            self.navBarTitle.rightBarButtonItem = nil
+           // cencelButtonOutlet.isHidden = true
+            
         }
         //----------------location------------------//
         
@@ -137,7 +149,7 @@ var flag = 0
 
     }
    
-    @IBAction func cencelButtonAction(_ sender: UIButton) {
+    @IBAction func cencelButtonAction(_ sender: UIBarButtonItem) {
          
         self.dismiss(animated: true, completion: nil)
         

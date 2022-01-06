@@ -11,8 +11,16 @@ import Firebase
 
 class LoginViewController: UIViewController {
     var activityIndicator = UIActivityIndicatorView()
-   
-
+    @IBOutlet weak var navBarTitle: UINavigationItem!{
+        didSet{
+            navBarTitle.title = "titleApp".localized
+        }
+    }
+    @IBOutlet weak var LanguageButtonOutlet: UIBarButtonItem!{
+        didSet{
+            self.LanguageButtonOutlet.title = "language".localized
+           
+        }}
     @IBOutlet weak var emailLabel: UILabel!{
         didSet{
             emailLabel.text = "email".localized
@@ -64,7 +72,9 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-     
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
         // Do any additional setup after loading the view.
     }
     
@@ -92,7 +102,7 @@ class LoginViewController: UIViewController {
         }
     }
     
-    @IBAction func changeLanguageButton(_ sender: UIButton) {
+    @IBAction func changeLanguageButton(_ sender: UIBarButtonItem) {
 
         var lang = UserDefaults.standard.string(forKey: "currentLanguage")
          if lang == "ar" {

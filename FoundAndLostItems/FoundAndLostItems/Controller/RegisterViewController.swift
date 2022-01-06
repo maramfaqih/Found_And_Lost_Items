@@ -10,7 +10,16 @@ import Firebase
 class RegisterViewController: UIViewController {
 var activityIndicator = UIActivityIndicatorView()
 
- 
+    @IBOutlet weak var navBarTitle: UINavigationItem!{
+        didSet{
+            navBarTitle.title = "titleApp".localized
+        }
+    }
+    @IBOutlet weak var LanguageButtonOutlet: UIBarButtonItem!{
+        didSet{
+            self.LanguageButtonOutlet.title = "language".localized
+        }}
+       
     @IBOutlet weak var nameTextField: UITextField!
     
     @IBOutlet weak var emailTextField: UITextField!
@@ -83,7 +92,9 @@ var activityIndicator = UIActivityIndicatorView()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
         // Do any additional setup after loading the view.
       
         
@@ -135,6 +146,33 @@ var activityIndicator = UIActivityIndicatorView()
                        
         }
         }
+    @IBAction func changeLanguageButton(_ sender: UIBarButtonItem) {
+       
+        var lang = UserDefaults.standard.string(forKey: "currentLanguage")
+         if lang == "ar" {
+             Bundle.setLanguage(lang ?? "ar")
+             UIView.appearance().semanticContentAttribute = .forceRightToLeft
+            lang = "en"
+             
+        }else{
+
+            Bundle.setLanguage(lang ?? "en")
+            UIView.appearance().semanticContentAttribute = .forceLeftToRight
+            lang = "ar"
+        }
+      
+        
+          UserDefaults.standard.set(lang, forKey: "currentLanguage")
+          let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+          if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+             let sceneDelegate = windowScene.delegate as? SceneDelegate {
+              sceneDelegate.window?.rootViewController = storyboard.instantiateInitialViewController()
+        
+   
+
+    }
+}
+
     }
     
 

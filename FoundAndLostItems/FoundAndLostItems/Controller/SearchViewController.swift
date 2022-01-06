@@ -13,6 +13,11 @@ class SearchViewController: UIViewController {
     var selectedPostImage:UIImage?
     var selectedPost:Post?
     //let searchController = UISearchController(searchResultsController: nil)
+    @IBOutlet weak var navBarTitle: UINavigationItem!{
+        didSet{
+            navBarTitle.title = "titleApp".localized
+        }
+    }
     @IBOutlet weak var titleApp1Label: UILabel!{
         didSet{
             titleApp1Label.text = "titleApp1".localized
@@ -24,11 +29,11 @@ class SearchViewController: UIViewController {
             titleApp2Label.text = "titleApp2".localized
         }
     }
-    @IBOutlet weak var LanguageButtonOutlet: UIButton!{
+    @IBOutlet weak var LanguageButtonOutlet: UIBarButtonItem!{
         didSet{
-            LanguageButtonOutlet.setTitle(NSLocalizedString("language", tableName: "Localizable", comment: ""), for: .normal)
-        }
-    }
+            self.LanguageButtonOutlet.title = "language".localized
+           
+        }}
     @IBOutlet weak var searchController: UISearchBar!{
         didSet{
             searchController.delegate = self
@@ -46,9 +51,11 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
- 
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
        getPosts()
-       postsSearch = posts
+      // postsSearch = posts
     }
     
  
@@ -138,7 +145,7 @@ class SearchViewController: UIViewController {
         }
         
     }
-    @IBAction func changeLanguageButton(_ sender: UIButton) {
+    @IBAction func changeLanguageButton(_ sender: UIBarButtonItem) {
        
         var lang = UserDefaults.standard.string(forKey: "currentLanguage")
          if lang == "ar" {
@@ -156,8 +163,6 @@ class SearchViewController: UIViewController {
         UserDefaults.standard.set(lang, forKey: "currentLanguage")
 
         if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabBarController") as? UITabBarController {
-          
-
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: false, completion: nil)
         
@@ -166,6 +171,7 @@ class SearchViewController: UIViewController {
 
     }
 }
+
     
 }
 extension SearchViewController: UITableViewDataSource {
@@ -201,9 +207,10 @@ extension SearchViewController:UISearchBarDelegate{
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = ""
         searchBar.endEditing(true)
-        postsSearch = posts
+       // postsSearch = posts
     }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+       
         postsSearch = searchText.isEmpty ? posts : posts.filter({ (item ) in
             return (item.title.lowercased().contains(searchBar.text!.lowercased())||item.description.lowercased().contains(searchBar.text!.lowercased())||item.country.lowercased().contains(searchBar.text!.lowercased())||item.city.lowercased().contains(searchBar.text!.lowercased()))
     })

@@ -10,7 +10,11 @@ import Firebase
 
 class ProfileViewController: UIViewController {
 
-    
+    @IBOutlet weak var navBarTitle: UINavigationItem!{
+        didSet{
+            navBarTitle.title = "titleApp".localized
+        }
+    }
     @IBOutlet weak var phoneNolabel: UILabel!
     {
         didSet{
@@ -58,11 +62,11 @@ class ProfileViewController: UIViewController {
             titleApp2Label.text = "titleApp2".localized
         }
     }
-    @IBOutlet weak var LanguageButtonOutlet: UIButton!{
+    @IBOutlet weak var LanguageButtonOutlet: UIBarButtonItem!{
         didSet{
-            LanguageButtonOutlet.setTitle(NSLocalizedString("language".localized, tableName: "Localizable", comment: ""), for: .normal)
-        }
-    }
+            self.LanguageButtonOutlet.title = "language".localized
+           
+        }}
     @IBOutlet weak var nameTextField: UITextField!
     
     @IBOutlet weak var emailTextField: UITextField!
@@ -75,6 +79,9 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let ref = Firestore.firestore()
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
 //        Auth.auth().currentUser?.updateEmail(to: email) { error in
 //            if let error = error {
 //
@@ -219,7 +226,7 @@ class ProfileViewController: UIViewController {
                 }
             }
             }
-    @IBAction func handleLogout(_ sender: Any) {
+    @IBAction func handleLogout(_ sender: UIBarButtonItem) {
         do {
             try Auth.auth().signOut()
             if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LandingNavigationController") as? UINavigationController {
@@ -231,7 +238,7 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    @IBAction func changeLanguageButton(_ sender: UIButton) {
+    @IBAction func changeLanguageButton(_ sender: UIBarButtonItem) {
        
         var lang = UserDefaults.standard.string(forKey: "currentLanguage")
          if lang == "ar" {
@@ -249,8 +256,6 @@ class ProfileViewController: UIViewController {
         UserDefaults.standard.set(lang, forKey: "currentLanguage")
 
         if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabBarController") as? UITabBarController {
-          
-
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: false, completion: nil)
         
@@ -259,4 +264,5 @@ class ProfileViewController: UIViewController {
 
     }
 }
+
 }

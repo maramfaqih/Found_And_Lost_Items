@@ -19,6 +19,12 @@ class DetailsViewController: UIViewController {
             selectLocationLabelOutlet.text = "selectLocationOnMap".localized
         }
     }
+    @IBOutlet weak var navBarTitle: UINavigationItem!{
+        didSet{
+            navBarTitle.title = "titleApp".localized
+        }
+    }
+    
     @IBOutlet weak var descriptionLableOutlet: UILabel!{
         didSet{
             descriptionLableOutlet.text = "description".localized

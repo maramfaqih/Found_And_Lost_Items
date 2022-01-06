@@ -15,6 +15,12 @@ var read = false
     var selectedPostImage:UIImage?
     let ref = Firestore.firestore()
   
+    @IBOutlet weak var navBarTitle: UINavigationItem!{
+        didSet{
+            navBarTitle.title = "titleApp".localized
+        }
+    }
+    
     @IBOutlet weak var postsTableView: UITableView!{
         didSet{
             postsTableView.delegate = self
@@ -33,9 +39,10 @@ var read = false
             titleApp2Label.text = "titleApp2".localized
         }
     }
-    @IBOutlet weak var LanguageButtonOutlet: UIButton!{
+    @IBOutlet weak var LanguageButtonOutlet: UIBarButtonItem!{
         didSet{
-            LanguageButtonOutlet.setTitle(NSLocalizedString("language", tableName: "Localizable", comment: ""), for: .normal)
+            self.LanguageButtonOutlet.title = "language".localized
+           
         }
     }
     
@@ -46,11 +53,13 @@ var read = false
             filterSegmentedControlOutlet.setTitle("lost".localized, forSegmentAt: 2)
         }
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let all =  ref.collection("posts").order(by: "createdAt" ,descending: true)
         getPosts(state: all)
         // Do any additional setup after loading the view.
+
         
     }
     
@@ -193,7 +202,7 @@ var read = false
         
     }
     
-    @IBAction func changeLanguageButton(_ sender: UIButton) {
+    @IBAction func changeLanguageButton(_ sender: UIBarButtonItem) {
        
         var lang = UserDefaults.standard.string(forKey: "currentLanguage")
          if lang == "ar" {

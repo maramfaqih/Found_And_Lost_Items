@@ -13,6 +13,12 @@ class MyPostViewController: UIViewController {
     var selectedPost:Post?
     var selectedPostImage:UIImage?
     let ref = Firestore.firestore()
+    @IBOutlet weak var navBarTitle: UINavigationItem!{
+        didSet{
+            navBarTitle.title = "titleApp".localized
+        }
+    }
+    
     @IBOutlet weak var titleApp1Label: UILabel!{
         didSet{
             titleApp1Label.text = "titleApp1".localized
@@ -24,11 +30,11 @@ class MyPostViewController: UIViewController {
             titleApp2Label.text = "titleApp2".localized
         }
     }
-    @IBOutlet weak var LanguageButtonOutlet: UIButton!{
+    @IBOutlet weak var LanguageButtonOutlet: UIBarButtonItem!{
         didSet{
-            LanguageButtonOutlet.setTitle(NSLocalizedString("language", tableName: "Localizable", comment: ""), for: .normal)
-        }
-    }
+            self.LanguageButtonOutlet.title = "language".localized
+           
+        }}
     @IBOutlet weak var myPostTableView: UITableView!{
         didSet{
             myPostTableView.delegate = self
@@ -112,6 +118,33 @@ class MyPostViewController: UIViewController {
             }
 
 }
+    @IBAction func changeLanguageButton(_ sender: UIBarButtonItem) {
+       
+        var lang = UserDefaults.standard.string(forKey: "currentLanguage")
+         if lang == "ar" {
+             Bundle.setLanguage(lang ?? "ar")
+             UIView.appearance().semanticContentAttribute = .forceRightToLeft
+            lang = "en"
+             
+        }else{
+
+            Bundle.setLanguage(lang ?? "en")
+            UIView.appearance().semanticContentAttribute = .forceLeftToRight
+            lang = "ar"
+        }
+      
+        UserDefaults.standard.set(lang, forKey: "currentLanguage")
+
+        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabBarController") as? UITabBarController {
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: false, completion: nil)
+        
+        
+   
+
+    }
+}
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             if identifier == "toPostEditVC" {
@@ -181,34 +214,7 @@ extension MyPostViewController: UITableViewDelegate {
             performSegue(withIdentifier: "toPostEditVC", sender: self)
         
     }
-    @IBAction func changeLanguageButton(_ sender: UIButton) {
-       
-        var lang = UserDefaults.standard.string(forKey: "currentLanguage")
-         if lang == "ar" {
-             Bundle.setLanguage(lang ?? "ar")
-             UIView.appearance().semanticContentAttribute = .forceRightToLeft
-            lang = "en"
-             
-        }else{
-
-            Bundle.setLanguage(lang ?? "en")
-            UIView.appearance().semanticContentAttribute = .forceLeftToRight
-            lang = "ar"
-        }
-      
-        UserDefaults.standard.set(lang, forKey: "currentLanguage")
-
-        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabBarController") as? UITabBarController {
-          
-
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: false, completion: nil)
-        
-        
-   
-
-    }
-}
+    
 }
 extension UIApplication {
 
@@ -217,3 +223,4 @@ extension UIApplication {
     }
 
 }
+

@@ -38,8 +38,8 @@
 "country" = "الدولة";
 "city" = "المدينة";
 "cencel" = "إلغاء";
-"titleApp1" = "مفقود وموجود";
-"titleApp2" = "   ";
+"titleApp" = "مفقود وموجود";
+
 "saveChanges" = "حفظ التغييرات";
 "addPost" = "نشر";
 "updatePost" = "تعديل المنشور";

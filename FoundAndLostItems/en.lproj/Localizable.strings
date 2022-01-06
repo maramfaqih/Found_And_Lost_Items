@@ -36,8 +36,8 @@
 "country" = "Country";
 "city" = "City";
 "cencel" = "Cencal";
-"titleApp1" = "Lost&Found";
-"titleApp2" = "Item";
+"titleApp" = "Lost&Found";
+
 "addPost" = "Add Post";
 "updatePost" = "update Post";
 "edit" = "Edit";
