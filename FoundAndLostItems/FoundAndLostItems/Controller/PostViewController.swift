@@ -214,6 +214,7 @@ var flag = 0
                         let ref = db.collection("posts")
                         if let selectedPost = self.selectedPost {
                             postData = [
+                                "id": postId,
                                 "userId":selectedPost.user.id,
                                 "title":title,
                                 "found":found,
@@ -229,6 +230,7 @@ var flag = 0
                             ]
                         }else {
                             postData = [
+                                "id": postId,
                                 "userId":currentUser.uid,
                                 "title":title,
                                 "description":description,

@@ -6,6 +6,10 @@
 	<string>Do you allow this app to know your current location?</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Will you allow this app to always know your location?</string>
+	<key>NSCameraUsageDescription</key>
+	<string>we need to access to camera to take photos</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>we need access to photos to upload posts</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

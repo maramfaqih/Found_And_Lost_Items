@@ -42,7 +42,7 @@ class PostCell: UITableViewCell {
         effectViewCell.layer.masksToBounds = true
         shadowViewCell.layer.cornerRadius = 15
         shadowViewCell.layer.masksToBounds = true
-        shadowViewCell.layer.shadowOpacity = 0.15
+        shadowViewCell.layer.shadowOpacity = 0.2
         shadowViewCell.layer.shadowRadius = 4
         shadowViewCell.layer.masksToBounds = false
        

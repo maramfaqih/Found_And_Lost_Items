@@ -18,17 +18,7 @@ class SearchViewController: UIViewController {
             navBarTitle.title = "titleApp".localized
         }
     }
-    @IBOutlet weak var titleApp1Label: UILabel!{
-        didSet{
-            titleApp1Label.text = "titleApp1".localized
-        }
-    }
     
-    @IBOutlet weak var titleApp2Label: UILabel!{
-        didSet{
-            titleApp2Label.text = "titleApp2".localized
-        }
-    }
     @IBOutlet weak var LanguageButtonOutlet: UIBarButtonItem!{
         didSet{
             self.LanguageButtonOutlet.title = "language".localized

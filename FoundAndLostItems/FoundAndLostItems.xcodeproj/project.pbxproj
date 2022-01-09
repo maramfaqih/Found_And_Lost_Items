@@ -33,6 +33,9 @@
 		EEC31D9B2779332700E48473 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC31D9A2779332700E48473 /* DetailsViewController.swift */; };
 		EED97039277AEE190011036D /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED97038277AEE190011036D /* SearchViewController.swift */; };
 		EED9703D277AF8440011036D /* MyPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED9703C277AF8440011036D /* MyPostViewController.swift */; };
+		EEE7F0722789D04800D64BBA /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE7F0712789D04800D64BBA /* Comment.swift */; };
+		EEE7F0752789D53900D64BBA /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE7F0732789D53900D64BBA /* CommentCell.swift */; };
+		EEE7F0762789D53900D64BBA /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEE7F0742789D53900D64BBA /* CommentCell.xib */; };
 		EEF734112781970900115DD0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEF734132781970900115DD0 /* Localizable.strings */; };
 		EEF73416278199C900115DD0 /* BundleExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF73415278199C900115DD0 /* BundleExtention.swift */; };
 /* End PBXBuildFile section */
@@ -67,6 +70,9 @@
 		EEC31D9A2779332700E48473 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		EED97038277AEE190011036D /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		EED9703C277AF8440011036D /* MyPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostViewController.swift; sourceTree = "<group>"; };
+		EEE7F0712789D04800D64BBA /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		EEE7F0732789D53900D64BBA /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		EEE7F0742789D53900D64BBA /* CommentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentCell.xib; sourceTree = "<group>"; };
 		EEF734122781970900115DD0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EEF734142781970B00115DD0 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EEF73415278199C900115DD0 /* BundleExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BundleExtention.swift; path = FoundAndLostItems/View/BundleExtention.swift; sourceTree = "<group>"; };
@@ -101,6 +107,7 @@
 			children = (
 				EEC31D862778806F00E48473 /* User.swift */,
 				EEC31D90277885DC00E48473 /* Post.swift */,
+				EEE7F0712789D04800D64BBA /* Comment.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -109,6 +116,8 @@
 			isa = PBXGroup;
 			children = (
 				EEC31D692778477E00E48473 /* Main.storyboard */,
+				EEE7F0732789D53900D64BBA /* CommentCell.swift */,
+				EEE7F0742789D53900D64BBA /* CommentCell.xib */,
 				EEC31D942778959600E48473 /* PostCell.swift */,
 				EEC31D952778959600E48473 /* PostCell.xib */,
 			);
@@ -237,6 +246,7 @@
 				EEC31D702778478600E48473 /* LaunchScreen.storyboard in Resources */,
 				EEC31D6D2778478600E48473 /* Assets.xcassets in Resources */,
 				EEC31D972778959600E48473 /* PostCell.xib in Resources */,
+				EEE7F0762789D53900D64BBA /* CommentCell.xib in Resources */,
 				EEF734112781970900115DD0 /* Localizable.strings in Resources */,
 				EEC31D6B2778477E00E48473 /* Main.storyboard in Resources */,
 				EE9F6CA02779CB1E004FC3D8 /* .gitignore in Resources */,
@@ -266,7 +276,9 @@
 				EE38A434277D6213009342CE /* CustomTabBarController.swift in Sources */,
 				EEC31D962778959600E48473 /* PostCell.swift in Sources */,
 				EEC31D642778477E00E48473 /* AppDelegate.swift in Sources */,
+				EEE7F0752789D53900D64BBA /* CommentCell.swift in Sources */,
 				EEC31D9B2779332700E48473 /* DetailsViewController.swift in Sources */,
+				EEE7F0722789D04800D64BBA /* Comment.swift in Sources */,
 				EEF73416278199C900115DD0 /* BundleExtention.swift in Sources */,
 				EEC31D662778477E00E48473 /* SceneDelegate.swift in Sources */,
 			);

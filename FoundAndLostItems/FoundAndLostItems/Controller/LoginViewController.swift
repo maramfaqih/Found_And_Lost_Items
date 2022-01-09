@@ -105,19 +105,22 @@ class LoginViewController: UIViewController {
     @IBAction func changeLanguageButton(_ sender: UIBarButtonItem) {
 
         var lang = UserDefaults.standard.string(forKey: "currentLanguage")
-         if lang == "ar" {
-             Bundle.setLanguage(lang ?? "ar")
-             UIView.appearance().semanticContentAttribute = .forceRightToLeft
-            lang = "en"
-             
-        }else{
-
-            Bundle.setLanguage(lang ?? "en")
-            UIView.appearance().semanticContentAttribute = .forceLeftToRight
+        if lang == "en" {
+           
+            UIView.appearance().semanticContentAttribute = .forceRightToLeft
+            
             lang = "ar"
-        }
-      
-        UserDefaults.standard.set(lang, forKey: "currentLanguage")
+            Bundle.setLanguage(lang ?? "ar")
+       }else{
+
+           UIView.appearance().semanticContentAttribute = .forceLeftToRight
+           
+           lang = "en"
+           Bundle.setLanguage(lang ?? "en")
+       }
+        
+            UserDefaults.standard.set(lang, forKey: "currentLanguage")
+        
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let sceneDelegate = windowScene.delegate as? SceneDelegate {

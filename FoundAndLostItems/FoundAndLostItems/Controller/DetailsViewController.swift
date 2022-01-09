@@ -8,10 +8,18 @@
 import UIKit
 import CoreLocation
 import MapKit
+import Firebase
 class DetailsViewController: UIViewController {
-    @IBOutlet weak var titleApp1Label: UILabel!{
+    let ref = Firestore.firestore()
+//    var listener: ListenerRegistration
+
+    let activityIndicator = UIActivityIndicatorView()
+    @IBOutlet weak var sendCommentButton: UIButton!
+    @IBOutlet weak var commentsTableView: UITableView!{
         didSet{
-            titleApp1Label.text = "titleApp1".localized
+            commentsTableView.delegate = self
+            commentsTableView.dataSource = self
+            commentsTableView.register(UINib(nibName: "CommentCell", bundle: nil), forCellReuseIdentifier: "CommentCell")
         }
     }
     @IBOutlet weak var selectLocationLabelOutlet: UILabel!{
@@ -25,20 +33,18 @@ class DetailsViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var commentTextField: UITextField!
     @IBOutlet weak var descriptionLableOutlet: UILabel!{
         didSet{
             descriptionLableOutlet.text = "description".localized
         }
     }
-    @IBOutlet weak var titleApp2Label: UILabel!{
-        didSet{
-            titleApp2Label.text = "titleApp2".localized
-        }
-    }
+  
   
     var latitude : CLLocationDegrees = 0.0
     var longitude :  CLLocationDegrees = 0.0
     var selectedPost:Post?
+    var  comments = [Comment]()
     var selectedPostImage:UIImage?
     @IBOutlet weak var itemLocationMapView: MKMapView!
     @IBOutlet weak var postImageView: UIImageView!
@@ -55,7 +61,9 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var  time : UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-          
+//        comments = [Comment]()
+//        print("eeeeeeeee",comments)
+        getComments()
         // Do any additional setup after loading the view.
         if let selectedPost = selectedPost,
         let selectedImage = selectedPostImage{
@@ -83,6 +91,60 @@ print("selectedPost.latitude",selectedPost.latitude)
             itemLocationMapView.addAnnotation(pin)
         }
     }
+    @IBAction func sendCommentAction(_ sender: UIButton) {
+
+        Activity.showIndicator(parentView: self.view, childView: self.activityIndicator)
+//
+
+            if let comment = commentTextField.text,
+               let currentUser = Auth.auth().currentUser {
+
+                  let  commentId = "\(Firebase.UUID())"
+//
+                        var commentData = [String:Any]()
+//
+                            let db = Firestore.firestore()
+                            let ref = db.collection("comments")
+                            commentData = [
+                                    "id": commentId,
+                                    "userId":currentUser.uid,
+                                    "comment":comment,
+                                    "postId":selectedPost!.id,
+                                    "createdAt":FieldValue.serverTimestamp()
+                                ]
+
+                            ref.document(commentId).setData(commentData) { error in
+                                if let error = error {
+                                    print("FireStore Error",error.localizedDescription)
+                                }
+//                                self.comments = [Comment]()
+//                                self.getComments()
+
+                                      Activity.removeIndicator(parentView: self.view, childView: self.activityIndicator)
+                                print("Document added with ID: \(commentId)")
+                                self.commentTextField.text = ""
+                               // self.listener
+                                  }
+                            }
+//
+//        var ref: DocumentReference? = nil
+//        ref = db.collection("comments").addDocument(data: [
+//            "id": commentId,
+//            "userId":currentUser.uid,
+//            "comment":comment,
+//            "postId":selectedPost!.id,
+//            "createdAt":FieldValue.serverTimestamp()
+//        ]) { err in
+//            if let err = err {
+//                print("Error adding document: \(err)")
+//            } else {
+//                print("Document added with ID: \(ref!.documentID)")
+//            }
+        }
+                        
+                    
+    
+    
     
 
 func setStartingLocation(location: CLLocation, distance: CLLocationDistance){
@@ -91,9 +153,85 @@ func setStartingLocation(location: CLLocation, distance: CLLocationDistance){
    
 
 }
+    
+    func getComments(){
+//let today = Date()
+    //   let todayTimeStamp = Timestamp(date: today)
+        self.commentsTableView.reloadData()
+
+         ref.collection("comments").whereField("postId", isEqualTo: selectedPost!.id).order(by: "createdAt",descending: true).addSnapshotListener{  snapshot, error in
+           
+
+            if let error = error {
+                print("DB ERROR Posts",error.localizedDescription)
+//                Alert.showAlert(strTitle: "Error", strMessage: error.localizedDescription, viewController: self)
+            }
+            if let snapshot = snapshot {
+                
+                snapshot.documentChanges.forEach { diff in
+                    let commentData = diff.document.data()
+                    switch diff.type {
+                    case .added :
+                        if let userId = commentData["userId"] as? String {
+                            self.ref.collection("users").document(userId).getDocument { userSnapshot, error in
+                                if let error = error {
+                                    print("ERROR user Data",error.localizedDescription)
+                                    
+                                }
+                                if let userSnapshot = userSnapshot,
+                                   let userData = userSnapshot.data(){
+                                  let user = User(dict:userData)
+
+                                    let comment = Comment(dict:commentData,id:diff.document.documentID,user:user)
+                                  self.commentsTableView.beginUpdates()
+                                    if snapshot.documentChanges.count != 1 {
+                                        //self.comments.insert(comment, at: 0)
+                                        self.comments.append(comment)
+
+                                        self.commentsTableView.insertRows(at: [IndexPath(row:self.comments.count - 1,section: 0)],with: .automatic)
+                                    }else {
+                                        // self.comments.append(comment)
+                                       // self.commentsTableView.insertRows(at: [IndexPath(row:self.comments.count - 1,section: 0)],with: .automatic)
+                                       self.comments.insert(comment, at: 0)
+                                        self.commentsTableView.insertRows(at: [IndexPath(row: 0,section: 0)],with: .automatic)
+                                    }
+                                    self.commentsTableView.endUpdates()
+                                }}}
+                    case .modified:
+                        let commentId = diff.document.documentID
+                       
+                            if let currentComment = self.comments.first(where: {$0.id == commentId}),
+
+                                let updateIndex = self.comments.firstIndex(where: {$0.id == commentId}){
+                                let newComment = Comment(dict:commentData,id:commentId,user:currentComment.user)
+                            self.comments[updateIndex] = newComment
+
+                                self.commentsTableView.beginUpdates()
+                                self.commentsTableView.deleteRows(at: [IndexPath(row: updateIndex,section: 0)], with: .left)
+                                self.commentsTableView.insertRows(at: [IndexPath(row: updateIndex,section: 0)],with: .left)
+                                self.commentsTableView.endUpdates()
+
+                        }
+                    case .removed:
+                        let commentId = diff.document.documentID
+                        if let deleteIndex = self.comments.firstIndex(where: {$0.id == commentId}){
+                            self.comments.remove(at: deleteIndex)
+
+                                self.commentsTableView.beginUpdates()
+                                self.commentsTableView.deleteRows(at: [IndexPath(row: deleteIndex,section: 0)], with: .automatic)
+                                self.commentsTableView.endUpdates()
+
+                        }
+                    }
+                }
+            }
+
+             }}
+       
+        }
+    
 
 
-}
 
  func toDate(_ timestamp: Any?) -> Date? {
     if let any = timestamp {
@@ -104,4 +242,25 @@ func setStartingLocation(location: CLLocation, distance: CLLocationDistance){
         }
     }
     return nil
+}
+extension DetailsViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("----count----\n",comments.count)
+        print("----*comments*----\n",comments)
+        return comments.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell") as! CommentCell
+
+        return cell.configure(with: comments[indexPath.row])
+    }
+    
+}
+    
+extension DetailsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+ 
 }

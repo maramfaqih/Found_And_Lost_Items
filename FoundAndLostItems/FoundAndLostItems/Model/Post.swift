@@ -25,6 +25,7 @@ struct Post {
     init(dict:[String:Any],id:String,user:User) {
         if let title = dict["title"] as? String,
            let description = dict["description"] as? String,
+           let id = dict["id"] as? String,
            let country = dict["country"] as? String,
            let city = dict["city"] as? String,
            let latitude = dict["latitude"] as? Double,
@@ -41,6 +42,8 @@ struct Post {
             self.latitude = latitude
             self.longitude = longitude
             self.found = found
+            self.id = id
+           
         }
         self.id = id
         self.user = user

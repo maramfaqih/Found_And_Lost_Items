@@ -9,7 +9,7 @@ import UIKit
 import Firebase
 
 class HomeViewController: UIViewController {
-var read = false
+    var lang : String?
     var posts = [Post]()
     var selectedPost:Post?
     var selectedPostImage:UIImage?
@@ -56,7 +56,8 @@ var read = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let all =  ref.collection("posts").order(by: "createdAt" ,descending: true)
+     lang = UserDefaults.standard.string(forKey: "currentLanguage")
+        let all =  ref.collection("posts").order(by: "createdAt",descending: true)
         getPosts(state: all)
         // Do any additional setup after loading the view.
 
@@ -67,11 +68,12 @@ var read = false
     @IBAction func displayFilterSegmentedControl(_ sender: UISegmentedControl) {
   
         posts = [Post]()
-        
+//       let today = Date()
+//               let todayTimeStamp = Timestamp(date: today)
          let filter = sender.selectedSegmentIndex
             if filter == 0 {
-                let all =  ref.collection("posts").order(by: "createdAt" ,descending: true)
-
+                let all =  ref.collection("posts").order(by: "createdAt", descending: true)
+                    //.whereField("createdAt", isLessThanOrEqualTo:todayTimeStamp)
                 getPosts(state: all)
             }else if filter == 1 {
                 let found =  ref.collection("posts").whereField("found", isEqualTo: "found").order(by: "createdAt",descending: true)
@@ -92,12 +94,13 @@ var read = false
 //let today = Date()
     //   let todayTimeStamp = Timestamp(date: today)
         self.postsTableView.reloadData()
-     // if read {
+      
         state.addSnapshotListener { snapshot, error in
             let ref = Firestore.firestore()
 
             if let error = error {
                 print("DB ERROR Posts",error.localizedDescription)
+//                Alert.showAlert(strTitle: "Error", strMessage: error.localizedDescription, viewController: self)
             }
             if let snapshot = snapshot {
                 snapshot.documentChanges.forEach { diff in
@@ -166,27 +169,7 @@ var read = false
             
         }
         
-//     else{
-//        ref.collection("posts").order(by: "createdAt" , descending: true)
-//            .getDocuments() { (querySnapshot, err) in
-//                if let err = err {
-//                    print("Error getting documents: \(err)")
-//                } else {
-//                    for document in querySnapshot!.documents {
-//                        print("\(document.documentID) => \(document.data())")
-////                        if let userSnapshot = querySnapshot,
-////                           let userData = document.data() {
-////                            let user = User(dict:userData)
-////                            let post = Post(dict: document.data(),id: document.documentID,user:user)
-////                        posts.append(post)
-////                    }
-//                }
-//        }
-//                self.read = true
-//        }
-//        }
-//
-//    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             if identifier == "toPostVC" {
@@ -204,27 +187,30 @@ var read = false
     
     @IBAction func changeLanguageButton(_ sender: UIBarButtonItem) {
        
-        var lang = UserDefaults.standard.string(forKey: "currentLanguage")
-         if lang == "ar" {
-             Bundle.setLanguage(lang ?? "ar")
-             UIView.appearance().semanticContentAttribute = .forceRightToLeft
-            lang = "en"
+//        var lang = UserDefaults.standard.string(forKey: "currentLanguage")
+        
+         if lang == "en" {
+            
              
+             lang = "ar"
+          
+             UIView.appearance().semanticContentAttribute = .forceRightToLeft
+
         }else{
 
-            Bundle.setLanguage(lang ?? "en")
+            
+            lang = "en"
             UIView.appearance().semanticContentAttribute = .forceLeftToRight
-            lang = "ar"
+
         }
-      
-        UserDefaults.standard.set(lang, forKey: "currentLanguage")
+       
+            Bundle.setLanguage(lang ?? "en")
+            UserDefaults.standard.set(lang, forKey: "currentLanguage")
 
         if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabBarController") as? UITabBarController {
             vc.modalPresentationStyle = .fullScreen  
             self.present(vc, animated: false, completion: nil)
         
-        
-   
 
     }
 }
@@ -256,30 +242,6 @@ extension HomeViewController: UITableViewDelegate {
         }
         else {
             performSegue(withIdentifier: "toDetailsVC", sender: self)
-            
-        }
-    }
-    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-
-        UIView.animate(withDuration: 0.7) {
-            if let cell = (tableView.dequeueReusableCell(withIdentifier: "PostCell") as? PostCell) {
-               // cell.contentView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-              //  cell.contentView.layoutIfNeeded()
-                cell.effectViewCell.backgroundColor = UIColor(white: 1,  alpha: 1)
-               
-               
-           }
-
-    }
-
-}
-    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
-        UIView.animate(withDuration: 0.7) {
-            if let cell = (tableView.dequeueReusableCell(withIdentifier: "PostCell") as? PostCell) {
-                cell.contentView.transform = CGAffineTransform.identity
-                cell.effectViewCell.backgroundColor = UIColor(white: 1,  alpha: 0)
-                //cell.contentView.layoutIfNeeded()
-            }
             
         }
     }
