@@ -11,10 +11,21 @@ import MapKit
 import Firebase
 class DetailsViewController: UIViewController {
     let ref = Firestore.firestore()
-//    var listener: ListenerRegistration
 
     let activityIndicator = UIActivityIndicatorView()
-    @IBOutlet weak var sendCommentButton: UIButton!
+    @IBOutlet weak var sendCommentButton: UIButton!{
+        didSet{
+          
+            sendCommentButton.setTitle(NSLocalizedString("send", tableName: "Localized",  comment: ""),for: .normal)
+        }
+    }
+    
+    @IBOutlet weak var commentsLabelOutlet: UILabel!{
+        didSet{
+            commentsLabelOutlet.text = "comments".localized
+
+        }
+    }
     @IBOutlet weak var commentsTableView: UITableView!{
         didSet{
             commentsTableView.delegate = self
@@ -61,8 +72,7 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var  time : UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-//        comments = [Comment]()
-//        print("eeeeeeeee",comments)
+
         getComments()
         // Do any additional setup after loading the view.
         if let selectedPost = selectedPost,
@@ -84,7 +94,7 @@ class DetailsViewController: UIViewController {
             postImageView.image = selectedImage
             let initialLocation = CLLocation(latitude: selectedPost.latitude, longitude: selectedPost.longitude)
             setStartingLocation(location: initialLocation, distance: 1000)
-print("selectedPost.latitude",selectedPost.latitude)
+
             let pin = MKPointAnnotation()
             pin.coordinate = CLLocationCoordinate2DMake(selectedPost.latitude, selectedPost.longitude)
             pin.title = "location".localized
@@ -108,6 +118,7 @@ print("selectedPost.latitude",selectedPost.latitude)
                             commentData = [
                                     "id": commentId,
                                     "userId":currentUser.uid,
+                                    "publisherUserId":selectedPost!.user.id,
                                     "comment":comment,
                                     "postId":selectedPost!.id,
                                     "createdAt":FieldValue.serverTimestamp()
@@ -117,29 +128,14 @@ print("selectedPost.latitude",selectedPost.latitude)
                                 if let error = error {
                                     print("FireStore Error",error.localizedDescription)
                                 }
-//                                self.comments = [Comment]()
-//                                self.getComments()
+
 
                                       Activity.removeIndicator(parentView: self.view, childView: self.activityIndicator)
                                 print("Document added with ID: \(commentId)")
                                 self.commentTextField.text = ""
-                               // self.listener
                                   }
                             }
-//
-//        var ref: DocumentReference? = nil
-//        ref = db.collection("comments").addDocument(data: [
-//            "id": commentId,
-//            "userId":currentUser.uid,
-//            "comment":comment,
-//            "postId":selectedPost!.id,
-//            "createdAt":FieldValue.serverTimestamp()
-//        ]) { err in
-//            if let err = err {
-//                print("Error adding document: \(err)")
-//            } else {
-//                print("Document added with ID: \(ref!.documentID)")
-//            }
+
         }
                         
                     
@@ -155,8 +151,6 @@ func setStartingLocation(location: CLLocation, distance: CLLocationDistance){
 }
     
     func getComments(){
-//let today = Date()
-    //   let todayTimeStamp = Timestamp(date: today)
         self.commentsTableView.reloadData()
 
          ref.collection("comments").whereField("postId", isEqualTo: selectedPost!.id).order(by: "createdAt",descending: true).addSnapshotListener{  snapshot, error in
@@ -190,8 +184,7 @@ func setStartingLocation(location: CLLocation, distance: CLLocationDistance){
 
                                         self.commentsTableView.insertRows(at: [IndexPath(row:self.comments.count - 1,section: 0)],with: .automatic)
                                     }else {
-                                        // self.comments.append(comment)
-                                       // self.commentsTableView.insertRows(at: [IndexPath(row:self.comments.count - 1,section: 0)],with: .automatic)
+                                     
                                        self.comments.insert(comment, at: 0)
                                         self.commentsTableView.insertRows(at: [IndexPath(row: 0,section: 0)],with: .automatic)
                                     }

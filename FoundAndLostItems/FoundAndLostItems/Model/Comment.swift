@@ -11,6 +11,7 @@ struct Comment {
     var postId = ""
     var comment = ""
     var userId = ""
+    var publisherUserId = ""
     var id = ""
     var createdAt:Timestamp?
     var user:User
@@ -19,10 +20,12 @@ struct Comment {
         if let postId = dict["postId"] as? String,
            let comment = dict["comment"] as? String,
            let userId = dict["userId"] as? String,
+           let publisherUserId = dict["publisherUserId"] as? String,
            let id = dict["id"] as? String,
            let createdAt = dict["createdAt"] as? Timestamp {
             self.postId = postId
             self.userId = userId
+            self.publisherUserId = publisherUserId
             self.comment = comment
             self.createdAt =  createdAt
             self.id =  id

@@ -12,7 +12,6 @@ class SearchViewController: UIViewController {
     var postsSearch = [Post]()
     var selectedPostImage:UIImage?
     var selectedPost:Post?
-    //let searchController = UISearchController(searchResultsController: nil)
     @IBOutlet weak var navBarTitle: UINavigationItem!{
         didSet{
             navBarTitle.title = "titleApp".localized

@@ -19,17 +19,7 @@ class MyPostViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var titleApp1Label: UILabel!{
-        didSet{
-            titleApp1Label.text = "titleApp1".localized
-        }
-    }
-    
-    @IBOutlet weak var titleApp2Label: UILabel!{
-        didSet{
-            titleApp2Label.text = "titleApp2".localized
-        }
-    }
+
     @IBOutlet weak var LanguageButtonOutlet: UIBarButtonItem!{
         didSet{
             self.LanguageButtonOutlet.title = "language".localized
@@ -46,20 +36,10 @@ class MyPostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-//        if let currentUser = Auth.auth().currentUser,
-//           currentUser.uid == posts[indexPath.row].user.id{
-//        if let currentUser = Auth.auth().currentUser,
-//                 currentUser.uid =
-        
-//        if let currentUser = Auth.auth().currentUser,
-//           currentUser.uid == posts[0].user.id{
-//                let found =  ref.collection("posts").whereField("found", isEqualTo: "yes")
-       
 
         let all =  ref.collection("posts").whereField("userId", isEqualTo: Auth.auth().currentUser!.uid ).order(by: "createdAt",descending: true)
         getPosts(state: all)
-      //  }
+    
     }
     func getPosts(state : Query ) {
         self.myPostTableView.reloadData()

@@ -11,12 +11,24 @@ class CommentCell: UITableViewCell {
 
     @IBOutlet weak var userNameCell: UILabel!
     @IBOutlet weak var commentCell: UILabel!
+    
+    @IBOutlet weak var viewCommentCell: UIView!{
+        didSet{
+            viewCommentCell.layer.cornerRadius = 15
+            viewCommentCell.layer.masksToBounds = true
+        }
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
     func configure(with comment:Comment) -> UITableViewCell {
-        userNameCell.text = comment.user.name + " :"
+        if comment.userId == comment.publisherUserId{
+            userNameCell.text = comment.user.name + " :(Creator)"
+    }else{
+        userNameCell.text = comment.user.name + " :"}
+
+    
         commentCell.text = comment.comment
         return self
         

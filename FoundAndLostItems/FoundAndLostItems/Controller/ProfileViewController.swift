@@ -51,17 +51,6 @@ class ProfileViewController: UIViewController {
         }
     }
  
-    @IBOutlet weak var titleApp1Label: UILabel!{
-        didSet{
-            titleApp1Label.text = "titleApp1".localized
-        }
-    }
-    
-    @IBOutlet weak var titleApp2Label: UILabel!{
-        didSet{
-            titleApp2Label.text = "titleApp2".localized
-        }
-    }
     @IBOutlet weak var LanguageButtonOutlet: UIBarButtonItem!{
         didSet{
             self.LanguageButtonOutlet.title = "language".localized
@@ -82,21 +71,7 @@ class ProfileViewController: UIViewController {
         let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
-//        Auth.auth().currentUser?.updateEmail(to: email) { error in
-//            if let error = error {
-//
-//            }
-//        let user = Auth.auth().currentUser
-//        var credential: AuthCredential
-//        user?.reauthenticate(with: credential) { error,athuUser  in
-//          if let error = error {
-//          }
-              
-      //  Auth.auth().currentUser?.updatePassword(to: password) { error in
-          // ...
-         //   if let error = error {
-         
-              //       }
+
         
      
         ref.collection("users").document(Auth.auth().currentUser!.uid).getDocument { userSnapshot, error in
@@ -147,7 +122,6 @@ class ProfileViewController: UIViewController {
                               if let email = self.emailTextField.text {
                         Auth.auth().currentUser?.updateEmail(to: email) { error in
                                   if let error = error {
-                                      print("email.....")
                                     // An error happened.
                                       Alert.showAlert(strTitle: "error email", strMessage: error.localizedDescription, viewController: self)
                                      
@@ -156,7 +130,6 @@ class ProfileViewController: UIViewController {
 
                                   }
                             
-                                // ...
                         }}
                           }}
                     }
@@ -166,32 +139,7 @@ class ProfileViewController: UIViewController {
                                 "email": email,
                                 "phoneNumber":phoneNumber]
                         
-        //                let user = Auth.auth().currentUser
-        //                var credential: AuthCredential
-        //
-        //                // Prompt the user to re-provide their sign-in credentials
-        //
-        //                user?.reauthenticate(with: credential) { error,arg  in
-        //                  if let error = error {
-        //                    // An error happened.
-        //                  } else {
-                            // User re-authenticated.
-//                        if passwordTextField.text!.count >= 6 {
-//                        if let password = passwordTextField.text {
-//                        Auth.auth().currentUser?.updatePassword(to: password) { error in
-//                                  if let error = error {
-//                                      print("password.....")
-//                                    // An error happened.
-//                                      Alert.showAlert(strTitle: "error password", strMessage: error.localizedDescription, viewController: self)
-//                                      Activity.removeIndicator(parentView: self.view, childView: self.activityIndicator)
-//                                  }else{
-//                                      Alert.showAlert(strTitle: "password", strMessage: "y", viewController: self)
-//
-//                                  }
-//
-//                                // ...
-//                        }}
-//                        }
+       
                         
                         if let password = passwordTextField.text {
                             if password != "" {
@@ -206,11 +154,9 @@ class ProfileViewController: UIViewController {
 
                                   }
                             
-                                // ...
                         }}
                         }
                        
-        //                = emailTextField.text
 
                              ref.document(userId).setData(userData) { error in
                                  if let error = error {
@@ -221,8 +167,7 @@ class ProfileViewController: UIViewController {
                                  Activity.removeIndicator(parentView: self.view, childView: self.activityIndicator)
                                  
                 
-            //}
-               //  }
+         
                 }
             }
             }

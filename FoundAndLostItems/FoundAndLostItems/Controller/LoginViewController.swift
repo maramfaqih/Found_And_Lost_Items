@@ -61,13 +61,7 @@ class LoginViewController: UIViewController {
 
     }
     
-    @IBOutlet weak var langugeButtonOutlet: UIButton!
-    {
-        didSet{
-            langugeButtonOutlet.setTitle(NSLocalizedString("language", tableName: "Localizable", comment: ""), for: .normal)
-                 
-        }
-    }
+ 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     override func viewDidLoad() {
@@ -104,22 +98,39 @@ class LoginViewController: UIViewController {
     
     @IBAction func changeLanguageButton(_ sender: UIBarButtonItem) {
 
-        var lang = UserDefaults.standard.string(forKey: "currentLanguage")
-        if lang == "en" {
-           
-            UIView.appearance().semanticContentAttribute = .forceRightToLeft
-            
-            lang = "ar"
-            Bundle.setLanguage(lang ?? "ar")
-       }else{
-
-           UIView.appearance().semanticContentAttribute = .forceLeftToRight
-           
-           lang = "en"
-           Bundle.setLanguage(lang ?? "en")
-       }
         
-            UserDefaults.standard.set(lang, forKey: "currentLanguage")
+            var lang = ""
+            
+            if let userDefaultLang = UserDefaults.standard.string(forKey: "currentLanguage"){
+              lang = userDefaultLang
+                print("userDefaultLang:",userDefaultLang)
+            }
+         
+            
+        print("uuuuu Lang:",lang)
+             if lang == "en" {
+                
+                
+                 lang = "ar"
+                 print("set Lang:",lang)
+                 Bundle.setLanguage(lang)
+                 UserDefaults.standard.set(lang, forKey: "currentLanguage")
+                 UIView.appearance().semanticContentAttribute = .forceRightToLeft
+
+            }else{
+                
+                
+                
+                lang = "en"
+                print("set Lang2:",lang)
+                Bundle.setLanguage(lang)
+                UserDefaults.standard.set(lang, forKey: "currentLanguage")
+                UIView.appearance().semanticContentAttribute = .forceLeftToRight
+
+            }
+           
+          
+
         
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,

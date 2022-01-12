@@ -43,6 +43,7 @@
                         </constraints>
                     </view>
                 </subviews>
+                <color key="backgroundColor" name="BGColorApp"/>
                 <constraints>
                     <constraint firstItem="vkr-g8-ody" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="AkG-wp-uvh"/>
                     <constraint firstAttribute="bottom" secondItem="vkr-g8-ody" secondAttribute="bottom" constant="10" id="BfW-Z7-20M"/>
@@ -51,14 +52,19 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" name="BGColorApp"/>
             <connections>
                 <outlet property="commentCell" destination="X6f-FJ-sza" id="m7g-yq-RHw"/>
                 <outlet property="userNameCell" destination="eeI-e3-7D7" id="1Sd-nW-3YI"/>
+                <outlet property="viewCommentCell" destination="vkr-g8-ody" id="Pyw-gh-gIb"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="71.651785714285708"/>
         </tableViewCell>
     </objects>
     <resources>
+        <namedColor name="BGColorApp">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
         <namedColor name="FirstColor">
             <color red="0.92699998617172241" green="0.58899998664855957" blue="0.4440000057220459" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>

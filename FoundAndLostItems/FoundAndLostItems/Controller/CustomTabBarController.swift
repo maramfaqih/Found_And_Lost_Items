@@ -20,7 +20,6 @@ class CustomTabBarController: UITabBarController {
         
 
       UITabBar.appearance().unselectedItemTintColor = UIColor(displayP3Red: 0.95, green: 0.95, blue: 0.95 , alpha: 1)
-       // UITabBar.appearance().unselectedItemTintColor =
         // Do any additional setup after loading the view.
     }
     

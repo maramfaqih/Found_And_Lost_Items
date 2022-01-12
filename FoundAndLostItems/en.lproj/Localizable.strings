@@ -50,4 +50,6 @@
 "daysAgo" = " days ago";
 "weeksAgo" = " weeks ago";
 "from" = " ";
-"search"="Search";
+"search" = "Search";
+"comments" = "-Comments-";
+"send" = "Send";

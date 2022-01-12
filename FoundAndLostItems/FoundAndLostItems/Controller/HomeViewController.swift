@@ -9,7 +9,6 @@ import UIKit
 import Firebase
 
 class HomeViewController: UIViewController {
-    var lang : String?
     var posts = [Post]()
     var selectedPost:Post?
     var selectedPostImage:UIImage?
@@ -18,6 +17,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var navBarTitle: UINavigationItem!{
         didSet{
             navBarTitle.title = "titleApp".localized
+
         }
     }
     
@@ -28,20 +28,11 @@ class HomeViewController: UIViewController {
             postsTableView.register(UINib(nibName: "PostCell", bundle: nil), forCellReuseIdentifier: "PostCell")
         }
     }
-    @IBOutlet weak var titleApp1Label: UILabel!{
-        didSet{
-            titleApp1Label.text = "titleApp1".localized
-        }
-    }
-    
-    @IBOutlet weak var titleApp2Label: UILabel!{
-        didSet{
-            titleApp2Label.text = "titleApp2".localized
-        }
-    }
+
     @IBOutlet weak var LanguageButtonOutlet: UIBarButtonItem!{
         didSet{
             self.LanguageButtonOutlet.title = "language".localized
+            
            
         }
     }
@@ -56,7 +47,6 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-     lang = UserDefaults.standard.string(forKey: "currentLanguage")
         let all =  ref.collection("posts").order(by: "createdAt",descending: true)
         getPosts(state: all)
         // Do any additional setup after loading the view.
@@ -68,20 +58,16 @@ class HomeViewController: UIViewController {
     @IBAction func displayFilterSegmentedControl(_ sender: UISegmentedControl) {
   
         posts = [Post]()
-//       let today = Date()
-//               let todayTimeStamp = Timestamp(date: today)
          let filter = sender.selectedSegmentIndex
             if filter == 0 {
                 let all =  ref.collection("posts").order(by: "createdAt", descending: true)
-                    //.whereField("createdAt", isLessThanOrEqualTo:todayTimeStamp)
                 getPosts(state: all)
             }else if filter == 1 {
-                let found =  ref.collection("posts").whereField("found", isEqualTo: "found").order(by: "createdAt",descending: true)
+                let found =  ref.collection("posts").order(by: "createdAt",descending: true).whereField("found", isEqualTo: "found")
                 getPosts(state: found)
                 
             }else if filter == 2 {
-                //self.postsTableView.beginUpdates()
-                let lost =  ref.collection("posts").whereField("found", isEqualTo: "lost").order(by: "createdAt",descending: true)
+                let lost =  ref.collection("posts").order(by: "createdAt",descending: true).whereField("found", isEqualTo: "lost")
                 getPosts(state: lost)
               
                 
@@ -91,8 +77,7 @@ class HomeViewController: UIViewController {
         
     }
     func getPosts(state : Query ) {
-//let today = Date()
-    //   let todayTimeStamp = Timestamp(date: today)
+
         self.postsTableView.reloadData()
       
         state.addSnapshotListener { snapshot, error in
@@ -186,27 +171,33 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func changeLanguageButton(_ sender: UIBarButtonItem) {
+        var lang = ""
+        
+        if let userDefaultLang = UserDefaults.standard.string(forKey: "currentLanguage"){
+          lang = userDefaultLang
+        }
        
-//        var lang = UserDefaults.standard.string(forKey: "currentLanguage")
         
          if lang == "en" {
             
-             
+            
              lang = "ar"
-          
+             Bundle.setLanguage(lang)
+             UserDefaults.standard.set(lang, forKey: "currentLanguage")
              UIView.appearance().semanticContentAttribute = .forceRightToLeft
 
         }else{
-
+            
+            
             
             lang = "en"
+            Bundle.setLanguage(lang)
+            UserDefaults.standard.set(lang, forKey: "currentLanguage")
             UIView.appearance().semanticContentAttribute = .forceLeftToRight
 
         }
        
-            Bundle.setLanguage(lang ?? "en")
-            UserDefaults.standard.set(lang, forKey: "currentLanguage")
-
+           
         if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabBarController") as? UITabBarController {
             vc.modalPresentationStyle = .fullScreen  
             self.present(vc, animated: false, completion: nil)
