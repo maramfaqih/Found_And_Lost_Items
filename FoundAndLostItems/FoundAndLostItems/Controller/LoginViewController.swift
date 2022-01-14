@@ -10,6 +10,7 @@ import Firebase
 
 
 class LoginViewController: UIViewController {
+
     var activityIndicator = UIActivityIndicatorView()
     @IBOutlet weak var navBarTitle: UINavigationItem!{
         didSet{
@@ -62,8 +63,17 @@ class LoginViewController: UIViewController {
     }
     
  
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!{
+        didSet{
+            emailTextField.delegate = self
+
+        }
+    }
+    @IBOutlet weak var passwordTextField: UITextField! {   didSet{
+        passwordTextField.delegate = self
+
+    }
+}
     override func viewDidLoad() {
         super.viewDidLoad()
         let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
@@ -72,6 +82,19 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func passwordVisibilityAction(_ sender: UIButton) {
+
+        passwordTextField.isSecureTextEntry.toggle()
+           if passwordTextField.isSecureTextEntry {
+               if let image = UIImage(systemName: "eye.slash") {
+                   sender.setImage(image, for: .normal)
+               }
+           } else {
+               if let image = UIImage(systemName: "eye") {
+                   sender.setImage(image, for: .normal)
+               }
+           }
+    }
     @IBAction func handleLogin(_ sender: Any) {
 
         if let email = emailTextField.text,
@@ -149,4 +172,22 @@ extension String {
         
        
     }
+}
+extension UIViewController: UITextFieldDelegate{
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true;
+    }
+}
+
+extension UITextField {
+fileprivate func setPasswordToggleImage(_ button: UIButton) {
+    if(isSecureTextEntry){
+        button.setImage(UIImage(named: "ic_password_visible"), for: .normal)
+    }else{
+        button.setImage(UIImage(named: "ic_password_invisible"), for: .normal)
+
+    }
+}
+
 }

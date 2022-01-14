@@ -13,13 +13,7 @@ import MapKit
 class PostViewController: UIViewController {
     let ref = Firestore.firestore()
 
-    @IBOutlet weak var sendButtonOutlet: UIButton!{
-        didSet{
-          
-            sendButtonOutlet.setTitle(NSLocalizedString("send", tableName: "Localized",  comment: ""),for: .normal)
-        }
-
-    }
+    @IBOutlet weak var sendButtonOutlet: UIButton!
     @IBOutlet weak var commentsLabel: UILabel!{
         didSet{
             commentsLabel.text = "comments".localized
@@ -27,7 +21,13 @@ class PostViewController: UIViewController {
     }
 
     var  comments = [Comment]()
-    @IBOutlet weak var commentTextField: UITextField!
+    @IBOutlet weak var commentTextField: UITextField!{
+        didSet{
+            commentTextField.delegate = self
+
+        }
+    
+    }
     @IBOutlet weak var commentsTableView: UITableView!{
         didSet{
             commentsTableView.delegate = self
@@ -83,7 +83,8 @@ var flag = 0
     var selectedPostImage:UIImage?
     let activityIndicator = UIActivityIndicatorView()
 
-    @IBOutlet weak var postImageView: UIImageView!{ didSet {
+    @IBOutlet weak var postImageView: UIImageView!{
+        didSet {
         postImageView.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(chooseImage))
         postImageView.addGestureRecognizer(tapGesture)
@@ -99,7 +100,13 @@ var flag = 0
    
     
     @IBOutlet weak var postTitleTextField: UITextField!
+    {
+        didSet{
+            postTitleTextField.delegate = self
+
+        }
     
+    }
  
   
     @IBOutlet weak var postFoundPickerView: UIPickerView!
@@ -113,8 +120,20 @@ var flag = 0
         }
     }
     
-    @IBOutlet weak var postCityTextField: UITextField!
-    @IBOutlet weak var postICountryTextField: UITextField!
+    @IBOutlet weak var postCityTextField: UITextField!{
+        didSet{
+            postCityTextField.delegate = self
+
+        }
+    
+    }
+    @IBOutlet weak var postCountryTextField: UITextField!{
+        didSet{
+            postCountryTextField.delegate = self
+
+        }
+    
+    }
     @IBOutlet weak var actionButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -150,13 +169,12 @@ var flag = 0
         //----------------location------------------//
         
            locationManager.delegate = self
-           //locationManager1  = CLLocationManager()
            locationManager.desiredAccuracy = kCLLocationAccuracyBest
            locationManager.distanceFilter = kCLLocationAccuracyHundredMeters
 
            locationManager.stopUpdatingLocation()
            locationManager.requestAlwaysAuthorization()
-          // locationManager1.requestLocation()
+         
 
            // check if location enabled
            if CLLocationManager.locationServicesEnabled() {
@@ -255,7 +273,6 @@ var flag = 0
             let locationCoordinate = itemLocationMapView.convert(touchLocation, toCoordinateFrom: itemLocationMapView)
             latitude = locationCoordinate.latitude
             longitude = locationCoordinate.longitude
-            print("-------",locationCoordinate.latitude)
 
 
        
@@ -271,7 +288,7 @@ var flag = 0
     @IBAction func handleActionTouch(_ sender: Any) {
         var category : String?
         if foundItem == "موجود" || foundItem == "found" {
-             category = "found"}
+             category = "found" }
             else {
                 category = "lost"
             }
@@ -280,7 +297,7 @@ var flag = 0
            let title = postTitleTextField.text,
            let found = category,
            let description = postDescriptionTextField.text,
-           let country = postICountryTextField.text,
+           let country = postCountryTextField.text,
            let city = postCityTextField.text,
            let currentUser = Auth.auth().currentUser {
          
@@ -485,7 +502,7 @@ extension PostViewController : CLLocationManagerDelegate {
                 
                 let city =
                 placeMark.locality
-                self.postICountryTextField.text = country ?? "Unknown"
+                self.postCountryTextField.text = country ?? "Unknown"
                 self.postCityTextField.text = city ?? "Unknown"
                 
 

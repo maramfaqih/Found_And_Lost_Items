@@ -14,11 +14,28 @@ class PostCell: UITableViewCell {
 
     @IBOutlet weak var postImageView: UIImageView!
 
-    @IBOutlet weak var effectViewCell: UIView!
+    @IBOutlet weak var effectViewCell: UIView!{
+        didSet{
+        effectViewCell.layer.cornerRadius = 15
+        effectViewCell.layer.masksToBounds = true
+    }
+    }
+    @IBOutlet weak var shadowViewCell: UIView!{
+        didSet{
+            shadowViewCell.layer.cornerRadius = 15
+            shadowViewCell.layer.masksToBounds = true
+            shadowViewCell.layer.shadowOpacity = 0.2
+            shadowViewCell.layer.shadowRadius = 4
+            shadowViewCell.layer.masksToBounds = false
+        }
+    }
     
-    @IBOutlet weak var shadowViewCell: UIView!
-    
-    @IBOutlet weak var backgroundViewCell: UIView!
+    @IBOutlet weak var backgroundViewCell: UIView!{
+        didSet{
+        backgroundViewCell.layer.cornerRadius = 15
+        backgroundViewCell.layer.masksToBounds = true
+        }
+    }
     @IBOutlet weak var postTitleLabel: UILabel!
     
     @IBOutlet weak var postDescriptionLabel: UILabel!
@@ -35,17 +52,8 @@ class PostCell: UITableViewCell {
     }
 
     func configure(with post:Post) -> UITableViewCell {
-       // backgroundViewCell.backgroundColor = .systemGray6
-        backgroundViewCell.layer.cornerRadius = 15
-        backgroundViewCell.layer.masksToBounds = true
-        effectViewCell.layer.cornerRadius = 15
-        effectViewCell.layer.masksToBounds = true
-        shadowViewCell.layer.cornerRadius = 15
-        shadowViewCell.layer.masksToBounds = true
-        shadowViewCell.layer.shadowOpacity = 0.2
-        shadowViewCell.layer.shadowRadius = 4
-        shadowViewCell.layer.masksToBounds = false
-       
+   
+      
         postFoundLabel.text = post.found.localized
         postTitleLabel.text = post.title
         postDescriptionLabel.text = post.description

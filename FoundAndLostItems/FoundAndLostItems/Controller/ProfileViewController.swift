@@ -9,6 +9,15 @@ import UIKit
 import Firebase
 
 class ProfileViewController: UIViewController {
+    var allowConnection : Bool?
+var userName = ""
+var phoneNumber = ""
+    @IBOutlet weak var allowContactLabel: UILabel!{
+        didSet{
+            allowContactLabel.text = "allowContact".localized
+        }
+    }
+    @IBOutlet weak var contactSwitchOutlet : UISwitch!
 
     @IBOutlet weak var navBarTitle: UINavigationItem!{
         didSet{
@@ -56,12 +65,52 @@ class ProfileViewController: UIViewController {
             self.LanguageButtonOutlet.title = "language".localized
            
         }}
-    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var nameTextField: UITextField!{
+        
+        didSet{
+            nameTextField.delegate = self
+
+        }
     
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var phoneNumberTextField: UITextField!
+    
+}
+    
+    @IBOutlet weak var emailTextField: UITextField!{
+        
+        didSet{
+            emailTextField.delegate = self
+
+        }
+    
+    
+}
+    @IBOutlet weak var phoneNumberTextField: UITextField!{
+        
+        didSet{
+            phoneNumberTextField.delegate = self
+
+        }
+    
+    
+}
   
-    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!{
+        
+        didSet{
+            passwordTextField.delegate = self
+
+        }
+    
+    
+}
+    @IBOutlet weak var rePasswordTextField: UITextField!{
+        
+        didSet{
+            rePasswordTextField.delegate = self
+
+        }
+    }
+    
     var activityIndicator = UIActivityIndicatorView()
     var selectedUser:User?
   
@@ -85,23 +134,32 @@ class ProfileViewController: UIViewController {
                      self.nameTextField.text = user.name
                      self.emailTextField.text = Auth.auth().currentUser?.email
                      self.phoneNumberTextField.text = user.phoneNumber
-                     print("s\(user.name)")
-                     print("m***")
+                     self.userName = user.name
+                     self.phoneNumber = user.phoneNumber
+                     self.contactSwitchOutlet.isOn = user.allowConnection
+                     
+                    
                      
         }
                 }
  
    
     }
-    
+    @IBAction func contactSwitch(_ sender: UISwitch) {
+        if (sender.isOn == true){
+            allowConnection = true
+         }
+         else{
+             allowConnection = false
+         }
+    }
     @IBAction func handleUpdate(_ sender: UIButton) {
         
         //
                     if let name = nameTextField.text,
                       let email = emailTextField.text,
-                     // let password = passwordTextField.text,
                        let phoneNumber = phoneNumberTextField.text,
-                
+                       let allowConnection = self.allowConnection,
                 let currentUser = Auth.auth().currentUser {
                  Activity.showIndicator(parentView: self.view, childView: activityIndicator)
 
@@ -126,23 +184,27 @@ class ProfileViewController: UIViewController {
                                       Alert.showAlert(strTitle: "error email", strMessage: error.localizedDescription, viewController: self)
                                      
                                   }else{
-                                      Alert.showAlert(strTitle: "email", strMessage: "y", viewController: self)
+                                      Alert.showAlert(strTitle: "Email", strMessage: "Your Email has been changed successfully.", viewController: self)
 
                                   }
                             
                         }}
-                          }}
+                         
+                            }}
                     }
+                    
                             let userData : [String:Any]  = [
                                 "id":userId,
                                 "name":name,
                                 "email": email,
-                                "phoneNumber":phoneNumber]
+                                "phoneNumber":phoneNumber,
+                                "allowConnection" : allowConnection]
                         
        
                         
                         if let password = passwordTextField.text {
                             if password != "" {
+                                if password == rePasswordTextField.text {
                         Auth.auth().currentUser?.updatePassword(to: password) { error in
                                   if let error = error {
                                       print("password.....")
@@ -150,13 +212,26 @@ class ProfileViewController: UIViewController {
                                       Alert.showAlert(strTitle: "error password", strMessage: error.localizedDescription, viewController: self)
                                       Activity.removeIndicator(parentView: self.view, childView: self.activityIndicator)
                                   }else{
-                                      Alert.showAlert(strTitle: "password", strMessage: "y", viewController: self)
+                                      Alert.showAlert(strTitle: "password", strMessage: "Your password has been changed successfully.", viewController: self)
+                                      self.passwordTextField.text = ""
+                                      self.rePasswordTextField.text = ""
+                                      
 
                                   }
                             
+                        }}else{
+                            Alert.showAlert(strTitle: "Error", strMessage: "Password confirmation doesn't match Password", viewController: self)
+                            self.passwordTextField.text = ""
+                            self.rePasswordTextField.text = ""
+                            
                         }}
                         }
-                       
+                        if  self.nameTextField.text != self.userName {
+                            Alert.showAlert(strTitle: "Name", strMessage: "Your name has been changed successfully.", viewController: self)
+                        }
+                        if self.phoneNumberTextField.text != self.phoneNumber {
+                            Alert.showAlert(strTitle: "Phone Number", strMessage: "Your Phone Number has been changed successfully.", viewController: self)
+                        }
 
                              ref.document(userId).setData(userData) { error in
                                  if let error = error {
@@ -171,6 +246,32 @@ class ProfileViewController: UIViewController {
                 }
             }
             }
+    @IBAction func passwordVisibilityAction(_ sender: UIButton) {
+
+        passwordTextField.isSecureTextEntry.toggle()
+           if passwordTextField.isSecureTextEntry {
+               if let image = UIImage(systemName: "eye.slash") {
+                   sender.setImage(image, for: .normal)
+               }
+           } else {
+               if let image = UIImage(systemName: "eye") {
+                   sender.setImage(image, for: .normal)
+               }
+           }
+    }
+    @IBAction func rePasswordVisibilityAction(_ sender: UIButton) {
+
+        rePasswordTextField.isSecureTextEntry.toggle()
+           if rePasswordTextField.isSecureTextEntry {
+               if let image = UIImage(systemName: "eye.slash") {
+                   sender.setImage(image, for: .normal)
+               }
+           } else {
+               if let image = UIImage(systemName: "eye") {
+                   sender.setImage(image, for: .normal)
+               }
+           }
+    }
     @IBAction func handleLogout(_ sender: UIBarButtonItem) {
         do {
             try Auth.auth().signOut()

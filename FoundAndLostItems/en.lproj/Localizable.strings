@@ -39,7 +39,7 @@
 "titleApp" = "Lost&Found";
 
 "addPost" = "Add Post";
-"updatePost" = "update Post";
+"updatePost" = "Update Post";
 "edit" = "Edit";
 "saveChanges" = "Save Changes";
 "description" = "Description :";
@@ -52,4 +52,5 @@
 "from" = " ";
 "search" = "Search";
 "comments" = "-Comments-";
-"send" = "Send";
+"callUser" = " Contact Publisher";
+"allowContact" = "Allow users to contact me";

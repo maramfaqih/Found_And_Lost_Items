@@ -9,7 +9,13 @@ import UIKit
 import Firebase
 class RegisterViewController: UIViewController {
 var activityIndicator = UIActivityIndicatorView()
-
+    var allowConnection : Bool?
+    @IBOutlet weak var allowContactLabel: UILabel!{
+        didSet{
+            allowContactLabel.text = "allowContact".localized
+        }
+    }
+    
     @IBOutlet weak var navBarTitle: UINavigationItem!{
         didSet{
             navBarTitle.title = "titleApp".localized
@@ -20,16 +26,43 @@ var activityIndicator = UIActivityIndicatorView()
             self.LanguageButtonOutlet.title = "language".localized
         }}
        
-    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var nameTextField: UITextField!{
+        didSet{
+            nameTextField.delegate = self
+
+        }
     
-    @IBOutlet weak var emailTextField: UITextField!
+    }
     
-    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!{
+        didSet{
+            emailTextField.delegate = self
+
+        }
     
-    @IBOutlet weak var confirmPasswordTextField: UITextField!
+    }
     
-    @IBOutlet weak var phoneNumberTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!{
+        didSet{
+            passwordTextField.delegate = self
+
+        }
     
+    }
+    
+    @IBOutlet weak var confirmPasswordTextField: UITextField!{
+        didSet{
+            confirmPasswordTextField.delegate = self
+
+        }
+    
+    }
+    
+    @IBOutlet weak var phoneNumberTextField: UITextField! { didSet{
+        phoneNumberTextField.delegate = self
+
+    }
+}
     @IBOutlet weak var langugeButtonOutlet: UIButton!
     {
         didSet{
@@ -100,12 +133,21 @@ var activityIndicator = UIActivityIndicatorView()
         
     }
     
+    @IBAction func contactSwitch(_ sender: UISwitch) {
+        if (sender.isOn == true){
+            allowConnection = true
+         }
+         else{
+             allowConnection = false
+         }
+    }
     @IBAction func handleRegister(_ sender: Any) {
         if let name = nameTextField.text,
            let email = emailTextField.text,
            let password = passwordTextField.text,
            let phoneNumber = phoneNumberTextField.text,
            let confirmPassword = confirmPasswordTextField.text,
+           let allowConnection = self.allowConnection,
            password == confirmPassword {
             Activity.showIndicator(parentView: self.view, childView: activityIndicator)
             Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
@@ -117,11 +159,12 @@ var activityIndicator = UIActivityIndicatorView()
                 if let authResult = authResult {
 
                                 let db = Firestore.firestore()
-                                let userData: [String:String] = [
+                                let userData: [String:Any] = [
                                     "id":authResult.user.uid,
                                     "name":name,
                                     "email":email,
                                     "phoneNumber":phoneNumber,
+                                    "allowConnection" : allowConnection
                                 ]
                     
                                 db.collection("users").document(authResult.user.uid).setData(userData) { error in
@@ -146,6 +189,33 @@ var activityIndicator = UIActivityIndicatorView()
                        
         }
         }
+    @IBAction func passwordVisibilityAction(_ sender: UIButton) {
+
+        passwordTextField.isSecureTextEntry.toggle()
+           if passwordTextField.isSecureTextEntry {
+               if let image = UIImage(systemName: "eye.slash") {
+                   sender.setImage(image, for: .normal)
+               }
+           } else {
+               if let image = UIImage(systemName: "eye") {
+                   sender.setImage(image, for: .normal)
+               }
+           }
+    }
+    @IBAction func rePasswordVisibilityAction(_ sender: UIButton) {
+
+        confirmPasswordTextField.isSecureTextEntry.toggle()
+           if confirmPasswordTextField.isSecureTextEntry {
+               if let image = UIImage(systemName: "eye.slash") {
+                   sender.setImage(image, for: .normal)
+               }
+           } else {
+               if let image = UIImage(systemName: "eye") {
+                   sender.setImage(image, for: .normal)
+               }
+           }
+    }
+
     @IBAction func changeLanguageButton(_ sender: UIBarButtonItem) {
        
         var lang = UserDefaults.standard.string(forKey: "currentLanguage")

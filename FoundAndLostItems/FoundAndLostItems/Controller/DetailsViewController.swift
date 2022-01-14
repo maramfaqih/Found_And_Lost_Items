@@ -11,14 +11,18 @@ import MapKit
 import Firebase
 class DetailsViewController: UIViewController {
     let ref = Firestore.firestore()
-
-    let activityIndicator = UIActivityIndicatorView()
-    @IBOutlet weak var sendCommentButton: UIButton!{
+    var contactWithUser = false
+    var phoneNumber = 0
+    
+    @IBOutlet weak var contactButtonOutlet: UIButton!{
         didSet{
-          
-            sendCommentButton.setTitle(NSLocalizedString("send", tableName: "Localized",  comment: ""),for: .normal)
+            contactButtonOutlet.setTitle("callUser".localized, for: .normal)
+
+            
         }
     }
+    let activityIndicator = UIActivityIndicatorView()
+    @IBOutlet weak var sendCommentButton: UIButton!
     
     @IBOutlet weak var commentsLabelOutlet: UILabel!{
         didSet{
@@ -44,7 +48,15 @@ class DetailsViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var commentTextField: UITextField!
+    @IBOutlet weak var commentTextField: UITextField!{
+        
+            didSet{
+                commentTextField.delegate = self
+
+            }
+        
+        
+    }
     @IBOutlet weak var descriptionLableOutlet: UILabel!{
         didSet{
             descriptionLableOutlet.text = "description".localized
@@ -72,8 +84,10 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var  time : UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         getComments()
+        getUserInfo()
+     
         // Do any additional setup after loading the view.
         if let selectedPost = selectedPost,
         let selectedImage = selectedPostImage{
@@ -100,6 +114,42 @@ class DetailsViewController: UIViewController {
             pin.title = "location".localized
             itemLocationMapView.addAnnotation(pin)
         }
+    }
+     func callUser () {
+         guard let url = URL(string: "telprompt://\(self.phoneNumber)"),
+               UIApplication.shared.canOpenURL(url) else {
+               return
+           }
+           UIApplication.shared.open(url, options: [:], completionHandler: nil)
+         
+        
+    }
+    
+    @IBAction func contactButtonAction(_ sender: UIButton) {
+        callUser()
+    }
+    func getUserInfo(){
+        let ref = Firestore.firestore()
+
+           ref.collection("users").document((selectedPost?.user.id)!).getDocument { userSnapshot, error in
+                    if let error = error {
+                        print("ERROR user Data",error.localizedDescription)
+                       print("dddddd")
+                    }
+               if let userSnapshot = userSnapshot,
+                  let userData = userSnapshot.data(){
+                   let user = User(dict:userData)
+                   self.phoneNumber = Int(user.phoneNumber)!
+                   self.contactWithUser = user.allowConnection
+                  print("\(self.phoneNumber),\(self.contactWithUser)")
+                   if !self.contactWithUser {
+                       self.contactButtonOutlet.isHidden = true
+                
+                   }
+                  
+           }
+                  
+           }
     }
     @IBAction func sendCommentAction(_ sender: UIButton) {
 

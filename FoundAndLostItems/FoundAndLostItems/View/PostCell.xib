@@ -149,13 +149,18 @@
                             <constraint firstItem="FMi-hb-cRf" firstAttribute="leading" secondItem="3hz-VQ-sGV" secondAttribute="leading" id="zWr-yS-JfU"/>
                         </constraints>
                     </view>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fme-CB-a7E">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fme-CB-a7E">
                         <rect key="frame" x="15" y="15" width="290" height="170"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </view>
                 </subviews>
                 <color key="backgroundColor" name="BGColorApp"/>
                 <color key="tintColor" name="BGColorApp"/>
+                <constraints>
+                    <constraint firstItem="Fme-CB-a7E" firstAttribute="width" secondItem="mF1-30-eHr" secondAttribute="width" id="BbO-B7-Meo"/>
+                    <constraint firstItem="Fme-CB-a7E" firstAttribute="centerX" secondItem="mF1-30-eHr" secondAttribute="centerX" id="DJf-CC-HaT"/>
+                    <constraint firstItem="Fme-CB-a7E" firstAttribute="height" secondItem="mF1-30-eHr" secondAttribute="height" id="I2e-ty-srr"/>
+                    <constraint firstItem="Fme-CB-a7E" firstAttribute="centerY" secondItem="mF1-30-eHr" secondAttribute="centerY" id="lPs-Mf-9bB"/>
+                </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" name="BGColorApp"/>

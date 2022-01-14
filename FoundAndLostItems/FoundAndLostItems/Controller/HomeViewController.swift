@@ -13,7 +13,8 @@ class HomeViewController: UIViewController {
     var selectedPost:Post?
     var selectedPostImage:UIImage?
     let ref = Firestore.firestore()
-  
+    var lang =  Locale.current.languageCode
+    
     @IBOutlet weak var navBarTitle: UINavigationItem!{
         didSet{
             navBarTitle.title = "titleApp".localized
@@ -47,10 +48,13 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+      
         let all =  ref.collection("posts").order(by: "createdAt",descending: true)
         getPosts(state: all)
         // Do any additional setup after loading the view.
-
+    
+      
+          
         
     }
     
@@ -213,12 +217,28 @@ extension HomeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell") as! PostCell
-
+        cell.selectionStyle = .none
         return cell.configure(with: posts[indexPath.row])
+    }
+    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        //let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell") as! PostCell
+        UIView.animate(withDuration: 0.4) {
+               if let cell = tableView.cellForRow(at: indexPath) as? PostCell {
+                   cell.effectViewCell.backgroundColor = UIColor(white: 1,  alpha: 0.2)
+                   
+               }
+           }
+    }
+    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        UIView.animate(withDuration: 0.4){
+            if let cell = tableView.cellForRow(at: indexPath) as? PostCell {
+        cell.effectViewCell.backgroundColor = .clear
+    }
+
     }
     
 }
-    
+}
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 200
