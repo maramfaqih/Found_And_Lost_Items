@@ -6,7 +6,7 @@
   
 */
 
-
+"appName" = "Lost & Found Items";
 "loginword" = "Login";
 "email" = "Email";
 "password" = "Password";
@@ -54,3 +54,11 @@
 "comments" = "-Comments-";
 "callUser" = " Contact Publisher";
 "allowContact" = "Allow users to contact me";
+"arEn" = "ع";
+"title1" = "Posts";
+"title2" = "Calls and Comments";
+"title3" = "Location on Map";
+"desc1" = "Publishing of lost and found items, filtering and searching.";
+"desc2" = "You can contact the publisher and leave comments on the posts.";
+"desc3" = "You can locate the lost item on the map";
+

@@ -13,7 +13,6 @@ class HomeViewController: UIViewController {
     var selectedPost:Post?
     var selectedPostImage:UIImage?
     let ref = Firestore.firestore()
-    var lang =  Locale.current.languageCode
     
     @IBOutlet weak var navBarTitle: UINavigationItem!{
         didSet{
@@ -22,13 +21,7 @@ class HomeViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var postsTableView: UITableView!{
-        didSet{
-            postsTableView.delegate = self
-            postsTableView.dataSource = self
-            postsTableView.register(UINib(nibName: "PostCell", bundle: nil), forCellReuseIdentifier: "PostCell")
-        }
-    }
+ var firstLunch = true
 
     @IBOutlet weak var LanguageButtonOutlet: UIBarButtonItem!{
         didSet{
@@ -45,14 +38,20 @@ class HomeViewController: UIViewController {
             filterSegmentedControlOutlet.setTitle("lost".localized, forSegmentAt: 2)
         }
     }
+    @IBOutlet weak var postsTableView: UITableView!{
+        didSet{
+            postsTableView.delegate = self
+            postsTableView.dataSource = self
+            postsTableView.register(UINib(nibName: "PostCell", bundle: nil), forCellReuseIdentifier: "PostCell")
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+        // Do any additional setup after loading the view.
+        
         let all =  ref.collection("posts").order(by: "createdAt",descending: true)
         getPosts(state: all)
-        // Do any additional setup after loading the view.
-    
       
           
         
@@ -73,12 +72,8 @@ class HomeViewController: UIViewController {
             }else if filter == 2 {
                 let lost =  ref.collection("posts").order(by: "createdAt",descending: true).whereField("found", isEqualTo: "lost")
                 getPosts(state: lost)
-              
                 
             }
-
-        
-        
     }
     func getPosts(state : Query ) {
 
@@ -89,7 +84,6 @@ class HomeViewController: UIViewController {
 
             if let error = error {
                 print("DB ERROR Posts",error.localizedDescription)
-//                Alert.showAlert(strTitle: "Error", strMessage: error.localizedDescription, viewController: self)
             }
             if let snapshot = snapshot {
                 snapshot.documentChanges.forEach { diff in
@@ -150,10 +144,7 @@ class HomeViewController: UIViewController {
                     }
                 }
             }
-            
-
-           
-                  
+ 
         }
             
         }
@@ -176,32 +167,24 @@ class HomeViewController: UIViewController {
     
     @IBAction func changeLanguageButton(_ sender: UIBarButtonItem) {
         var lang = ""
-        
         if let userDefaultLang = UserDefaults.standard.string(forKey: "currentLanguage"){
-          lang = userDefaultLang
+                lang = userDefaultLang
         }
-       
-        
+ 
          if lang == "en" {
-            
-            
+
              lang = "ar"
-             Bundle.setLanguage(lang)
-             UserDefaults.standard.set(lang, forKey: "currentLanguage")
              UIView.appearance().semanticContentAttribute = .forceRightToLeft
 
         }else{
-            
-            
-            
+  
             lang = "en"
-            Bundle.setLanguage(lang)
-            UserDefaults.standard.set(lang, forKey: "currentLanguage")
             UIView.appearance().semanticContentAttribute = .forceLeftToRight
 
         }
        
-           
+        Bundle.setLanguage(lang)
+        UserDefaults.standard.set(lang, forKey: "currentLanguage")
         if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabBarController") as? UITabBarController {
             vc.modalPresentationStyle = .fullScreen  
             self.present(vc, animated: false, completion: nil)
@@ -240,9 +223,11 @@ extension HomeViewController: UITableViewDataSource {
 }
 }
 extension HomeViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 200
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! PostCell
         selectedPostImage = cell.postImageView.image

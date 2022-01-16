@@ -9,9 +9,15 @@
 /* Begin PBXBuildFile section */
 		EE22AB42278DD0B5003F0E57 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EE22AB41278DD0B5003F0E57 /* IQKeyboardManagerSwift */; };
 		EE38A434277D6213009342CE /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE38A433277D6213009342CE /* CustomTabBarController.swift */; };
+		EE88B1F22791B13500269095 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE88B1F12791B13500269095 /* LandingViewController.swift */; };
 		EE9F6C9E277943EC004FC3D8 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F6C9D277943EC004FC3D8 /* Alert.swift */; };
 		EE9F6CA02779CB1E004FC3D8 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = EE9F6C9F2779CB1D004FC3D8 /* .gitignore */; };
 		EE9F6CA2277A8DCC004FC3D8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F6CA1277A8DCB004FC3D8 /* ProfileViewController.swift */; };
+		EEA3B64D2791E67200B8D71D /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = EEA3B64C2791E67200B8D71D /* Lottie */; };
+		EEAB970027920F78000209BB /* headerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAB96FF27920F78000209BB /* headerCollectionViewCell.swift */; };
+		EEAB970427933B97000209BB /* locationAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = EEAB970227933B97000209BB /* locationAnimation.json */; };
+		EEAB970927937A3E000209BB /* phonecallImage.json in Resources */ = {isa = PBXBuildFile; fileRef = EEAB970627937A3D000209BB /* phonecallImage.json */; };
+		EEAB970C27937A8F000209BB /* searchPic.json in Resources */ = {isa = PBXBuildFile; fileRef = EEAB970B27937A8F000209BB /* searchPic.json */; };
 		EEC31D642778477E00E48473 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC31D632778477E00E48473 /* AppDelegate.swift */; };
 		EEC31D662778477E00E48473 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC31D652778477E00E48473 /* SceneDelegate.swift */; };
 		EEC31D6B2778477E00E48473 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEC31D692778477E00E48473 /* Main.storyboard */; };
@@ -43,9 +49,14 @@
 
 /* Begin PBXFileReference section */
 		EE38A433277D6213009342CE /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
+		EE88B1F12791B13500269095 /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
 		EE9F6C9D277943EC004FC3D8 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		EE9F6C9F2779CB1D004FC3D8 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .gitignore; path = ../.gitignore; sourceTree = "<group>"; };
 		EE9F6CA1277A8DCB004FC3D8 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		EEAB96FF27920F78000209BB /* headerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = headerCollectionViewCell.swift; sourceTree = "<group>"; };
+		EEAB970227933B97000209BB /* locationAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = locationAnimation.json; sourceTree = "<group>"; };
+		EEAB970627937A3D000209BB /* phonecallImage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = phonecallImage.json; sourceTree = "<group>"; };
+		EEAB970B27937A8F000209BB /* searchPic.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = searchPic.json; sourceTree = "<group>"; };
 		EEC31D602778477D00E48473 /* FoundAndLostItems.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoundAndLostItems.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEC31D632778477E00E48473 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EEC31D652778477E00E48473 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEA3B64D2791E67200B8D71D /* Lottie in Frameworks */,
 				EEC31D8127787A3000E48473 /* FirebaseAuth in Frameworks */,
 				EE22AB42278DD0B5003F0E57 /* IQKeyboardManagerSwift in Frameworks */,
 				EEC31D8327787A3000E48473 /* FirebaseFirestore in Frameworks */,
@@ -100,6 +112,9 @@
 				EEC31D9227788F7300E48473 /* ImageView.swift */,
 				EEC31D8C277882EB00E48473 /* Activity.swift */,
 				EE9F6C9D277943EC004FC3D8 /* Alert.swift */,
+				EEAB970227933B97000209BB /* locationAnimation.json */,
+				EEAB970627937A3D000209BB /* phonecallImage.json */,
+				EEAB970B27937A8F000209BB /* searchPic.json */,
 			);
 			path = Utill;
 			sourceTree = "<group>";
@@ -122,6 +137,7 @@
 				EEE7F0742789D53900D64BBA /* CommentCell.xib */,
 				EEC31D942778959600E48473 /* PostCell.swift */,
 				EEC31D952778959600E48473 /* PostCell.xib */,
+				EEAB96FF27920F78000209BB /* headerCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -129,13 +145,14 @@
 		EE9F6C9C277943A1004FC3D8 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				EEC31D9A2779332700E48473 /* DetailsViewController.swift */,
-				EED97038277AEE190011036D /* SearchViewController.swift */,
-				EEC31D8E277885B500E48473 /* HomeViewController.swift */,
-				EEC31D9827789DB200E48473 /* PostViewController.swift */,
+				EE88B1F12791B13500269095 /* LandingViewController.swift */,
 				EEC31D8A277880D900E48473 /* LoginViewController.swift */,
 				EEC31D88277880B400E48473 /* RegisterViewController.swift */,
+				EEC31D8E277885B500E48473 /* HomeViewController.swift */,
 				EED9703C277AF8440011036D /* MyPostViewController.swift */,
+				EEC31D9827789DB200E48473 /* PostViewController.swift */,
+				EEC31D9A2779332700E48473 /* DetailsViewController.swift */,
+				EED97038277AEE190011036D /* SearchViewController.swift */,
 				EE9F6CA1277A8DCB004FC3D8 /* ProfileViewController.swift */,
 				EE38A433277D6213009342CE /* CustomTabBarController.swift */,
 			);
@@ -166,10 +183,10 @@
 			children = (
 				EE9F6C9927794316004FC3D8 /* Utill */,
 				EE9F6C9A27794336004FC3D8 /* Model */,
+				EE9F6C9B27794373004FC3D8 /* View */,
 				EE9F6C9C277943A1004FC3D8 /* Controller */,
 				EEC31D652778477E00E48473 /* SceneDelegate.swift */,
 				EEC31D632778477E00E48473 /* AppDelegate.swift */,
-				EE9F6C9B27794373004FC3D8 /* View */,
 				EEC31D6C2778478600E48473 /* Assets.xcassets */,
 				EEC31D6E2778478600E48473 /* LaunchScreen.storyboard */,
 				EEC31D712778478600E48473 /* Info.plist */,
@@ -199,6 +216,7 @@
 				EEC31D8227787A3000E48473 /* FirebaseFirestore */,
 				EEC31D8427787A3000E48473 /* FirebaseStorage */,
 				EE22AB41278DD0B5003F0E57 /* IQKeyboardManagerSwift */,
+				EEA3B64C2791E67200B8D71D /* Lottie */,
 			);
 			productName = FoundAndLostItems;
 			productReference = EEC31D602778477D00E48473 /* FoundAndLostItems.app */;
@@ -232,6 +250,7 @@
 			packageReferences = (
 				EEC31D7F27787A3000E48473 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				EE22AB40278DD0B5003F0E57 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				EEA3B64B2791E67100B8D71D /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = EEC31D612778477D00E48473 /* Products */;
 			projectDirPath = "";
@@ -248,8 +267,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				EEC31D702778478600E48473 /* LaunchScreen.storyboard in Resources */,
+				EEAB970427933B97000209BB /* locationAnimation.json in Resources */,
 				EEC31D6D2778478600E48473 /* Assets.xcassets in Resources */,
 				EEC31D972778959600E48473 /* PostCell.xib in Resources */,
+				EEAB970C27937A8F000209BB /* searchPic.json in Resources */,
+				EEAB970927937A3E000209BB /* phonecallImage.json in Resources */,
 				EEE7F0762789D53900D64BBA /* CommentCell.xib in Resources */,
 				EEF734112781970900115DD0 /* Localizable.strings in Resources */,
 				EEC31D6B2778477E00E48473 /* Main.storyboard in Resources */,
@@ -266,6 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EED9703D277AF8440011036D /* MyPostViewController.swift in Sources */,
+				EE88B1F22791B13500269095 /* LandingViewController.swift in Sources */,
 				EED97039277AEE190011036D /* SearchViewController.swift in Sources */,
 				EEC31D9927789DB200E48473 /* PostViewController.swift in Sources */,
 				EEC31D9327788F7300E48473 /* ImageView.swift in Sources */,
@@ -279,6 +302,7 @@
 				EE9F6C9E277943EC004FC3D8 /* Alert.swift in Sources */,
 				EE38A434277D6213009342CE /* CustomTabBarController.swift in Sources */,
 				EEC31D962778959600E48473 /* PostCell.swift in Sources */,
+				EEAB970027920F78000209BB /* headerCollectionViewCell.swift in Sources */,
 				EEC31D642778477E00E48473 /* AppDelegate.swift in Sources */,
 				EEE7F0752789D53900D64BBA /* CommentCell.swift in Sources */,
 				EEC31D9B2779332700E48473 /* DetailsViewController.swift in Sources */,
@@ -533,6 +557,14 @@
 				kind = branch;
 			};
 		};
+		EEA3B64B2791E67100B8D71D /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/LottieFiles/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		EEC31D7F27787A3000E48473 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -548,6 +580,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EE22AB40278DD0B5003F0E57 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
 			productName = IQKeyboardManagerSwift;
+		};
+		EEA3B64C2791E67200B8D71D /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EEA3B64B2791E67100B8D71D /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 		EEC31D8027787A3000E48473 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;

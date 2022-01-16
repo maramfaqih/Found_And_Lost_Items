@@ -11,17 +11,14 @@ import Firebase
 
 class LoginViewController: UIViewController {
 
+
     var activityIndicator = UIActivityIndicatorView()
     @IBOutlet weak var navBarTitle: UINavigationItem!{
         didSet{
-            navBarTitle.title = "titleApp".localized
+            navBarTitle.title = "login".localized
         }
     }
-    @IBOutlet weak var LanguageButtonOutlet: UIBarButtonItem!{
-        didSet{
-            self.LanguageButtonOutlet.title = "language".localized
-           
-        }}
+  
     @IBOutlet weak var emailLabel: UILabel!{
         didSet{
             emailLabel.text = "email".localized
@@ -32,27 +29,8 @@ class LoginViewController: UIViewController {
             passwordLabel.text = "password".localized
         }
     }
+ 
     
-    @IBOutlet weak var loginButtonOutlet: UIButton!
-    {
-        didSet{
-            loginButtonOutlet.setTitle(NSLocalizedString("login", tableName: "Localizable", comment: ""), for: .normal)
-        }
-    }
-    
-    @IBOutlet weak var registerButtonOutlet: UIButton!{
-        didSet{
-            registerButtonOutlet.setTitle("register".localized, for: .normal)
-        }
-    }
-    
-    @IBOutlet weak var orLabel: UILabel!
-    {
-        didSet{
-            orLabel.text = "or".localized
-        }
-
-    }
     
     @IBOutlet weak var loginLabel: UILabel!
     {
@@ -62,7 +40,6 @@ class LoginViewController: UIViewController {
 
     }
     
- 
     @IBOutlet weak var emailTextField: UITextField!{
         didSet{
             emailTextField.delegate = self
@@ -74,12 +51,32 @@ class LoginViewController: UIViewController {
 
     }
 }
+    
+    @IBOutlet weak var loginButtonOutlet: UIButton!
+    {
+        didSet{
+            loginButtonOutlet.setTitle("login".localized, for: .normal)
+        }
+    }
+    
+    @IBOutlet weak var backGroundInfoLogin: UIView!{
+        didSet{
+            backGroundInfoLogin.layer.cornerRadius = 15
+            backGroundInfoLogin.layer.masksToBounds = true
+            backGroundInfoLogin.layer.shadowOpacity = 0.2
+            backGroundInfoLogin.layer.shadowRadius = 4
+            backGroundInfoLogin.layer.masksToBounds = false
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Do any additional setup after loading the view.
+        
         let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
-        // Do any additional setup after loading the view.
+     
     }
     
     @IBAction func passwordVisibilityAction(_ sender: UIButton) {
@@ -119,51 +116,6 @@ class LoginViewController: UIViewController {
         }
     }
     
-    @IBAction func changeLanguageButton(_ sender: UIBarButtonItem) {
-
-        
-            var lang = ""
-            
-            if let userDefaultLang = UserDefaults.standard.string(forKey: "currentLanguage"){
-              lang = userDefaultLang
-                print("userDefaultLang:",userDefaultLang)
-            }
-         
-            
-        print("uuuuu Lang:",lang)
-             if lang == "en" {
-                
-                
-                 lang = "ar"
-                 print("set Lang:",lang)
-                 Bundle.setLanguage(lang)
-                 UserDefaults.standard.set(lang, forKey: "currentLanguage")
-                 UIView.appearance().semanticContentAttribute = .forceRightToLeft
-
-            }else{
-                
-                
-                
-                lang = "en"
-                print("set Lang2:",lang)
-                Bundle.setLanguage(lang)
-                UserDefaults.standard.set(lang, forKey: "currentLanguage")
-                UIView.appearance().semanticContentAttribute = .forceLeftToRight
-
-            }
-           
-          
-
-        
-        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let sceneDelegate = windowScene.delegate as? SceneDelegate {
-            sceneDelegate.window?.rootViewController = storyboard.instantiateInitialViewController()
-
-    
-
-}
-}
 }
 extension String {
     var localized: String {
@@ -176,18 +128,8 @@ extension String {
 extension UIViewController: UITextFieldDelegate{
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        return true;
+        return true
     }
 }
 
-extension UITextField {
-fileprivate func setPasswordToggleImage(_ button: UIButton) {
-    if(isSecureTextEntry){
-        button.setImage(UIImage(named: "ic_password_visible"), for: .normal)
-    }else{
-        button.setImage(UIImage(named: "ic_password_invisible"), for: .normal)
 
-    }
-}
-
-}

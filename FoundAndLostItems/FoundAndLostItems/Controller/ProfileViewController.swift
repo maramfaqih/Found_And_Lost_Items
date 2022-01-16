@@ -126,7 +126,6 @@ var phoneNumber = ""
         ref.collection("users").document(Auth.auth().currentUser!.uid).getDocument { userSnapshot, error in
                  if let error = error {
                      print("ERROR user Data",error.localizedDescription)
-                    print("dddddd")
                  }
                  if let userSnapshot = userSnapshot,
                     let userData = userSnapshot.data(){
@@ -184,7 +183,7 @@ var phoneNumber = ""
                                       Alert.showAlert(strTitle: "error email", strMessage: error.localizedDescription, viewController: self)
                                      
                                   }else{
-                                      Alert.showAlert(strTitle: "Email", strMessage: "Your Email has been changed successfully.", viewController: self)
+                                      Alert.showAlert(strTitle: "", strMessage: "Your Email has been changed successfully.", viewController: self)
 
                                   }
                             
@@ -212,7 +211,7 @@ var phoneNumber = ""
                                       Alert.showAlert(strTitle: "error password", strMessage: error.localizedDescription, viewController: self)
                                       Activity.removeIndicator(parentView: self.view, childView: self.activityIndicator)
                                   }else{
-                                      Alert.showAlert(strTitle: "password", strMessage: "Your password has been changed successfully.", viewController: self)
+                                      Alert.showAlert(strTitle: "", strMessage: "Your password has been changed successfully.", viewController: self)
                                       self.passwordTextField.text = ""
                                       self.rePasswordTextField.text = ""
                                       
@@ -220,17 +219,17 @@ var phoneNumber = ""
                                   }
                             
                         }}else{
-                            Alert.showAlert(strTitle: "Error", strMessage: "Password confirmation doesn't match Password", viewController: self)
+                            Alert.showAlert(strTitle: "", strMessage: "Password confirmation doesn't match Password", viewController: self)
                             self.passwordTextField.text = ""
                             self.rePasswordTextField.text = ""
                             
                         }}
                         }
                         if  self.nameTextField.text != self.userName {
-                            Alert.showAlert(strTitle: "Name", strMessage: "Your name has been changed successfully.", viewController: self)
+                            Alert.showAlert(strTitle: "", strMessage: "Your name has been changed successfully.", viewController: self)
                         }
                         if self.phoneNumberTextField.text != self.phoneNumber {
-                            Alert.showAlert(strTitle: "Phone Number", strMessage: "Your Phone Number has been changed successfully.", viewController: self)
+                            Alert.showAlert(strTitle: "", strMessage: "Your Phone Number has been changed successfully.", viewController: self)
                         }
 
                              ref.document(userId).setData(userData) { error in

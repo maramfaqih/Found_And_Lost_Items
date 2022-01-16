@@ -288,8 +288,7 @@ func setStartingLocation(location: CLLocation, distance: CLLocationDistance){
 }
 extension DetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("----count----\n",comments.count)
-        print("----*comments*----\n",comments)
+       
         return comments.count
     }
     

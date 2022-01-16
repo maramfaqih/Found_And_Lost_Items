@@ -40,11 +40,12 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
        getPosts()
-      // postsSearch = posts
+        
     }
     
  
@@ -122,7 +123,7 @@ class SearchViewController: UIViewController {
 }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
-            if identifier == "toPostVC" {
+            if identifier == "fromSearchPostEditVC" {
                 let vc = segue.destination as! PostViewController
                 vc.selectedPost = selectedPost
                 vc.selectedPostImage = selectedPostImage
@@ -134,32 +135,7 @@ class SearchViewController: UIViewController {
         }
         
     }
-    @IBAction func changeLanguageButton(_ sender: UIBarButtonItem) {
-       
-        var lang = UserDefaults.standard.string(forKey: "currentLanguage")
-         if lang == "ar" {
-             Bundle.setLanguage(lang ?? "ar")
-             UIView.appearance().semanticContentAttribute = .forceRightToLeft
-            lang = "en"
-             
-        }else{
-
-            Bundle.setLanguage(lang ?? "en")
-            UIView.appearance().semanticContentAttribute = .forceLeftToRight
-            lang = "ar"
-        }
-      
-        UserDefaults.standard.set(lang, forKey: "currentLanguage")
-
-        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabBarController") as? UITabBarController {
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: false, completion: nil)
-        
-        
-   
-
-    }
-}
+    
 
     
 }
@@ -187,8 +163,15 @@ extension SearchViewController: UITableViewDelegate {
         selectedPostImage = cell.postImageView.image
         let post = !postsSearch.isEmpty ? postsSearch[indexPath.row] : posts[indexPath.row]
         selectedPost = post
-        performSegue(withIdentifier: "fromSearchPostEditVC", sender: self)
+      //  performSegue(withIdentifier: "", sender: self)
+        if let currentUser = Auth.auth().currentUser,
+           currentUser.uid == posts[indexPath.row].user.id{
+          performSegue(withIdentifier: "fromSearchPostEditVC", sender: self)
+        }
+        else {
+            performSegue(withIdentifier: "fromSearchPostDetailsVC", sender: self)
             
+        }
         }
     }
 
@@ -196,11 +179,15 @@ extension SearchViewController:UISearchBarDelegate{
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = ""
         searchBar.endEditing(true)
-       // postsSearch = posts
+        searchBar.showsCancelButton = true
+        searchBar.showsSearchResultsButton = true
     }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-       
-        postsSearch = searchText.isEmpty ? posts : posts.filter({ (item ) in
+     
+        if searchText == "" {
+            postsSearch = [Post]()
+        }
+        postsSearch = searchText.isEmpty ? postsSearch : posts.filter({ (item ) in
             return (item.title.lowercased().contains(searchBar.text!.lowercased())||item.description.lowercased().contains(searchBar.text!.lowercased())||item.country.lowercased().contains(searchBar.text!.lowercased())||item.city.lowercased().contains(searchBar.text!.lowercased()))
     })
         searchTableView.reloadData()

@@ -11,16 +11,26 @@ import CoreLocation
 import MapKit
 
 class PostViewController: UIViewController {
+    
     let ref = Firestore.firestore()
-
-    @IBOutlet weak var sendButtonOutlet: UIButton!
+    var  comments = [Comment]()
+    var latitude : CLLocationDegrees = 0.0
+    var longitude :  CLLocationDegrees = 0.0
+    var locationManager  = CLLocationManager()
+    let annotation = MKPointAnnotation()
+    var foundItem = "found"
+    var foundItems = ["found".localized,"lost".localized]
+    var flag = 0
+    var selectedPost:Post?
+    var selectedPostImage:UIImage?
+    let activityIndicator = UIActivityIndicatorView()
+    
     @IBOutlet weak var commentsLabel: UILabel!{
         didSet{
             commentsLabel.text = "comments".localized
         }
     }
 
-    var  comments = [Comment]()
     @IBOutlet weak var commentTextField: UITextField!{
         didSet{
             commentTextField.delegate = self
@@ -72,77 +82,66 @@ class PostViewController: UIViewController {
         }
     }
     @IBOutlet weak var itemLocationMapView: MKMapView!
-    var latitude : CLLocationDegrees = 0.0
-    var longitude :  CLLocationDegrees = 0.0
-    var locationManager  = CLLocationManager()
-    let annotation = MKPointAnnotation()
-    var foundItem = "found"
-    var foundItems = ["found".localized,"lost".localized]
-var flag = 0
-    var selectedPost:Post?
-    var selectedPostImage:UIImage?
-    let activityIndicator = UIActivityIndicatorView()
+    
 
     @IBOutlet weak var postImageView: UIImageView!{
         didSet {
         postImageView.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(chooseImage))
         postImageView.addGestureRecognizer(tapGesture)
+        }
     }
-}
-    @IBOutlet weak var cencelButtonOutlet:
-   UIBarButtonItem!{
+    @IBOutlet weak var cencelButtonOutlet: UIBarButtonItem!{
         didSet{
             self.cencelButtonOutlet.title = "cencel".localized
            
-        }}
-
-   
-    
+        }
+       
+   }
     @IBOutlet weak var postTitleTextField: UITextField!
     {
         didSet{
             postTitleTextField.delegate = self
-
         }
-    
     }
- 
-  
-    @IBOutlet weak var postFoundPickerView: UIPickerView!
+
+    @IBOutlet weak var postFoundPickerView: UIPickerView!{
+        didSet{
+            postFoundPickerView.delegate = self
+            postFoundPickerView.dataSource = self
+        }
+    }
     @IBOutlet weak var postDescriptionTextField: UITextView!
     {
         didSet{
             postDescriptionTextField.layer.cornerRadius = 5.0
             postDescriptionTextField.layer.borderWidth = 0.34
-           
-
         }
     }
     
     @IBOutlet weak var postCityTextField: UITextField!{
         didSet{
             postCityTextField.delegate = self
-
         }
-    
     }
     @IBOutlet weak var postCountryTextField: UITextField!{
         didSet{
             postCountryTextField.delegate = self
-
         }
-    
     }
     @IBOutlet weak var actionButton: UIButton!
+    @IBOutlet weak var sendButtonOutlet: UIButton!
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Do any additional setup after loading the view.
+
         let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
-        // Do any additional setup after loading the view.
-        postFoundPickerView.delegate = self
-        postFoundPickerView.dataSource = self
+        
+       
+        
         if let selectedPost = selectedPost,
         let selectedImage = selectedPostImage{
             postTitleTextField.text = selectedPost.title
@@ -163,7 +162,6 @@ var flag = 0
             commentsLabel.isHidden = true
             sendButtonOutlet.isHidden = true
             
-           // cencelButtonOutlet.isHidden = true
             
         }
         //----------------location------------------//
@@ -178,18 +176,15 @@ var flag = 0
 
            // check if location enabled
            if CLLocationManager.locationServicesEnabled() {
-               print("Yes")
                locationManager.startUpdatingLocation()
-           }else{
-               print("No")
            }
+        
            //--------------------------------------------//
 
     }
     
     func getComments(){
-//let today = Date()
-    //   let todayTimeStamp = Timestamp(date: today)
+
         self.commentsTableView.reloadData()
 
          ref.collection("comments").whereField("postId", isEqualTo: selectedPost!.id).order(by: "createdAt",descending: true).addSnapshotListener{  snapshot, error in
@@ -197,7 +192,7 @@ var flag = 0
 
             if let error = error {
                 print("DB ERROR Posts",error.localizedDescription)
-//                Alert.showAlert(strTitle: "Error", strMessage: error.localizedDescription, viewController: self)
+        
             }
             if let snapshot = snapshot {
                 
@@ -208,8 +203,7 @@ var flag = 0
                         if let userId = commentData["userId"] as? String {
                             self.ref.collection("users").document(userId).getDocument { userSnapshot, error in
                                 if let error = error {
-                                    print("ERROR user Data",error.localizedDescription)
-                                    
+                                    Alert.showAlert(strTitle: "Error", strMessage: error.localizedDescription, viewController: self)
                                 }
                                 if let userSnapshot = userSnapshot,
                                    let userData = userSnapshot.data(){
@@ -266,7 +260,7 @@ var flag = 0
     }
     
     @IBAction func customLocationAction(_ sender: UILongPressGestureRecognizer) {
-       // if sender.state != UITapGestureRecognizer.State.ended{
+
         let allAnnotation = itemLocationMapView.annotations
         itemLocationMapView.removeAnnotations(allAnnotation)
             let touchLocation = sender.location(in: itemLocationMapView)
@@ -457,7 +451,7 @@ extension PostViewController: UIPickerViewDelegate, UIPickerViewDataSource {
        
             return foundItems.count
     }
-    //write elment array on  pv
+    //write elment array on  PickerView
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
        
             return foundItems[row]
@@ -506,11 +500,11 @@ extension PostViewController : CLLocationManagerDelegate {
                 self.postCityTextField.text = city ?? "Unknown"
                 
 
-            }}
-
-        
-           
+            }
+                
+           } 
         }
+        
         let initialLocation = CLLocation(latitude: latitude, longitude: longitude)
         setStartingLocation(location: initialLocation, distance: 100)
 

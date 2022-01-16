@@ -20,11 +20,7 @@ class MyPostViewController: UIViewController {
     }
     
 
-    @IBOutlet weak var LanguageButtonOutlet: UIBarButtonItem!{
-        didSet{
-            self.LanguageButtonOutlet.title = "language".localized
-           
-        }}
+  
     @IBOutlet weak var myPostTableView: UITableView!{
         didSet{
             myPostTableView.delegate = self
@@ -98,32 +94,6 @@ class MyPostViewController: UIViewController {
             }
 
 }
-    @IBAction func changeLanguageButton(_ sender: UIBarButtonItem) {
-       
-        var lang = UserDefaults.standard.string(forKey: "currentLanguage")
-         if lang == "ar" {
-             Bundle.setLanguage(lang ?? "ar")
-             UIView.appearance().semanticContentAttribute = .forceRightToLeft
-            lang = "en"
-             
-        }else{
-
-            Bundle.setLanguage(lang ?? "en")
-            UIView.appearance().semanticContentAttribute = .forceLeftToRight
-            lang = "ar"
-        }
-      
-        UserDefaults.standard.set(lang, forKey: "currentLanguage")
-
-        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabBarController") as? UITabBarController {
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: false, completion: nil)
-        
-        
-   
-
-    }
-}
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
@@ -137,6 +107,7 @@ class MyPostViewController: UIViewController {
     }
 
 }
+
 extension MyPostViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return posts.count
@@ -192,15 +163,7 @@ extension MyPostViewController: UITableViewDelegate {
         selectedPost = posts[indexPath.row]
         
             performSegue(withIdentifier: "toPostEditVC", sender: self)
-        
     }
     
-}
-extension UIApplication {
-
-    var statusBarView: UIView? {
-        return value(forKey: "statusBar") as? UIView
-    }
-
 }
 

@@ -18,91 +18,70 @@ var activityIndicator = UIActivityIndicatorView()
     
     @IBOutlet weak var navBarTitle: UINavigationItem!{
         didSet{
-            navBarTitle.title = "titleApp".localized
+            navBarTitle.title = "register".localized
         }
     }
-    @IBOutlet weak var LanguageButtonOutlet: UIBarButtonItem!{
-        didSet{
-            self.LanguageButtonOutlet.title = "language".localized
-        }}
+   
        
     @IBOutlet weak var nameTextField: UITextField!{
         didSet{
             nameTextField.delegate = self
-
         }
-    
     }
     
     @IBOutlet weak var emailTextField: UITextField!{
         didSet{
             emailTextField.delegate = self
-
         }
-    
     }
     
     @IBOutlet weak var passwordTextField: UITextField!{
         didSet{
             passwordTextField.delegate = self
-
         }
-    
     }
     
     @IBOutlet weak var confirmPasswordTextField: UITextField!{
         didSet{
             confirmPasswordTextField.delegate = self
-
-        }
-    
-    }
-    
-    @IBOutlet weak var phoneNumberTextField: UITextField! { didSet{
-        phoneNumberTextField.delegate = self
-
-    }
-}
-    @IBOutlet weak var langugeButtonOutlet: UIButton!
-    {
-        didSet{
-            langugeButtonOutlet.setTitle(NSLocalizedString("language", tableName: "Localizable", comment: ""), for: .normal)
         }
     }
-    @IBOutlet weak var registerLabel: UILabel!
-    {
+    
+    @IBOutlet weak var phoneNumberTextField: UITextField! {
         didSet{
-            registerLabel.text = "registerword".localized
-}
+            phoneNumberTextField.delegate = self
+        }
     }
+
+    
     @IBOutlet weak var phoneNolabel: UILabel!
     {
         didSet{
             phoneNolabel.text = "phoneNo".localized
-}
+       }
     }
     @IBOutlet weak var passwordLabel: UILabel!  {
         didSet{
             passwordLabel.text = "password".localized
-}
+        }
     }
     
     @IBOutlet weak var rePasswordLabel: UILabel!  {
         didSet{
             rePasswordLabel.text = "repassword".localized
-}
+       }
     }
     @IBOutlet weak var nameLblel: UILabel!
     {
         didSet{
             nameLblel.text = "name".localized
-}
+         }
     }
     @IBOutlet weak var emailLabel: UILabel!
     {
         didSet{
             emailLabel.text = "email".localized
-}
+       }
     }
     @IBOutlet weak var registerButtonOutlet: UIButton!
     {
@@ -110,27 +89,17 @@ var activityIndicator = UIActivityIndicatorView()
             registerButtonOutlet.setTitle("register".localized, for: .normal)
         }
     }
-    @IBOutlet weak var loginButtonOutlet: UIButton!
-    {
-        didSet{
-            loginButtonOutlet.setTitle(NSLocalizedString("login", tableName: "Localizable", comment: ""), for: .normal)
-        }
-    }
-    @IBOutlet weak var orLabel: UILabel!
-    {
-        didSet{
-            orLabel.text = "or".localized
-        }
-
-    }
+  
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Do any additional setup after loading the view.
+        
         let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
-        // Do any additional setup after loading the view.
-      
-        
+     
+     
     }
     
     @IBAction func contactSwitch(_ sender: UISwitch) {
@@ -216,32 +185,6 @@ var activityIndicator = UIActivityIndicatorView()
            }
     }
 
-    @IBAction func changeLanguageButton(_ sender: UIBarButtonItem) {
-       
-        var lang = UserDefaults.standard.string(forKey: "currentLanguage")
-         if lang == "ar" {
-             Bundle.setLanguage(lang ?? "ar")
-             UIView.appearance().semanticContentAttribute = .forceRightToLeft
-            lang = "en"
-             
-        }else{
-
-            Bundle.setLanguage(lang ?? "en")
-            UIView.appearance().semanticContentAttribute = .forceLeftToRight
-            lang = "ar"
-        }
-      
-        
-          UserDefaults.standard.set(lang, forKey: "currentLanguage")
-          let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-          if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-             let sceneDelegate = windowScene.delegate as? SceneDelegate {
-              sceneDelegate.window?.rootViewController = storyboard.instantiateInitialViewController()
-        
-   
-
-    }
-}
 
     }
     
