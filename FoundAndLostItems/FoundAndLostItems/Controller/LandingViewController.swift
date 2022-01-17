@@ -93,7 +93,7 @@ class LandingViewController: UIViewController {
     }
     
     @IBAction func infoButton(_ sender: UIButton) {
-        Alert.showAlert(strTitle: "", strMessage: "Application Developed Maram Faqih \n For final project in \n Tuwaiq Academy", viewController: self)
+        Alert.showAlert(strTitle: "Found&Lost Items", strMessage: "Application Developed by \n Maram Faqih \n For final project in \n Tuwaiq Academy", viewController: self)
     }
     @IBAction func changeLanguageButton(_ sender: UIButton) {
         var lang = ""

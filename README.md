@@ -2,7 +2,7 @@
 
 ## Description
 
-- Lost & Found Items is an Applicatin with idea to craete a plateform that allaw the users to share the lost and found items descreption, location, and a way to communcate with the orginal owner to reduse the stress of finding lost items by collobration search.
+- Lost & Found Items is an Application with idea to create a platform that allow the users to share the lost and found items description, location, and a way to communicate with the original owner to reduce the stress of finding lost items by collaboration search.
 
 ## Demo
 - Login
@@ -10,11 +10,15 @@
 ![](LoginEn.gif)
 ![](LoginAr.gif)
 
-- Calls & Comments
+- Home & Edit & Comments
 
-![](Commen.gif)
+![](Home&EditAr.gif)
+![](Home&EditEn.gif)
 
+-  MyPost & Posting & Search & Profile
 
+![](MyPost&Posting&Search&ProfileEn.gif)
+![](MyPost&Posting&Search&ProfileAr.gif)
 
 ## user Stories 
 
