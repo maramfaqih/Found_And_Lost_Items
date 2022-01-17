@@ -41,4 +41,4 @@
 
 ## Wireframe
 
-![](WireFrame.png)
+![](Wireframe.png)
