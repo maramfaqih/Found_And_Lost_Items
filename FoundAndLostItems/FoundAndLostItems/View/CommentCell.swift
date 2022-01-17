@@ -24,7 +24,7 @@ class CommentCell: UITableViewCell {
     }
     func configure(with comment:Comment) -> UITableViewCell {
         if comment.userId == comment.publisherUserId{
-            userNameCell.text = comment.user.name + "(Publisher): "
+            userNameCell.text = comment.user.name + " (Publisher):" //"publisher".localized
     }else{
         userNameCell.text = comment.user.name + " :"}
 

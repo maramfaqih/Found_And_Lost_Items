@@ -32,7 +32,7 @@
 "all" = "All";
 "title" = "Title";
 "category" = "Category";
-"selectLocationOnMap" = "Select Location on Map :";
+"selectLocationOnMap" = "Select Location on the Map :";
 "country" = "Country";
 "city" = "City";
 "cencel" = "Cencal";
@@ -52,13 +52,14 @@
 "from" = " ";
 "search" = "Search";
 "comments" = "-Comments-";
-"callUser" = " Contact Publisher";
-"allowContact" = "Allow users to contact me";
+"callUser" = " Call Publisher";
+"allowContact" = "Allow Phone calls";
 "arEn" = "ع";
 "title1" = "Posts";
-"title2" = "Calls and Comments";
+"title2" = "Calls and Messages";
 "title3" = "Location on Map";
-"desc1" = "Publishing of lost and found items, filtering and searching.";
-"desc2" = "You can contact the publisher and leave comments on the posts.";
+"desc1" = "Publishing announcement for lost and found items, easy to filter and search by the user.";
+"desc2" = "You can call the publisher and leave comments on the posts.";
 "desc3" = "You can locate the lost item on the map";
-
+"publisher" = " (Publisher):";
+"forgotPassword" = "Forgot Password ?";

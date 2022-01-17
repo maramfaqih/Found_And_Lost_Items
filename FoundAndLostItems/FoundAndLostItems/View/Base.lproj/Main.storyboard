@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hS4-1J-N5G">
-                                <rect key="frame" x="16" y="211.5" width="294.5" height="275"/>
+                                <rect key="frame" x="16" y="224" width="294.5" height="326.5"/>
                                 <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jNK-kV-Vw6">
@@ -39,7 +39,7 @@
                                 </items>
                             </navigationBar>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="8mX-cX-M36">
-                                <rect key="frame" x="30" y="62" width="266.5" height="396.5"/>
+                                <rect key="frame" x="30" y="80" width="266.5" height="437.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="SBv-yu-lt8">
                                         <rect key="frame" x="0.0" y="0.0" width="266.5" height="137"/>
@@ -50,7 +50,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="29" translatesAutoresizingMaskIntoConstraints="NO" id="YdM-Ic-eON">
-                                        <rect key="frame" x="0.0" y="177" width="266.5" height="219.5"/>
+                                        <rect key="frame" x="0.0" y="177" width="266.5" height="260.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WHJ-IA-Hsq">
                                                 <rect key="frame" x="0.0" y="0.0" width="266.5" height="33.5"/>
@@ -93,7 +93,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="vY0-ep-6hZ">
-                                                <rect key="frame" x="0.0" y="188.5" width="266.5" height="31"/>
+                                                <rect key="frame" x="0.0" y="188.5" width="266.5" height="72"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rHH-SP-fTE">
                                                         <rect key="frame" x="0.0" y="0.0" width="266.5" height="31"/>
@@ -103,6 +103,17 @@
                                                         </buttonConfiguration>
                                                         <connections>
                                                             <action selector="handleLogin:" destination="TWW-SE-PCI" eventType="touchUpInside" id="bN7-C0-0MR"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QDd-Gn-30k">
+                                                        <rect key="frame" x="0.0" y="44" width="266.5" height="28"/>
+                                                        <color key="tintColor" name="FirstColor"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="Forgot password?">
+                                                            <fontDescription key="titleFontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
+                                                        </buttonConfiguration>
+                                                        <connections>
+                                                            <action selector="forgotPasswordAction:" destination="TWW-SE-PCI" eventType="touchUpInside" id="bIa-AB-uTl"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -116,7 +127,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3IB-1s-Q2e">
-                                <rect key="frame" x="258.5" y="366" width="52" height="31"/>
+                                <rect key="frame" x="258.5" y="384" width="52" height="31"/>
                                 <color key="tintColor" systemColor="systemGrayColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="eye.slash" catalog="system" title=""/>
@@ -130,7 +141,6 @@
                         <constraints>
                             <constraint firstItem="hS4-1J-N5G" firstAttribute="height" secondItem="YdM-Ic-eON" secondAttribute="height" multiplier="1.25285" id="4eb-nO-s57"/>
                             <constraint firstItem="ng2-b5-8Eo" firstAttribute="width" secondItem="4Vq-AK-naq" secondAttribute="width" multiplier="0.828125" id="5UW-DZ-6NV"/>
-                            <constraint firstItem="8mX-cX-M36" firstAttribute="centerY" secondItem="gRA-2a-lDv" secondAttribute="centerY" multiplier="0.95" id="7D8-mJ-SaN"/>
                             <constraint firstItem="JyV-BD-5a4" firstAttribute="leading" secondItem="4Vq-AK-naq" secondAttribute="leading" id="Ger-J4-GcO"/>
                             <constraint firstItem="JyV-BD-5a4" firstAttribute="top" secondItem="gRA-2a-lDv" secondAttribute="top" constant="-3" id="KPj-af-OCI"/>
                             <constraint firstItem="jNK-kV-Vw6" firstAttribute="bottom" secondItem="JyV-BD-5a4" secondAttribute="bottom" id="KsB-bi-wxZ"/>
@@ -145,6 +155,7 @@
                             <constraint firstItem="8mX-cX-M36" firstAttribute="centerX" secondItem="gRA-2a-lDv" secondAttribute="centerX" id="fJF-NI-WCc"/>
                             <constraint firstItem="ng2-b5-8Eo" firstAttribute="height" secondItem="4Vq-AK-naq" secondAttribute="height" multiplier="0.25" id="n70-fN-XMm"/>
                             <constraint firstAttribute="trailing" secondItem="JyV-BD-5a4" secondAttribute="trailing" id="qwS-j6-AMC"/>
+                            <constraint firstItem="8mX-cX-M36" firstAttribute="top" secondItem="gRA-2a-lDv" secondAttribute="top" constant="80" id="w6g-BK-EQK"/>
                             <constraint firstItem="8mX-cX-M36" firstAttribute="leading" secondItem="gRA-2a-lDv" secondAttribute="leading" constant="30" id="wez-MB-Hw0"/>
                             <constraint firstItem="jNK-kV-Vw6" firstAttribute="leading" secondItem="4Vq-AK-naq" secondAttribute="leading" id="xkV-8H-zWq"/>
                         </constraints>
@@ -154,6 +165,7 @@
                         <outlet property="backGroundInfoLogin" destination="hS4-1J-N5G" id="e5Z-qt-Ibc"/>
                         <outlet property="emailLabel" destination="fY4-WE-yK3" id="gHA-pE-QOc"/>
                         <outlet property="emailTextField" destination="om5-1U-v4H" id="9Qp-BR-QAs"/>
+                        <outlet property="forgotPasswordButtonOutlet" destination="QDd-Gn-30k" id="zyd-hb-ASM"/>
                         <outlet property="loginButtonOutlet" destination="rHH-SP-fTE" id="dCW-IP-0k8"/>
                         <outlet property="loginLabel" destination="WHJ-IA-Hsq" id="byw-ls-QN8"/>
                         <outlet property="navBarTitle" destination="GDq-C3-Iee" id="qmA-Gi-zjv"/>

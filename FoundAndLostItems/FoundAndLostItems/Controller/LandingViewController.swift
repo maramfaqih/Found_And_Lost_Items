@@ -93,7 +93,7 @@ class LandingViewController: UIViewController {
     }
     
     @IBAction func infoButton(_ sender: UIButton) {
-        Alert.showAlert(strTitle: "", strMessage: "Application by Maram Faqih \n For final project in \n Tuwaiq Academy", viewController: self)
+        Alert.showAlert(strTitle: "", strMessage: "Application Developed Maram Faqih \n For final project in \n Tuwaiq Academy", viewController: self)
     }
     @IBAction func changeLanguageButton(_ sender: UIButton) {
         var lang = ""
@@ -115,10 +115,11 @@ class LandingViewController: UIViewController {
        
         Bundle.setLanguage(lang)
         UserDefaults.standard.set(lang, forKey: "currentLanguage")
-        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabBarController") as? UITabBarController {
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: false, completion: nil)
         
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let sceneDelegate = windowScene.delegate as? SceneDelegate {
+            sceneDelegate.window?.rootViewController = storyboard.instantiateInitialViewController()
 
     }
 }
@@ -137,8 +138,9 @@ extension LandingViewController:  UICollectionViewDelegate, UICollectionViewData
         
 
         headerSet[indexPath.row].animationViews?.frame = cell.animationViewCell.bounds
-        headerSet[indexPath.row].animationViews?.center = cell.animationViewCell.center
         headerSet[indexPath.row].animationViews?.contentMode = .scaleAspectFit
+        headerSet[indexPath.row].animationViews?.center = cell.animationViewCell.center
+        
         headerSet[indexPath.row].animationViews?.loopMode = .loop
         headerSet[indexPath.row].animationViews?.animationSpeed = 0.6
         cell.animationViewCell.addSubview(headerSet[indexPath.row].animationViews!)
